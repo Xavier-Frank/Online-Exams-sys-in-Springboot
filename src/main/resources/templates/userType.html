@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--===============================================================================================-->
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/fonts/iconic/css/material-design-iconic-font.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/vendor/animate/animate.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/vendor/css-hamburgers/hamburgers.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/vendor/animsition/css/animsition.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/vendor/select2/select2.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/vendor/daterangepicker/daterangepicker.css}">
+    <!--===============================================================================================-->
+    <!--	=============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/util.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+    <!--===============================================================================================-->
+</head>
+
+<body>
+<!--/////////////////// Error notification //////////////-->
+<div class="row text-center">
+    <div class="col-md-12">
+        <div th:if="${param.error}">
+            <div class="alert alert-warning">No user type selected</div>
+        </div>
+    </div>
+</div>
+<!--///////////////////////////////-->
+<div class="container-login100" style="background-image: url('static/images/examination.jpeg')" >
+    <div class="wrap-login100">
+        <form class="login100-form validate-form" action="#" th:action="@{/api/main/recordUserType}" method="GET">
+            <span class="login100-form-logo" data-validate="Select one option">
+                <i class="fa fa-user"></i>
+            </span>
+            Select your user type to continue:
+            <div class="radio">
+                <label><input type="radio" name="usertype" value="instructor" required> Instructor</label>
+            </div>
+            <div class="radio">
+                <label><input type="radio" name="usertype"  value="learner" required> Learner</label>
+            </div>
+            <div class="container-login100-form-btn">
+                <button class="login100-form-btn" type="submit">
+                    Continue
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script th:src="@{/assets/jquery/jquery.js}"></script>
+<script th:src="@{/assets/popper/popper.js}"></script>
+<script th:src="@{/assets/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+
+
+
+</html>

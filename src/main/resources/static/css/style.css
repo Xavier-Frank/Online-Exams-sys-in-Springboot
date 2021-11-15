@@ -1,0 +1,230 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap:10px;
+    background-color: #EDEDED;
+}
+.nav-item, .nav-link{
+    font-size: 1.25rem;
+    font-weight: bolder;
+    cursor: pointer;
+}
+.carousel-inner > .carousel-item > img{
+    all: initial;
+    width: auto;
+    height: 400px;
+    max-height: 640px;
+    object-fit: cover;
+    -o-object-fit: cover;
+    object-position: center;
+    -o-object-position: center;
+
+}
+.carousel-caption{
+    width: 100%;
+    left:0;
+    bottom: 5px;
+    background: linear-gradient( rgb(0,0,0,0),  rgb(0,0,0,0.3));
+}
+.carousel-caption > .caption-title{
+    font-size: 3rem;
+}
+.carousel-caption > .caption-text{
+    font-size: 1.5rem;
+}
+
+.recent-upload img{
+    all: initial;
+    width: 100%;
+    height: auto;
+    max-height: 250px;
+}
+.container{
+    padding:3px;
+}
+
+.main-title{
+    font-size: 2rem;
+    letter-spacing: 2px;
+    color: #343340;
+    text-transform: uppercase;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.main-title::after{
+    content: "";
+    width: 240px;
+    height: 3px;
+    background-color: rgb(241, 207, 12);
+    margin: auto;
+    display: block;
+}
+.section-title{
+    font-size: 1.5rem;
+    color: #343340;
+    opacity: 0.8;
+}
+
+.title{
+    font-size: 1.25rem;
+    color: #078fff;
+}
+.title::after{
+    content: "";
+    width: 100px;
+    height: 3px;
+    background-color: #078fff;
+    display: block;
+}
+
+.service{
+    padding: 20px;
+    background: #FFFF;
+}
+.service-body{
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+.team .members{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.members .member{
+    all:initial;
+    padding: 10px;
+    margin-bottom: 5px;
+    box-shadow: 1px 1px 3px #f1f1f1;
+    border-radius: 10px;
+    background:#fff ;
+    color:  #078;
+    border: 1px solid #078;
+    max-height: 360px;
+}
+.member img{
+    all: initial;
+    max-width: 180px;
+    object-fit: cover;
+    -o-object-fit: cover;
+    object-position: center;
+    -o-object-position: center;
+    max-height: 150px;
+}
+.links a, .apply-btn{
+    text-decoration: none;
+    background: rgb(241, 207, 12);
+    color: #343340;
+    border-radius: 10px;
+    padding: 5px;
+    margin-bottom: 3px;
+}
+.links a:hover, .apply-btn:hover{
+    background: #443e1e;
+    color: rgb(241, 207, 12);
+}
+
+.alert{
+    all:initial;
+    padding: 0;
+    background-color: #fff;
+    border-radius: 10px;
+    border: 1px solid #b1eefd;
+    position: absolute;
+    top:100px;
+}
+.alert .alert-header{
+    background-color: #b1eefd;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+}
+.alert .alert-body{
+    padding: 10px;
+}
+.property{
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr;
+    background: #fff;
+    margin-bottom: 10px;
+    transition:all 0.6s ease-in-out;
+}
+.property-image{
+    max-height: 360px;
+}
+.property-image img{
+    width: 100%;
+}
+.thumbnails{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+.thumbnails img{
+    width: 80px;
+    height: 80px;
+    max-width: 150px;
+    max-height: 150px;
+}
+.image{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.image img{
+    width: 100%;
+    height: 100%;
+}
+.details{
+    padding-top: 40px;
+    padding-bottom: 20px;
+}
+.footer{
+    background: #343340;
+    color:  rgb(241, 207, 12) !important;
+    min-height: 70px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+@media only screen and (min-width: 768px){
+    .property{
+        all:inherit;
+        padding: 20px;
+        display: grid;
+        grid-template-columns: 0.7fr  1fr;
+        background: #fff;
+        margin-bottom: 10px;
+    }
+    .property-image{
+        max-height: 360px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .property-image img{
+        width: auto;
+    }
+    .thumbnails{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .thumbnails img{
+        width: 80px;
+        height: 80px;
+        max-width: 150px;
+        max-height: 150px;
+    }
+}

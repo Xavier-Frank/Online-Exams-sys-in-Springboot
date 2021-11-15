@@ -1,0 +1,394 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html, body{
+    width: 100%;
+    background: #F5F5F5;
+    flex-grow: 1;
+}
+
+.input{
+    min-height: 40px;
+    border-radius: 25px;
+    border: 2px solid #EDEDED;
+    padding: 8px 10px;
+    outline: none;
+    font-size: 1.25rem;
+    background: #ffff;
+}
+.input:focus, .input:focus-visible, .input:focus-within{
+    background: #fff;
+    border-radius: 15px;
+    border: 2px solid #078;
+}
+a.deco-none{
+    text-decoration: none !important;
+}
+.wrapper{
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 240px 2fr;
+    grid-template-rows: 70px 2fr 70px;
+    grid-template-areas:
+    "header header"
+    "main_content main_content"
+    "footer footer";
+    flex-shrink: 0;
+}
+.header{
+    position: fixed;
+    top:0;
+    width: 100%;
+    height: 70px;
+    z-index: 99;
+    grid-area: header;
+    background: #FFFFFF;
+    box-shadow: 2px 2px 3px #343434;
+}
+.navigation{
+    position: fixed;
+    top:70px;
+    display: block;
+    left:-235px;
+    background: #343340;
+    padding: 15px;
+    padding-bottom: 10px;
+    height: calc(100vh - 70px);
+    transition: all 0.6s ease-in-out;
+    overflow-y: scroll;
+    z-index: 100;
+}
+.navigation .close{
+    top:5px;
+    right:-10px
+}
+.navigation ul{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.navigation li:not(.group){
+    padding: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.navigation li.group{
+    display: flex;
+    flex-direction: column;
+    color: #A5A5A5;
+}
+.navigation .group a{
+    padding-left: 50px;
+    margin-bottom: 10px;
+}
+.navigation a:not(.list-inline-item){
+    width: 100% !important;
+    text-decoration: none;
+    color: #A5A5A5;
+    font-size: 1.2rem;
+}
+.navigation .fa{
+    width: 35px;
+    height: 35px;
+}
+.navigation hr{
+    background: #A5A5A5;
+}
+.navigation li:not(.group):hover, .navigation .group a:hover{
+    background: #F5F5F5;
+    color:#343340;
+    border-radius: 10px;
+}
+.navigation .badge-pill{
+    width: 24px;
+    font-size: 12px;
+    text-align: center;
+}
+.follow a{
+    display: inline-flex !important;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50%;
+    border: 1px solid #078;
+    padding: 3px;
+    color: #078;
+}
+
+.navigation.active{
+    left:0;
+    height: 100vh;
+}
+.main-content{
+    grid-area: main_content;
+    background: #F5F5F5;
+    padding: 20px;
+}
+.dashboard{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+.greeting{
+    background: #EDEDED;
+    padding: 20px;
+}
+.dashboard .updates{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.updates .update{
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 0.4fr 1fr;
+    grid-template-areas: 
+    "icon title"
+    "icon message";
+    gap:10px;
+    margin-bottom: 5px;
+    box-shadow: 1px 1px 3px #f1f1f1;
+    border-radius: 10px;
+    background:#fff ;
+    color:  #078;
+    border: 1px solid #078;
+}
+
+.update .icon{
+    grid-area: icon;
+    display: flex;
+    flex-direction: row;
+    justify-content: center; 
+    align-items: center; 
+}
+.update .title{
+    grid-area: title;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center; 
+    align-items: center; 
+}
+.update .text{
+    grid-area: message;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center; 
+    align-items: center; 
+}
+.search{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #EDEDED;
+    padding: 10px;
+}
+.properties img{
+    width: 48px;
+    height: 48px;
+}
+.basic-details, .other-details{
+    background: #FFFFFFFF;
+    padding: 20px;
+    border: 2px solid #A5A5A5;
+}
+.display-image{
+    width: 250px;
+    min-height: 200px;
+    max-height: 300px;
+    margin: auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #078 ;
+    padding: 10px;
+}
+.display-image img{
+    width: 100%;
+    height: 280px;
+    
+    /* object-fit: cover;
+    -o-object-fit: cover;
+    object-position: center;
+    -o-object-position: center; */
+}
+.display-image > div{
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color:rgb(12, 11, 0);
+    font-size: 12px;
+    padding: 5px;
+    border-radius: 5px;
+    background: linear-gradient( rgb(0, 0, 0, 0.2), rgb(0, 0, 0, 0.2));
+    cursor: pointer;
+}
+.display-image > div:hover{
+    background: #078;
+    color: #ffffff;
+}
+.image{
+    position: relative;
+}
+.image .remove-img{
+    position: absolute;
+    top:-20px;
+    right: -20px;
+    transform: translate(-50%,-50%);
+    color: red;
+    font-size: 28px;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+}
+.message{
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-bottom: 20px;
+    position: relative;
+}
+.message .image{
+    position: absolute;
+    bottom: 0px;
+    right: -5px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+.message .image img{
+    width: 80px;
+    height: 80px;
+}
+.message .message-body{
+    background: #fff;
+    box-shadow: 3px 3px 5px -2px #000;
+    padding: 20px 10px;
+}
+.message:first-child{
+    margin-top: 10px;
+}
+.account{
+    display: grid;
+    grid-template-columns: 1fr;
+}
+.account .profile{
+    background: #FFFFFF;
+    padding: 10px;
+}
+.account .image img{
+    all:inherit;
+    width: 80%;
+    margin: auto;
+}
+.account .profile-data{
+    padding: 20px;
+    background: #FFFFFF;
+}
+.footer{
+    grid-area: footer;
+    background: #FFFFFF;
+}
+@media only screen and (max-width: 558px){
+    .dashboard .updates{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap:5px;
+    }
+}
+@media only screen and (min-width: 768px){
+    .account{
+        display: grid;
+        grid-template-columns: 240px 1fr;
+        gap: 10px;
+    }
+    .account .image img{
+        all:inherit;
+        width: 80%;
+        margin: auto;
+    }
+}
+@media only screen and (min-width: 992px){
+    .wrapper{
+        width: 100%;
+        height: 100vh;
+        display: grid;
+        grid-template-columns: 240px 2fr;
+        grid-template-rows: 70px 2fr 70px;
+        grid-template-areas:
+        "header header"
+        "navigation main_content"
+        "navigation footer";
+        flex-shrink: 0;
+    }
+    .navigation{
+        position: fixed;
+        top:70px;
+        left: 0;
+        height: 100vh;
+        overflow-y: auto;
+        grid-area: navigation;;
+        background: #343340;
+        padding: 20px;
+        transition: 0.6s ease-in-out;
+    }
+    .dashboard{
+        display: grid;
+        grid-template-columns: 1fr 0.8fr;
+        grid-template-areas: 
+        "greeting greeting"
+        "updates updates"
+        "main_card minor_card"
+        "bottom_card bottom_card";
+        gap:10px;
+    }
+    .dashboard .greeting{
+        grid-area: greeting;
+    }
+    .dashboard .updates{
+        grid-area: updates;
+    }
+    .dashboard .main-card{
+        grid-area: main_card;
+    }
+    .dashboard .minor-card{
+        grid-area: minor_card;
+    }
+    .dashboard .bottom-card{
+        grid-area: bottom_card;
+    }
+
+    .message{
+        display: grid;
+        grid-template-columns: 0.4fr 1fr;
+    }
+    .message .image{
+        position: relative;
+    }
+    .message .image img{
+        width: 150px;
+        height: 150px;
+    }
+    .account{
+        display: grid;
+        grid-template-columns: 0.5fr 1fr;
+        gap: 10px;
+    }
+    .account .image img{
+        all:inherit;
+        width: 80%;
+        margin: auto;
+    }
+}
