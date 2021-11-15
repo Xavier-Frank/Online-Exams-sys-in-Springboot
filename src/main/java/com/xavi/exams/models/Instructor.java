@@ -6,12 +6,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class Instructor {
     @Id
     @Column(length = 20)
@@ -29,11 +30,14 @@ public class Instructor {
 //    @Column(nullable = true, length = 13)
 //    private String phoneNumber;
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false, columnDefinition = "Varchar (900)")
     private String password;
 
-    @Column(name = "created_on")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createdOn;
+
+    // for forgotten password
+    private String resetPasswordToken;
 
     //Relationships
     @ManyToOne

@@ -12,16 +12,16 @@ public class MainController {
     //Return usertype form
     @GetMapping("/user-type")
     public String userTypeForm(){
-        return "userType";
+        return "index";
     }
 
     //Control User types
     @GetMapping("/recordUserType")
-    public String userTypes(@RequestParam("usertype") String usertype){
+    public String userTypes(@RequestParam("") String usertype){
             if (usertype.equals("instructor")){
-                return "redirect:/api/instructor/lec-registrationform";
+                return "redirect:/api/instructor/lec-loginform";
             }else if (usertype.equals("learner")){
-                return "redirect:/api/student/stud-registrationform";
+                return "redirect:/api/student/stud-loginform";
             }else if (usertype.equals("")){
                 return "redirect:/user-type?error";
             }else{

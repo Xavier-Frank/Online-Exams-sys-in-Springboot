@@ -39,7 +39,7 @@
 		</div>
 		<div class="container-login100" style="background-image: url('/images/examination.jpeg');">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form" action="#" th:action="@{/stud-registration}" method="POST">
+				<form class="login100-form validate-form" action="#" th:action="@{/api/student/stud-registrationProcess}" th:object="${learner}" method="POST">
 
 					<span class="login100-form-logo">
 						<i class="fa fa-user"></i>
@@ -49,35 +49,36 @@
 						Create An Account
 					</span>
 					<div class="wrap-input100 validate-input" data-validate = "Enter Your Registration Number">
-						<input class="input100" placeholder="Registration no." maxlength="20" minlength="3" required>
+						<input class="input100" placeholder="Registration no." maxlength="20" minlength="3" th:field="*{learnerId}" required>
 						<span class="focus-input100" data-placeholder="&#xf207;"></span>
 					</div>
 					<div class="wrap-input100 validate-input" data-validate = "Enter First Name">
-						<input class="input100" type="text" placeholder="First Name" maxlength="20" minlength="3" required>
+						<input class="input100" type="text" placeholder="First Name" maxlength="20" minlength="3" th:field="*{firstName}" required>
 						<span class="focus-input100" data-placeholder="&#xf207;"></span>
 					</div>
 					<div class="wrap-input100 validate-input" data-validate = "Enter Last Name">
-						<input class="input100" type="text" name="lastname" placeholder="Last Name" minlength="3" maxlength="20" required>
+						<input class="input100" type="text" name="lastname" placeholder="Last Name" minlength="3" maxlength="20" th:field="*{lastName}" required>
 						<span class="focus-input100" data-placeholder="&#xf207;"></span>
 					</div>
 					<div class="wrap-input100 validate-input" data-validate = "Institution's name">
-						<input class="input100" type="text" name="institution" placeholder="Institution" minlength="3" maxlength="50" required>
-						<span class="focus-input100" data-placeholder="&#xf207;"></span>
+						<input class="input100" type="text" name="institution" placeholder="Institution" minlength="3" maxlength="50" th:field="*{institution}" required>
+						<span class="focus-input100" data-placeholder="&#xf19c;"></span>
 					</div>
 					<div class="wrap-input100 validate-input" data-validate = "Campus">
-						<input class="input100" type="text" name="campus" placeholder="Campus" minlength="2" maxlength="20" required>
-						<span class="focus-input100" data-placeholder="&#xf207;"></span>
+						<input class="input100" type="text" name="campus" placeholder="Campus" minlength="2" maxlength="20" th:field="*{campus}" required>
+						<span class="focus-input100" data-placeholder="&#xf19c;"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Enter Your Year of Study">
-						<input class="input100" type="number" name="yearOfStudy" placeholder="Year of Study" min="1" max="6" required>
+						<input class="input100" type="number" name="yearOfStudy" placeholder="Year of Study" min="1" max="6" th:field="*{yearOfStudy}" required>
 						<span class="focus-input100" data-placeholder="&#xf207;"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Enter email">
-						<input class="input100" type="email" name="email" placeholder="Email" maxlength="50" minlength="2">
+						<input class="input100" type="email" name="email" placeholder="Email" maxlength="50" minlength="2" th:field="*{email}" required>
 						<span class="focus-input100" data-placeholder="&#x2709;"></span>
 					</div>
+
 <!--					<div class="wrap-input100 validate-input" data-validate="Enter phone number">-->
 <!--						<input class="input100" type="text" th:field="*{phonenumber}" name="phonenumber" minlength="10" maxlength="10" placeholder="Phone number" required>-->
 <!--						<span class="focus-input100" data-placeholder="&#x2706;"></span>-->
@@ -89,7 +90,7 @@
                     </div>
                     
                     <div class="wrap-input100 validate-input" data-validate="Retype password">
-						<input class="input100" type="password" id="confirm_password" name="pass_2" onkeyup='check();'  placeholder="Retype Password" required>
+						<input class="input100" type="password" id="confirm_password" name="pass_2" onkeyup='check();' placeholder="Retype Password" th:field="*{password}" required>
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
 						<span id='message'></span>
 					</div>

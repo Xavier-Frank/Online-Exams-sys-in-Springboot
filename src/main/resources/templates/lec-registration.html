@@ -39,7 +39,7 @@
     </div>
     <div class="container-login100" style="background-image: url('/images/examination.jpeg');">
         <div class="wrap-login100">
-            <form class="login100-form validate-form" action="#" th:action="@{/lec-regitration}" method="POST">
+            <form class="login100-form validate-form" action="#" th:action="@{/api/instructor/lec-regitrationProcess}"  th:object="${instructor}" method="POST">
 
 					<span class="login100-form-logo">
 						<i class="fa fa-user"></i>
@@ -49,19 +49,19 @@
 						Create An Account
                 </span>
                 <div class="wrap-input100 validate-input" data-validate = "Enter Your Staff ID">
-                    <input class="input100" type="text" placeholder="Staff id" maxlength="20" minlength="3" required>
+                    <input class="input100" type="text" placeholder="Staff id" maxlength="20" minlength="3" th:field="*{staffId}" required>
                     <span class="focus-input100" data-placeholder="&#xf207;"></span>
                 </div>
                 <div class="wrap-input100 validate-input" data-validate = "Enter First Name">
-                    <input class="input100" type="text" placeholder="First Name" maxlength="20" minlength="3" required>
+                    <input class="input100" type="text" placeholder="First Name" maxlength="20" minlength="3" th:field="*{firstName}" required>
                     <span class="focus-input100" data-placeholder="&#xf207;"></span>
                 </div>
                 <div class="wrap-input100 validate-input" data-validate = "Enter Last Name">
-                    <input class="input100" type="text" name="lastname" placeholder="Last Name" minlength="3" maxlength="20" required>
+                    <input class="input100" type="text" name="lastname" placeholder="Last Name" minlength="3" maxlength="20" th:field="*{lastName}" required>
                     <span class="focus-input100" data-placeholder="&#xf207;"></span>
                 </div>
                 <div class="wrap-input100 validate-input" data-validate="Enter email">
-                    <input class="input100" type="email" name="email" placeholder="Email" required>
+                    <input class="input100" type="email" name="email" placeholder="Email" th:field="*{email}" required>
                     <span class="focus-input100" data-placeholder="&#x2709;"></span>
                 </div>
 <!--                <div class="wrap-input100 validate-input" data-validate="Enter phone number">-->
@@ -70,7 +70,7 @@
 <!--                </div>-->
 
                 <div class="wrap-input100 validate-input" data-validate="Enter password">
-                    <input class="input100" type="password" id="password" name="pass" placeholder="Password" required>
+                    <input class="input100" type="password" id="password" name="pass" placeholder="Password" th:field="*{password}" required>
                     <span class="focus-input100" data-placeholder="&#xf191;"></span>
                 </div>
 

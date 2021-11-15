@@ -28,7 +28,7 @@
     <!--===============================================================================================-->
 </head>
 <body>
-
+<!--pop up success-->
 <div class="limiter">
     <div class="row text-center">
         <div class="col-md-12">
@@ -36,6 +36,12 @@
                 <div class="alert alert-info">Registration Success! Use your credentials to access the site</div>
             </div>
         </div>
+        <div class="row text-center">
+            <div class="col-md-12">
+                <div th:if="${param.successMessage}">
+                    <div class="alert alert-info">Password reset successful. Login to access your account</div>
+                </div>
+            </div>
 
     </div>
 
@@ -83,7 +89,7 @@
                 </div>
 
                 <div class="text-center p-t-50">
-                    <a class="txt1 login-links" href="/forgotPassword">
+                    <a class="txt1 login-links" href="/api/instructor/forgotPassword">
                         Forgot Password?
                     </a>
                     ||

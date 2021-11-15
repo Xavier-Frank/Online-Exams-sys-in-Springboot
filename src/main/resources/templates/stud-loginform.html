@@ -37,13 +37,19 @@
             </div>
         </div>
 
+        <div class="row text-center">
+            <div class="col-md-12">
+                <div th:if="${param.successMessage}">
+                    <div class="alert alert-info">Password reset successful. Login to access your account</div>
+                </div>
+            </div>
     </div>
 
     <div class="container-login100" style="background-image: url('static/images/examination.jpeg')" >
         <div class="wrap-login100">
             <form class="login100-form validate-form" action="#" method="POST">
                 <span class="login100-form-logo">
-						<i class="fa fa-home"></i>
+						<i class="fa fa-user"></i>
                 </span>
 
                 <span class="login100-form-title p-b-45 p-t-27">
@@ -82,7 +88,7 @@
                 </div>
 
                 <div class="text-center p-t-50">
-                    <a class="txt1 login-links" href="">
+                    <a class="txt1 login-links" href="/api/student/forgotPassword">
                         Forgot Password?
                     </a>
                     ||
