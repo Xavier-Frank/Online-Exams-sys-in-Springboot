@@ -1,16 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Instructor's dashboard </title>
+    <link rel="stylesheet" type="text/css" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/fonts/iconic/css/material-design-iconic-font.min.css}">
+    <!--===========================================================================================================-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!--===========================================================================================================     -->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <!-- =============================================================================================================    -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
-    <link href="../static/css/dashboard.css" rel="stylesheet">
+    <!-- =======================================================================================================    -->
+    <link th:href="@{/css/dashboard.css}" type="text/css" rel="stylesheet">
+
 </head>
 <body>
+<div class="limiter">
+    <!--		For sending alerts about the errors on the forms-->
+    <div class="row text-center">
+        <div class="col-md-12">
+            <div th:if="${param.success}">
+                <div class="alert alert-warning">Welcome</div>
+            </div>
+        </div>
+    </div>
     
     <div class="d-flex" id="wrapper">
         <!-- Side bar section -->
@@ -53,7 +72,6 @@
         </div>
         <!-- Side bar section -->
         <div id="page-content-wrapper">
-
             <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-align-left primary-left fs-4 me-3" id="menu-toggle"></i>
@@ -84,6 +102,8 @@
                     </ul>
                 </div>
             </nav>
+            
+            <!--            Body section -->
             <!-- Content Body -->
             <div class="container-fluid px-4 overview-boxes">
                 <h3> Overview </h3>
@@ -148,7 +168,7 @@
                                 </div>
                                 <div class="carousel-inner">
                                   <div class="carousel-item active">
-                                    <img src="/static/images/download.jpeg" class="d-block w-150" width="300" height="200" alt="Online Examination">
+                                    <img src="/images/download.jpeg" class="d-block w-150" width="300" height="200" alt="Online Examination">
                                     <div class="carousel-caption d-none d-md-block">
                                       <h5>Online Examination Platform</h5>
                                       <p>Eliminating the need for physical meet up!</p>
@@ -156,7 +176,7 @@
                                   </div>
 
                                   <div class="carousel-item">
-                                    <img src="/static/images/ticking-clock.jpg" class="d-block w-150" width="300" height="200" alt="Online Examination">
+                                    <img src="/images/ticking-clock.jpg" class="d-block w-150" width="300" height="200" alt="Online Examination">
                                     <div class="carousel-caption d-none d-md-block">
                                       <h5>Examination Timing</h5>
                                       <p>Time your assessments with an automatic submission!</p>
@@ -164,14 +184,14 @@
                                   </div>
 
                                   <div class="carousel-item">
-                                    <img src="/static/images/Monitor.jpeg" class="d-block w-150" width="300" height="200" alt="Conveniently Monitor exams from the comfort of your room">
+                                    <img src="/images/Monitor.jpeg" class="d-block w-150" width="300" height="200" alt="Conveniently Monitor exams from the comfort of your room">
                                     <div class="carousel-caption d-none d-md-block">
                                       <h5>Convenient!</h5>
                                       <p> Easily and Conveniently Monitor Assessments from the comfort of your room</p>
                                     </div>
                                   </div>
                                   <div class="carousel-item">
-                                    <img src="/static/images/reports1.jpeg" class="d-block w-150" width="300" height="200" alt="Reports and Results">
+                                    <img src="/images/reports1.jpeg" class="d-block w-150" width="300" height="200" alt="Reports and Results">
                                     <div class="carousel-caption d-none d-md-block">
                                       <h5>Results & Reports</h5>
                                       <p>Instantly Post results/reports to your Students!</p>
@@ -182,8 +202,6 @@
                         </div>
                     </div>
                 </div>
-                
-
 
         </div>
 

@@ -32,18 +32,28 @@ public class InstructorController {
     @Autowired
     private JavaMailSender mailSender;
 
+    //  Return Lecturers Dashboard
+    @GetMapping("/lec-dashboard")
+    public String instructorDashboard(){
+        return "/instructor/lec-dashboard";
+    }
+
     //return the login page
     @GetMapping("/lec-loginform")
     public String instructorLoginForm(){
-        return "lec-loginform";
+        return "/instructor/lec-loginform";
     }
 
     //return registration form
     @GetMapping("/lec-registrationform")
     public String intructorRegistrationForm(Model model){
         model.addAttribute("instructor", new Instructor());
-        return "lec-registration";
+        return "/instructor/lec-registration";
     }
+
+
+
+    /* ############### Login and registration controllers with forgot password fxns ################################## */
     //register an instructor
     @PostMapping("/lec-regitrationProcess")
     public String lecRegistrationProcess(Instructor instructor){
@@ -59,7 +69,7 @@ public class InstructorController {
     //forgot password handler
     @GetMapping("/forgotPassword")
     public String showForgotPasswordForm(){
-        return "forgotPassword";
+        return "/instructor/forgotPassword";
     }
 
     @PostMapping("/forgotPasswordProcess")
@@ -110,7 +120,7 @@ public class InstructorController {
         if (instructor == null){
             modelAndView.addObject("errorMessage", "Invalid token");
         }
-        modelAndView.setViewName("resetPassword");
+        modelAndView.setViewName("/instructor/resetPassword");
         return modelAndView;
     }
 
@@ -137,6 +147,8 @@ public class InstructorController {
     public ModelAndView handleMissingTokens(MissingServletRequestParameterException ex){
         return new ModelAndView("redirect:/api/main/user-type");
     }
+    /* ######################################### End of Login and registration controllers ################################## */
+
 
 
 }

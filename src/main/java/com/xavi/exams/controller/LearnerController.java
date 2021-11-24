@@ -32,18 +32,26 @@ public class LearnerController {
     @Autowired
     private JavaMailSender mailSender;
 
+    // Return Student Dashboard
+    @GetMapping("/stud-dashboard")
+    public String studentDashboard(){
+        return "/student/stud-dashboard";
+    }
+
     //return the login page
     @GetMapping("/stud-loginform")
     public String studentLoginForm(){
-        return "stud-loginform";
+        return "/student/stud-loginform";
     }
 
     //return registration form
     @GetMapping("/stud-registrationform")
     public String studentRegistrationForm(Model model){
         model.addAttribute("learner", new Learner());
-        return "stud-registration";
+        return "/student/stud-registration";
     }
+
+    /* ############### Login and registration controllers with forgot password fxns ################################## */
     //register a learner
     @PostMapping("/stud-registrationProcess")
     public String studentRegistrationProcess(Learner learner){
@@ -60,7 +68,7 @@ public class LearnerController {
     //reset Password
     @GetMapping("/forgotPassword")
     public String showStudentForgotPasswordform(){
-        return "forgotPasswordStud";
+        return "/student/forgotPasswordStud";
     }
 
     @PostMapping("/forgotPasswordProcess")
@@ -110,7 +118,7 @@ public class LearnerController {
         if (learner == null){
             modelAndView.addObject("errorMessage", "Invalid token");
         }
-        modelAndView.setViewName("resetPasswordStud");
+        modelAndView.setViewName("/student/resetPasswordStud");
         return modelAndView;
     }
     @PostMapping("/resetPasswordProcess")
@@ -136,6 +144,8 @@ public class LearnerController {
     public ModelAndView handleMissingTokens(MissingServletRequestParameterException ex){
         return new ModelAndView("redirect:/api/main/user-type");
     }
+    /* ############### End of Login and registration controllers with forgot password fxns ################################## */
+
 
 
 

@@ -19,9 +19,9 @@ public class MainController {
     @GetMapping("/recordUserType")
     public String userTypes(@RequestParam("") String usertype){
             if (usertype.equals("instructor")){
-                return "redirect:/api/instructor/lec-loginform";
+                return "redirect:/api/instructor/lec-dashboard";
             }else if (usertype.equals("learner")){
-                return "redirect:/api/student/stud-loginform";
+                return "redirect:/api/student/stud-dashboard";
             }else if (usertype.equals("")){
                 return "redirect:/user-type?error";
             }else{
