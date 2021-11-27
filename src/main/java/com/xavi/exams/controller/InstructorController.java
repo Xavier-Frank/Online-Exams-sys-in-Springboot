@@ -37,6 +37,11 @@ public class InstructorController {
     public String instructorDashboard(){
         return "/instructor/lec-dashboard";
     }
+    // Return Lecturers Profile
+    @GetMapping("/lec-profile")
+    public String instructorProfile(){
+        return "/instructor/lec-profile";
+    }
 
     //return the login page
     @GetMapping("/lec-loginform")
@@ -51,6 +56,15 @@ public class InstructorController {
         return "/instructor/lec-registration";
     }
 
+    /* ======================= Dashboard Navigation =================================== */
+//    Return overview
+    @GetMapping("/lec-overview")
+    public String instructorOverview(){
+        return "/instructor/overviewAdmin";
+    }
+
+
+    /* ======================= End of Dashboard Navigation =================================== */
 
 
     /* ############### Login and registration controllers with forgot password fxns ################################## */

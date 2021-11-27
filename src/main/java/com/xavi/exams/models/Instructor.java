@@ -12,7 +12,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = "email, staffId"))
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class Instructor {
     @Id
     @Column(length = 20)
