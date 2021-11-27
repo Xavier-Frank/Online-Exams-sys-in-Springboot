@@ -32,6 +32,8 @@ public class InstructorController {
     @Autowired
     private JavaMailSender mailSender;
 
+    /* ========================= Navigation controllers ====================================*/
+
     //  Return Lecturers Dashboard
     @GetMapping("/lec-dashboard")
     public String instructorDashboard(){
@@ -42,6 +44,41 @@ public class InstructorController {
     public String instructorProfile(){
         return "/instructor/lec-profile";
     }
+    //Return list of learners
+    @GetMapping("/listoflearners")
+    public String listOfLearners(){
+        return "/instructor/list-learners";
+    }
+    //return Announcements section
+    @GetMapping("/announcements")
+    public String lecAnnouncements(){
+        return "/instructor/lec-notification";
+    }
+    //Return Calendar
+    @GetMapping("/calendar")
+    public String lecCalendar(){
+        return "/instructor/lec-calendar";
+    }
+    //Return assessment page
+    @GetMapping("/assessment")
+    public String lecAssessments(){
+        return "/instructor/lec-assessment";
+    }
+    //return results page
+    @GetMapping("/results")
+    public String lecResults(){
+        return "/instructor/lec-results";
+    }
+    //return report page
+    @GetMapping("/lec-report")
+    public String lecReports(){
+        return "/instructor/lec-report";
+    }
+
+
+
+
+    /* ========================= // Navigation controllers ====================================*/
 
     //return the login page
     @GetMapping("/lec-loginform")
