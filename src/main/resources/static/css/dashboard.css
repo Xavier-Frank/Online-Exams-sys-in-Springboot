@@ -42,6 +42,11 @@
 #sidebar-wrapper .list-group{
     width: 15rem;
 }
+#sidebar-wrapper .list-group: hover{
+    width: 15rem;
+    font-weight: bold;
+    color: green;
+}
 #page-content-wrapper{
     min-width: 100vh;
 }
@@ -79,4 +84,17 @@
 .overview-boxes{
     padding-top: 30px !important;
     margin-bottom: 15px !important;
+}
+a {
+  color: black;
+  text-decoration: none;
+}
+a:link {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+  color: green;
+  font-weight: black;
 }

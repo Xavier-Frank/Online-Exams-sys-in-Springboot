@@ -32,11 +32,45 @@ public class LearnerController {
     @Autowired
     private JavaMailSender mailSender;
 
+    /* ====================== Naavigation controllers for student dashboard ===========================*/
+
     // Return Student Dashboard
     @GetMapping("/stud-dashboard")
     public String studentDashboard(){
         return "/student/stud-dashboard";
     }
+    //return profile
+    @GetMapping("/profile")
+    public String studentProfile(){
+        return "/student/stud-profile";
+    }
+
+    //Return notifications
+    @GetMapping("/notification")
+    public String studentNotification(){
+        return "/student/stud-notification";
+    }
+
+    //Return calendar
+    @GetMapping("/calendar")
+    public String studentCalendar(){
+        return "/student/stud-calendar";
+    }
+
+    // return Assessment page
+    @GetMapping("/assessments")
+    public String studentAssessment(){
+        return "/student/stud-assessments";
+    }
+
+    //return results
+    @GetMapping("/results")
+    public String studentResults(){
+        return "/student/stud-results";
+    }
+
+    /* ====================== // Navigation controllers for student dashboard ===========================*/
+
 
     //return the login page
     @GetMapping("/stud-loginform")
