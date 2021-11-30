@@ -98,3 +98,21 @@ a:hover {
   color: green;
   font-weight: black;
 }
+.table{
+    width: 85%;
+    margin-top: 100px !important;
+}
+.center{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px !important;
+}
+.edit{
+    color: green;
+}
+.notification{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 70px !important;
+    padding:15px;
+}

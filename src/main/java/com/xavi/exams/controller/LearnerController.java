@@ -33,7 +33,6 @@ public class LearnerController {
     private JavaMailSender mailSender;
 
     /* ====================== Naavigation controllers for student dashboard ===========================*/
-
     // Return Student Dashboard
     @GetMapping("/stud-dashboard")
     public String studentDashboard(){
@@ -77,6 +76,13 @@ public class LearnerController {
     public String studentLoginForm(){
         return "/student/stud-loginform";
     }
+
+    // handle logouts
+    @GetMapping("/student-logout")
+    public String studentLogout(){
+        return "/api/main/user-type?logOutSuccess";
+    }
+
 
     //return registration form
     @GetMapping("/stud-registrationform")

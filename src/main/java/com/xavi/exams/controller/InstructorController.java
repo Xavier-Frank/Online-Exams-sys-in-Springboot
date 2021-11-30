@@ -75,15 +75,18 @@ public class InstructorController {
         return "/instructor/lec-report";
     }
 
-
-
-
     /* ========================= // Navigation controllers ====================================*/
 
     //return the login page
     @GetMapping("/lec-loginform")
     public String instructorLoginForm(){
         return "/instructor/lec-loginform";
+    }
+
+    // handle logouts
+    @GetMapping("/instructor-logout")
+    public String instructorLogout(){
+        return "/api/main/user-type?logOutSuccess";
     }
 
     //return registration form
