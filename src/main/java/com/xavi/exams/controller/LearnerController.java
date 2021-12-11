@@ -12,10 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.MissingServletRequestParameterException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.mail.MessagingException;
@@ -72,9 +69,9 @@ public class LearnerController {
 
 
     //return the login page
-    @GetMapping("/stud-loginform")
-    public String studentLoginForm(){
-        return "/student/stud-loginform";
+    @RequestMapping(value = "/stud-loginform", method = { RequestMethod.GET})
+    public ModelAndView loginPage() {
+        return new ModelAndView("/student/stud-loginform");
     }
 
     // handle logouts

@@ -11,5 +11,8 @@ public interface LearnerRepository extends JpaRepository <Learner, String> {
     @Query("SELECT l FROM Learner l WHERE l.email = ?1")
     public Learner findByEmail(String email);
 
+    @Query("SELECT u FROM Learner u WHERE u.learnerId = ?1")
+    public Learner findByLearnerId(String leanerId);
+
     public Learner findByResetPasswordToken(String token);
 }
