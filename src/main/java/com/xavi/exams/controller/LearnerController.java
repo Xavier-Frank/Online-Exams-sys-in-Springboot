@@ -29,7 +29,7 @@ public class LearnerController {
     @Autowired
     private JavaMailSender mailSender;
 
-    /* ====================== Naavigation controllers for student dashboard ===========================*/
+    /* ====================== Navigation controllers for student dashboard ===========================*/
     // Return Student Dashboard
     @GetMapping("/stud-dashboard")
     public String studentDashboard(){

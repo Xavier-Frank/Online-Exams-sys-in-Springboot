@@ -16,8 +16,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.util.Properties;
 
@@ -26,6 +28,7 @@ import java.util.Properties;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     @Autowired
     private DataSource dataSource;
+
 
     @Bean
     public UserDetailsService userDetailsService () {
@@ -42,6 +45,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         authProvider.setPasswordEncoder(passwordEncoder());
 
         return authProvider;
+    }
+    @Bean
+    public AuthenticationEntryPoint unauthorizedEntryPoint() {
+        return (request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
     }
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

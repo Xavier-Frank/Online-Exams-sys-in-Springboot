@@ -6,7 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Timestamp;
 
 @Entity
 @AllArgsConstructor
@@ -33,8 +34,8 @@ public class Instructor {
     @Column(nullable = false, columnDefinition = "Varchar (900)")
     private String password;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdOn;
+    @Column
+    private Timestamp createdOn;
 
     // for forgotten password
     private String resetPasswordToken;
