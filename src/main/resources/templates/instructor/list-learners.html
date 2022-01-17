@@ -46,7 +46,7 @@
                 <a href="/api/instructor/lec-profile" class="list-group-item list-group-item-action bg-transparent second-text fw-bold border">
                     <i class="fa fa-user me-2"></i> Profile
                 </a>
-                <a href="/api/instructor/listoflearners" class="list-group-item list-group-item-action bg-transparent second-text active border">
+                <a href="/api/instructor/list-of-learners" class="list-group-item list-group-item-action bg-transparent second-text active border">
                     <i class="fa fa-users me-2"></i> Learners
                 </a>
                 <a href="/api/instructor/announcements" class="list-group-item list-group-item-action bg-transparent second-text fw-bold border">
@@ -118,22 +118,32 @@
                             <th> Department </th>
                             <th> Institution </th>
                             <th> Campus </th>
+                            <th> Email </th>
+                            <th class="table-info"> <b> Action </b> </th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>S13/09420/17</td>
-                            <td>Xavier</td>
-                            <td>Francis</td>
-                            <td>4</td>
-                            <td>Science</td>
-                            <td>Computer Science</td>
-                            <td>Egerton University</td>
-                            <td>Njoro</td>
-                        </tr>
+                        <th:block th:each="learner: ${learner}">
+                            <tr>
+                                <td>[[${learner.learnerId}]] </td>
+                                <td>[[${learner.firstName}]] </td>
+                                <td>[[${learner.lastName}]] </td>
+                                <td>[[${learner.yearOfStudy}]] </td>
+                                <td>[[${learner.faculty}]] </td>
+                                <td>[[${learner.department}]] </td>
+                                <td>[[${learner.institution}]] </td>
+                                <td>[[${learner.campus}]] </td>
+                                <td>[[${learner.email}]] </td>
+                                <td class="table-info">
+                                    <button type="button" class="btn btn-info">Contact</button>
+                                </td>
+                            </tr>
+
+
+                        </th:block>
                         </tbody>
                     </table>
-                </div>
+                 </div>
 
         </div>
         <!-- //Body section   -->

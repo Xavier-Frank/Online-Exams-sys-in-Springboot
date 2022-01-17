@@ -1,8 +1,11 @@
 package com.xavi.exams.controller;
 
+import com.xavi.exams.doa.LearnerRepository;
 import com.xavi.exams.models.Instructor;
+import com.xavi.exams.models.Learner;
 import com.xavi.exams.models.Utility;
 import com.xavi.exams.services.InstructorService;
+import com.xavi.exams.services.LearnerService;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -22,6 +25,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/api/instructor")
@@ -44,11 +48,7 @@ public class InstructorController {
     public String instructorProfile(){
         return "/instructor/lec-profile";
     }
-    //Return list of learners
-    @GetMapping("/listoflearners")
-    public String listOfLearners(){
-        return "/instructor/list-learners";
-    }
+
     //return Announcements section
     @GetMapping("/announcements")
     public String lecAnnouncements(){
@@ -203,6 +203,20 @@ public class InstructorController {
     }
     /* ######################################### End of Login and registration controllers ################################## */
 
+
+
+    /* ######################################### Start Instructor Operations #############################*/
+
+    @Autowired private LearnerService learnerService;
+    // Return  list of learners
+    @GetMapping("/list-of-learners")
+    public String showLearners(Model model){
+        List<Learner> list_of_learners = learnerService.learnerList();
+        model.addAttribute("learner", list_of_learners);
+
+        return "/instructor/list-learners";
+    }
+    /* ######################################### End of Instructor Operations #############################*/
 
 
 }

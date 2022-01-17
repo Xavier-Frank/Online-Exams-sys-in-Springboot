@@ -29,6 +29,12 @@ public class Learner {
     private Integer yearOfStudy;
 
     @Column(nullable = false, length = 70)
+    private String faculty;
+
+    @Column(nullable = false, length = 70)
+    private String department;
+
+    @Column(nullable = false, length = 70)
     private String institution;
     
      @Column(nullable = false, length = 50)

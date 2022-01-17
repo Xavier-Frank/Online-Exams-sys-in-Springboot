@@ -49,7 +49,7 @@
                 <a href="/api/instructor/lec-profile" class="list-group-item list-group-item-action bg-transparent second-text fw-bold border">
                     <i class="fa fa-user me-2"></i> Profile
                 </a>
-                <a href="/api/instructor/listoflearners" class="list-group-item list-group-item-action bg-transparent second-text fw-bold border">
+                <a href="/api/instructor/list-of-learners" class="list-group-item list-group-item-action bg-transparent second-text fw-bold border">
                     <i class="fa fa-users me-2"></i> Learners
                 </a>
                 <a href="/api/instructor/announcements" class="list-group-item list-group-item-action bg-transparent second-text active border">
@@ -107,6 +107,7 @@
                 </div>
             </nav>
 
+
             <!-- Body section -->
 
             <div class="notification">
@@ -114,25 +115,21 @@
 
                 <form>
                     <!-- Create the editor container -->
-                    <div id="editor">
-                        <p>Hello World!</p>
+                    <div>
+                        <textarea id="editor" class="editor" maxlength="255" field="*{content}">
                         <p>Post Examination Announcements here</p>
-                        <p><br></p>
+                        </textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-warning">Post</button></td>
+                    <div>
+                        <button type="submit" class="btn btn-warning">Post</button></td>
+                    </div>
                 </form>
 
             </div>
-
-
             <!-- Content Body -->
         </div>
     </div>
-
-
-
-
 
 
        <!-- Include the Ckeditor library -->
@@ -146,7 +143,6 @@
                     console.error( error );
                 } );
         </script>
-
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
         <script>

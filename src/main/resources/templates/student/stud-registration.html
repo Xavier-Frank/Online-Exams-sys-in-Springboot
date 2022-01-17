@@ -72,6 +72,16 @@
 						<span class="focus-input100" data-placeholder="&#xf19c;"></span>
 					</div>
 
+					<div class="wrap-input100 validate-input" data-validate = "Faculty">
+						<input class="input100" type="text" name="campus" placeholder="Faculty" minlength="2" maxlength="50" th:field="*{faculty}" required>
+						<span class="focus-input100" data-placeholder="&#xf19c;"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Department">
+						<input class="input100" type="text" name="campus" placeholder="Department" minlength="2" maxlength="70" th:field="*{department}" required>
+						<span class="focus-input100" data-placeholder="&#xf19c;"></span>
+					</div>
+
 					<div class="wrap-input100 validate-input" data-validate = "Enter Your Year of Study">
 						<input class="input100" type="number" name="yearOfStudy" placeholder="Year of Study" min="1" max="6" th:field="*{yearOfStudy}" required>
 						<span class="focus-input100" data-placeholder="&#xf207;"></span>

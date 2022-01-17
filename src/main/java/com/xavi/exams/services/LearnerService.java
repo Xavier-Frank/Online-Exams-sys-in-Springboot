@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class LearnerService {
     @Autowired
@@ -44,8 +46,10 @@ public class LearnerService {
         learnerRepository.save(learner);
     }
 
-    //login
-
+    // list of learners
+    public List<Learner> learnerList(){
+        return (List<Learner>) learnerRepository.findAll();
+    }
     //View results
 
     //Take Assessment
