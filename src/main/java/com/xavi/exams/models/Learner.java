@@ -4,8 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
@@ -50,8 +52,9 @@ public class Learner {
     @Column(nullable = false, columnDefinition = "Varchar(1200)")
     private String password;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdOn;
+    @CreationTimestamp
+    @Column(updatable = false)
+    private Timestamp createdOn;
 
     // for forgotten password
     private String resetPasswordToken;

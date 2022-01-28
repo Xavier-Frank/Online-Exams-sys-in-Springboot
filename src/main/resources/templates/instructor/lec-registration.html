@@ -33,7 +33,12 @@
     <div class="row text-center">
         <div class="col-md-12">
             <div th:if="${param.error}">
-                <div class="alert alert-warning">Email account is already taken</div>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong> Email account is already taken </strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -64,21 +69,17 @@
                     <input class="input100" type="email" name="email" placeholder="Email" th:field="*{email}" required>
                     <span class="focus-input100" data-placeholder="&#x2709;"></span>
                 </div>
-<!--                <div class="wrap-input100 validate-input" data-validate="Enter phone number">-->
-<!--                    <input class="input100" type="text" th:field="*{phonenumber}" name="phonenumber" minlength="10" maxlength="10" placeholder="Phone number" required>-->
-<!--                    <span class="focus-input100" data-placeholder="&#x2706;"></span>-->
+
+<!--                <div class="wrap-input100 validate-input" data-validate="Enter password">-->
+<!--                    <input class="input100" type="password" id="password" name="pass" placeholder="Password" th:field="*{password}" required>-->
+<!--                    <span class="focus-input100" data-placeholder="&#xf191;"></span>-->
 <!--                </div>-->
 
-                <div class="wrap-input100 validate-input" data-validate="Enter password">
-                    <input class="input100" type="password" id="password" name="pass" placeholder="Password" th:field="*{password}" required>
-                    <span class="focus-input100" data-placeholder="&#xf191;"></span>
-                </div>
-
-                <div class="wrap-input100 validate-input" data-validate="Retype password">
-                    <input class="input100" type="password" id="confirm_password" name="pass_2" onkeyup='check();'  placeholder="Retype Password" required>
-                    <span class="focus-input100" data-placeholder="&#xf191;"></span>
-                    <span id='message'></span>
-                </div>
+<!--                <div class="wrap-input100 validate-input" data-validate="Retype password">-->
+<!--                    <input class="input100" type="password" id="confirm_password" name="pass_2" onkeyup='check();'  placeholder="Retype Password" required>-->
+<!--                    <span class="focus-input100" data-placeholder="&#xf191;"></span>-->
+<!--                    <span id='message'></span>-->
+<!--                </div>-->
                 <div class="container-login100-form-btn">
                     <button class="login100-form-btn" name="" type="submit">
                         Register
@@ -120,6 +121,7 @@
 <script th:src="@{/js/main.js}"></script>
 <!--=================================================================================================-->
 <script th:src="@{/js/alert.js}"></script>
+<script th:src="@{/js/util.js}"></script>
 <!--=================================================================================================-->
 
 </body>

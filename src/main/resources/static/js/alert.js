@@ -18,3 +18,35 @@ var check = function() {
     document.getElementById('message').innerHTML = 'please match the passwords';
   }
 }
+ function isDisabled(){
+      let userId = document.getElementById("learnerId").value;
+      let password = document.getElementById("pass").value;
+
+      if(userId!= "" && password!= ""){
+            document.getElementById("login").removeAttribute("disabled");
+
+      }
+
+
+ }
+  function isDisabled2(){
+       let userId = document.getElementById("staffId").value;
+       let password = document.getElementById("pass").value;
+
+       if(userId!= "" && password!= ""){
+             document.getElementById("login").removeAttribute("disabled");
+
+       }
+
+
+  }
+  function Disabled(){
+        let password = document.getElementById("otp").value;
+
+        if(password!= ""){
+              document.getElementById("login").removeAttribute("disabled");
+
+        }
+
+
+   }

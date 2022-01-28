@@ -29,7 +29,12 @@
     <div class="row text-center">
         <div class="col-md-12">
             <div th:if="${param.success}">
-                <div class="alert alert-warning">Welcome</div>
+                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                     Notification Successfully Posted
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -107,29 +112,54 @@
                 </div>
             </nav>
 
-
             <!-- Body section -->
 
             <div class="notification">
                 <h2> Post a comment for Learners: </h2>
 
-                <form>
+                <form action="#" th:action="@{/api/notifications/save-notification}" th:object="${notifications}" method="POST">
                     <!-- Create the editor container -->
-                    <div>
-                        <textarea id="editor" class="editor" maxlength="255" field="*{content}">
-                        <p>Post Examination Announcements here</p>
+                    <div data-validate="Enter comment to post">
+                        <textarea id="editor" class="editor" name="content" placeholder="Post comments here" field="*{content}" required>
                         </textarea>
                     </div>
-
+                    <br>
                     <div>
                         <button type="submit" class="btn btn-warning">Post</button></td>
                     </div>
                 </form>
+                <br>
+                <h4>All notifications for upcoming events:</h4>
+                <table class="table table-responsive table-dark table-hover center">
+                            <thead>
+                            <tr>
+                                <th> Notification Id </th>
+                                <th> Date Created </th>
+                                <th> Body </th>
+                                <th class="table-info"> <b> Action </b> </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <th:block th:each="notifications: ${notifications}">
+                                <tr>
+                                    <td>[[${notifications.id}]] </td>
+                                    <td>[[${notifications.createdOn}]] </td>
+                                    <td>[[${notifications.content}]] </td>
+                                    <td class="table-info">
+                                        <button type="button" class="btn btn-danger">Delete</button>
+                                    </td>
+                                </tr>
+                            </th:block>
+                            </tbody>
+                </table>
+                </div>
 
+                </div>
             </div>
+
             <!-- Content Body -->
-        </div>
-    </div>
+<br>
+<br>
 
 
        <!-- Include the Ckeditor library -->
@@ -154,6 +184,27 @@
 
         }
     </script>
+
+<!--===============================================================================================-->
+<script th:src="@{/vendor/jquery/jquery-3.2.1.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/vendor/animsition/js/animsition.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/vendor/bootstrap/js/popper.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/vendor/select2/select2.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/vendor/daterangepicker/moment.min.js}"></script>
+<script th:src="@{/vendor/daterangepicker/daterangepicker.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/vendor/countdowntime/countdowntime.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/alert.js}"></script>
+<script th:src="@{/js/util.js}"></script>
+<!--=================================================================================================-->
+
 </body>
 
 </html>

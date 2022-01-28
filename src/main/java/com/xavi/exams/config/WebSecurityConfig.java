@@ -1,8 +1,6 @@
 package com.xavi.exams.config;
 
 
-import com.xavi.exams.services.CustomLeanerDetails;
-import com.xavi.exams.services.CustomLeanerDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +15,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
@@ -30,10 +27,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     private DataSource dataSource;
 
 
-    @Bean
-    public UserDetailsService userDetailsService () {
-        return new CustomLeanerDetailsService();
-    }
+//    @Bean
+//    public UserDetailsService userDetailsService () {
+//        return new CustomLeanerDetailsService();
+//    }
     @Bean
     public BCryptPasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
@@ -95,11 +92,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                     .antMatchers("/templates/instructor/**")
                     .authenticated()
                     .and()
-                    .formLogin().loginProcessingUrl("/api/main/user-type").permitAll()
+                    .formLogin()
                     .loginPage("/api/instructor/lec-loginform")
-                    .permitAll()
                     .usernameParameter("staffId")
+                    .passwordParameter("password")
                     .defaultSuccessUrl("/api/instructor/lec-dashboard?success")
+                    .permitAll()
                     .failureUrl("/api/instructor/lec-loginform?error").permitAll()
                     .and()
                     .logout().logoutUrl("/api/instructor/instructor-logout").permitAll()
@@ -139,11 +137,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                     .authenticated()
                     .and()
                     .formLogin()
-                    .loginProcessingUrl("/api/student/stud-loginform").permitAll()
-                    .loginPage("/student/stud-loginform").permitAll()
+                    .loginPage("/api/student/stud-loginform")
                     .usernameParameter("learnerId")
                     .passwordParameter("password")
-                    .defaultSuccessUrl("/api/student/stud-dashboard?success").permitAll()
+                    .defaultSuccessUrl("/api/student/stud-dashboard?success")
                     .failureUrl("/api/student/stud-loginform?error")
                     .permitAll()
                     .and()

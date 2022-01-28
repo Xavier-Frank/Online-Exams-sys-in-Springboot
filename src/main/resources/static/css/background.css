@@ -1,0 +1,16 @@
+* {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+
+body, html {
+	height: 100%;
+	font-family: Poppins-Regular, sans-serif;
+
+	background-image: url('/images/examination.jpeg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+
+}

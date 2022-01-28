@@ -16,16 +16,13 @@ public class MainController {
     public String userTypeForm(){
         return "index";
     }
-    @RequestMapping(value = "/login", method = { RequestMethod.GET, RequestMethod.POST })
-    public ModelAndView loginPage() {
-        return new ModelAndView("/student/stud-loginform");
-    }
+
 
     //Control User types
     @GetMapping("/recordUserType")
     public String userTypes(@RequestParam("usertype") String usertype){
             if (usertype.equals("instructor")){
-                return "redirect:/api/instructor/lec-loginform";
+                return "redirect:/api/instructor/lec-loginform?successM";
             }else if (usertype.equals("learner")){
                 return "redirect:/api/student/stud-loginform";
             }else if (usertype.equals("")){

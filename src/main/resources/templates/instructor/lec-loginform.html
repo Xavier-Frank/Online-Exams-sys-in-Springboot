@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Staff Login Form</title>
     <meta charset="UTF-8">
@@ -23,94 +23,93 @@
     <link rel="stylesheet" type="text/css" th:href="@{/vendor/daterangepicker/daterangepicker.css}">
     <!--===============================================================================================-->
     <!--	=============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/background.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/util.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
     <!--===============================================================================================-->
 </head>
 <body>
-<!--pop up success-->
-<div class="limiter">
-    <div class="row text-center">
-        <div class="col-md-12">
-            <div th:if="${param.success}">
-                <div class="alert alert-info">Registration Success! Use your credentials to access the site</div>
-            </div>
-        </div>
+    <!--pop up success-->
+    <div class="limiter">
         <div class="row text-center">
-            <div class="col-md-12">
-                <div th:if="${param.successMessage}">
-                    <div class="alert alert-info">Password reset successful. Login to access your account</div>
-                </div>
-            </div>
-
-            <div class="row text-center">
-                <div class="col-md-12">
-                    <div th:if="${param.error}">
-                        <div class="alert alert-danger">Invalid Credentials, Try Again</div>
-                    </div>
-                </div>
-
-    </div>
-
-    <div class="container-login100" style="background-image: url('/images/examination.jpeg')" >
-        <div class="wrap-login100">
-            <form class="login100-form validate-form" th:action="@{/login}" method="POST">
-                <span class="login100-form-logo">
-						<i class="fa fa-user"></i>
-                </span>
-
-                <span class="login100-form-title p-b-45 p-t-27">
-						LOG IN
-				</span>
-
-                <div class="wrap-input100 validate-input" data-validate = "Enter Your Staff ID">
-                    <input class="input100" type="text" placeholder="Staff id" maxlength="20" minlength="3" required>
-                    <span class="focus-input100" data-placeholder="&#xf207;"></span>
-                </div>
-
-                <div class="wrap-input100 validate-input" data-validate="Enter password">
-                    <input class="input100" type="password" id="pass" name="password" placeholder="Password" required>
-                    <span class="focus-input100" data-placeholder="&#xf191;"></span>
-                </div>
-
-                <div class="contact100-form-checkbox">
-                    <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-                    <label class="label-checkbox100" for="ckb1">
-                        Remember me
-                    </label>
-                </div>
-                <!--                error msg here-->
-                <div class="row text-center error-msg">
                     <div class="col-md-12">
-                        <div th:if="${param.error}">
-                            <div class="alert alert-danger"> Invalid username or password
+                        <div th:if="${param.success}">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                Password successfully generated check your email to copy it
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="container-login100-form-btn">
-                    <button type="submit" class="login100-form-btn" name="login_user">
-                        Login
-                    </button>
+            <div class="col-md-12">
+                <div th:if="${param.successM}">
+                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                        <strong> Enter your Staff ID to generate OTP(one time password) </strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                 </div>
+            </div>
+            <div class="col-md-12">
+                <div th:if="${param.successMe}">
+                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                        <strong> Registration successful, generate your OTP(one time password) to log in </strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-                <div class="text-center p-t-50">
-                    <a class="txt1 login-links" href="/api/instructor/forgotPassword">
-                        Forgot Password?
-                    </a>
-                    /////
-                    <a class="txt2 login-links" href="/api/instructor/lec-registrationform">
-                        Create Account <i class="fa fa-fighter-jet"></i>
-                    </a>
-                </div>
-            </form>
+
+                <!-- error msg here-->
+                    <div class="col-md-12">
+                        <div th:if="${param.error}">
+                            <div class="alert alert-danger"> User does not exist
+                            </div>
+                        </div>
+                    </div>
         </div>
-    </div>
-</div>
 
+        <div class="row text-center">
+        <div class="col-md-12">
+            <div class="container-login100" style="background-image: url('/images/examination.jpeg');">
 
+                <div class="wrap-login100">
+                    <form class="login100-form validate-form" id="regForm" th:action="@{/api/instructor/generateOTP}" method="POST">
+
+                            <span class="login100-form-logo">
+                                    <i class="fa fa-user"></i>
+                            </span>
+
+                            <span class="login100-form-title p-b-45 p-t-27">
+                                    LOG IN
+                            </span>
+
+                            <div class="wrap-input100 validate-input" data-validate = "Enter Your Staff ID">
+                                <input class="input100" type="text" field="*{staffId}" id="staffId" name="staffId" placeholder="Staff id" maxlength="20" minlength="3" onkeyup="isDisabled2()" required>
+                                <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                            </div>
+                            <div class="container-login100-form-btn">
+                                <button type="submit" class="login100-form-btn" name="login_user">
+                                    Generate OTP
+                                </button>
+                            </div>
+                            <div class="text-center p-t-50">
+                                <a class="txt2 login-links" href="/api/instructor/lec-registrationform">
+                                    Create Account <i class="fa fa-fighter-jet"></i>
+                                </a>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </div>
 <div id="dropDownSelect1"></div>
+</div>
 
 <!--===============================================================================================-->
 <script th:src="@{/vendor/jquery/jquery-3.2.1.min.js}"></script>
@@ -128,6 +127,7 @@
 <script th:src="@{/vendor/countdowntime/countdowntime.js}"></script>
 <!--===============================================================================================-->
 <script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/util.js}"></script>
 <!--=================================================================================================-->
 
 

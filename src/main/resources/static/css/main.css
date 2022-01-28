@@ -1,7 +1,3 @@
-
-
-
-
 /*//////////////////////////////////////////////////////////////////
 [ FONT ]*/
 
@@ -173,7 +169,7 @@ iframe {
 
 .container-login100 {
   width: 100%;
-  min-height: 70vh;
+  min-height: 100vh;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -204,7 +200,7 @@ iframe {
 }
 
 .wrap-login100 {
-  width: 500px;
+  width: 450px;
   border-radius: 10px;
   overflow: hidden;
   padding: 3px 40px 3px 25px;
@@ -572,6 +568,27 @@ input[type=text] {
 /* When the input field gets focus, change its width to 100% */
 input[type=text]:focus {
   width: 100%;
+}
+/* styling the login form*/
+.tab{
+    display: none;
+}
+/*circles to indicate steps*/
+.step{
+    height: 15px;
+    width:15px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5;
+}
+.step.active{
+    opacity: 1;
+}
+.step.finish{
+    background-color: #04aa6d;
 }
 
 

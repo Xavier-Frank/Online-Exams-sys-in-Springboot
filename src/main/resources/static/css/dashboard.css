@@ -100,7 +100,7 @@ a:hover {
 }
 .table{
     width: 85%;
-    margin-top: 100px !important;
+    margin-top: 70px !important;
 }
 .center{
     margin-left: auto;
@@ -113,6 +113,6 @@ a:hover {
 .notification{
     margin-left: auto;
     margin-right: auto;
-    margin-top: 70px !important;
-    padding:15px;
+    margin-top: 20px !important;
+    padding:5px;
 }
