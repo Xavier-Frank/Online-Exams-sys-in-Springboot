@@ -24,7 +24,7 @@ public class MainController {
             if (usertype.equals("instructor")){
                 return "redirect:/api/instructor/lec-loginform?successM";
             }else if (usertype.equals("learner")){
-                return "redirect:/api/student/stud-loginform";
+                return "redirect:/api/student/stud-loginform?successM";
             }else if (usertype.equals("")){
                 return "redirect:/user-type?error";
             }else{

@@ -63,12 +63,14 @@
                     </div>
                 </div>
             </div>
-
-
                 <!-- error msg here-->
                     <div class="col-md-12">
                         <div th:if="${param.error}">
-                            <div class="alert alert-danger"> User does not exist
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                User does not exist
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
                         </div>
                     </div>

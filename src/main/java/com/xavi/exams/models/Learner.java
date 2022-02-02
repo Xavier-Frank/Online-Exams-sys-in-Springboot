@@ -46,18 +46,14 @@ public class Learner {
     @Column(nullable = true, length = 50)
     private String email;
 
-//    @Column(nullable = true, length = 13)
-//    private String phoneNumber;
+    @Column(length = 50, insertable = true)
+    private String oneTimePassword;
 
-    @Column(nullable = false, columnDefinition = "Varchar(1200)")
-    private String password;
 
     @CreationTimestamp
     @Column(updatable = false)
     private Timestamp createdOn;
 
-    // for forgotten password
-    private String resetPasswordToken;
 
     //Relationships
     @ManyToOne(cascade = CascadeType.ALL)

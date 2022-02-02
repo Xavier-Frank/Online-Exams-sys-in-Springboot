@@ -1,5 +1,6 @@
 package com.xavi.exams.controller;
 
+import com.xavi.exams.models.Instructor;
 import com.xavi.exams.models.Learner;
 import com.xavi.exams.models.Utility;
 import com.xavi.exams.services.LearnerService;
@@ -64,6 +65,10 @@ public class LearnerController {
     public String studentResults(){
         return "/student/stud-results";
     }
+    @GetMapping("/stud-OtpValidation")
+    public String otpValidation() {
+        return "/student/OTPValidation";
+    }
 
     /* ====================== // Navigation controllers for student dashboard ===========================*/
 
@@ -88,106 +93,81 @@ public class LearnerController {
         return "/student/stud-registration";
     }
 
-    /* ############### Login and registration controllers with forgot password fxns ################################## */
+    /* ############### Login and registration controllers ################################## */
     //register a learner
     @PostMapping("/stud-registrationProcess")
     public String studentRegistrationProcess(Learner learner){
-        //encrypt password
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String encodedPassword = encoder.encode(learner.getPassword());
-        learner.setPassword(encodedPassword);
 
         learnerService.registerLeaner(learner);
-
         return "redirect:/api/student/stud-loginform?success";
-
-    }
-    //reset Password
-    @GetMapping("/forgotPassword")
-    public String showStudentForgotPasswordform(){
-        return "/student/forgotPasswordStud";
     }
 
-    @PostMapping("/forgotPasswordProcess")
-    public ModelAndView forgotPasswordProcess(HttpServletRequest request, ModelAndView modelAndView) {
-        String email = request.getParameter("email");
-        String token = RandomString.make(25);
+    //login a student
+    @PostMapping("/generateOTP")
+    public ModelAndView studentLoginProcess(HttpServletRequest httpServletRequest, ModelAndView modelAndView, Learner learner){
+        String learnerId = httpServletRequest.getParameter("learnerId");
 
+        //generate random integer
+        String otp = RandomString.make(4);
+
+        // check if staff id and save the otp in database
         try {
-            learnerService.updateResetPasswordToken(token, email);
-            String resetPasswordLink = Utility.getSiteURL(request) + "/api/student/resetPassword?token=" + token;
-            sendEmail(email, resetPasswordLink);
-            modelAndView.setViewName("redirect:/api/student/forgotPassword?success");
+            learnerService.validateLearnerId(otp, learnerId);
+            String link = Utility.getSiteURL(httpServletRequest) + "/api/student/stud-OtpValidationPage?otp=" + otp;
+            String email = learnerService.getUserByEmailAddress(learnerId);
+            learnerService.sendEmail(email, link, otp);
+            modelAndView.setViewName("redirect:/api/student/stud-loginform?success");
+
 
         } catch (ClassNotFoundException | MessagingException | UnsupportedEncodingException e) {
-            modelAndView.setViewName("redirect:/api/student/forgotPassword?error");
+            modelAndView.setViewName("redirect:/api/student/stud-loginform?error");
+
         }
         return modelAndView;
     }
 
-    public void sendEmail(String recipientEmail, String link) throws MessagingException,UnsupportedEncodingException {
-        MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message);
+    //Get the login form
+    @GetMapping("/stud-OtpValidationPage")
+    public ModelAndView showResetPasswordForm(@Param(value = "otp") String otp, ModelAndView modelAndView) {
+        Learner learner = learnerService.getByOneTimePassword(otp);
 
-        helper.setFrom("supportcenter@gmail.com", "Password Support");
-        helper.setTo(recipientEmail);
-
-        String subject = "Password reset link";
-        String content = "<p>Hello,</p>"
-                + "<p>You have requested to reset your password.</p>"
-                + "<p>Click the link below to change your password:</p>"
-                + "<p><a href=\"" + link + "\">Change my password</a></p>"
-                + "<br>"
-                + "<p>Ignore this email if you do remember your password, "
-                + "or you have not made the request.</p>";
-        helper.setSubject(subject);
-        helper.setText(content, true);
-        mailSender.send(message);
-
-    }
-    //Reset the password
-    @GetMapping("/resetPassword")
-    public ModelAndView showResetPasswordForm(@Param(value = "token") String token, ModelAndView modelAndView ){
-        Learner learner  = learnerService.getByResetPasswordToken(token);
-
-        modelAndView.addObject("token", token);
-
-        if (learner == null){
-            modelAndView.addObject("errorMessage", "Invalid token");
-        }
-        modelAndView.setViewName("/student/resetPasswordStud");
-        return modelAndView;
-    }
-    @PostMapping("/resetPasswordProcess")
-    public ModelAndView resetPasswordProcess(ModelAndView modelAndView, HttpServletRequest request){
-        String token = request.getParameter("token");
-        String password = request.getParameter("password");
-
-        Learner learner  = learnerService.getByResetPasswordToken(token);
+        modelAndView.addObject("otp", otp);
 
         if (learner == null) {
-            modelAndView.addObject("errorMessage", "Invalid token");
-            modelAndView.setViewName("redirect:/api/student/resetPassword?errorMessage");
+            modelAndView.addObject("errorMessage", "Invalid OTP");
+            modelAndView.setViewName("redirect:/api/student/stud-OtpValidation?invalid");
         } else {
-            learnerService.updatePassword(learner, password);
-            modelAndView.addObject("successMessage", "You have succesfully changed your password");
-            modelAndView.setViewName("redirect:/api/student/stud-loginform?successMessage");
+            modelAndView.setViewName("redirect:/api/student/stud-OtpValidation?success");
             return modelAndView;
         }
         return modelAndView;
     }
-    //handling the exception of accessing the resetPassword page without token redirects to login page
-    @ExceptionHandler(MissingServletRequestParameterException.class)
-    public ModelAndView handleMissingTokens(MissingServletRequestParameterException ex){
-        return new ModelAndView("redirect:/api/main/user-type");
+
+    //Login an instructor
+    @PostMapping("/stud-otpVerification")
+    public ModelAndView verifyOTP(ModelAndView modelAndView, HttpServletRequest httpServletRequest) {
+        String pass = httpServletRequest.getParameter("pass");
+
+
+        Learner learner  = learnerService.getByOneTimePassword(pass);
+
+        if (learner != null) {
+            learnerService.loginLearner(learner);
+            modelAndView.setViewName("redirect:/api/student/stud-dashboard?success");
+            return modelAndView;
+        } else {
+            modelAndView.setViewName("redirect:/api/student/stud-OtpValidation?error");
+        }
+        return modelAndView;
     }
+
+   //handling the exception of accessing the resetPassword page without token redirects to login page
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public ModelAndView handleMissingTokens(MissingServletRequestParameterException ex) {
+        return new ModelAndView("redirect:/api/student/stud-loginform?successM");
+    }
+
     /* ############### End of Login and registration controllers with forgot password fxns ################################## */
-
-
-
-
-
-
 
 
 }
