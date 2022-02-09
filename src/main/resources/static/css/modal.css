@@ -1,0 +1,8 @@
+.modal-header{
+    background: #f7941e;
+
+}
+.required:after{
+    content: "*";
+    color: red;
+}

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instructor's Assessment </title>
+    <title>Create Assessments</title>
     <link rel="stylesheet" type="text/css" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" th:href="@{/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
     <!-- =======================================================================================================    -->
     <link th:href="@{/css/dashboard.css}" type="text/css" rel="stylesheet">
+    <link th:href="@{/css/modal.css}" rel="stylesheet" type="text/css" >
+<!--    ====================================================================================================================================================================================-->
 
 </head>
 <body>
@@ -26,8 +28,8 @@
     <div class="row text-center">
         <div class="col-md-12">
             <div th:if="${param.success}">
-                <div class="alert alert-info alert-dismissible fade show" role="alert">
-                    <strong>  </strong>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Welcome
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -35,6 +37,7 @@
             </div>
         </div>
     </div>
+</div>
 
     <div class="d-flex" id="wrapper">
         <!-- Side bar section -->
@@ -44,10 +47,10 @@
             </div>
 
             <div class="list-group list-group-flush my-3">
-                <a href="/api/instructor/lec-dashboard" class="list-group-item list-group-item-action bg-transparent second-text fw-bold border">
+                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold border">
                     <i class="fas fa-tachometer-alt me-2"></i> Dashboard
                 </a>
-                <a href="/api/instructor/profile" class="list-group-item list-group-item-action bg-transparent second-text fw-bold border">
+                <a href="/api/instructor/lec-profile" class="list-group-item list-group-item-action bg-transparent second-text fw-bold border">
                     <i class="fa fa-user me-2"></i> Profile
                 </a>
                 <a href="/api/instructor/list-of-learners" class="list-group-item list-group-item-action bg-transparent second-text fw-bold border">
@@ -107,17 +110,150 @@
                     </ul>
                 </div>
             </nav>
+
+            <!-- Body section -->
+
+            <!-- Content Body -->
+            <div class="container-fluid px-4 overview-boxes">
+                <h3> Easily Create an Assessment: </h3>
+                <div class="row g-3 my-2">
+                    <div class="col-md-3">
+                        <a href="#">
+                            <div class="p-5 bg-white shadow-lg d-flex justify-content-around align-items-center rounded">
+                                <div>
+                                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#myModal">
+                                        <h3 class="fs-2">Create</h3>
+                                    </button>
+                                    <p class="fs-5">Add Questions</p>
+
+                                    <!--  modal pop up-->
+                                    <div class="modal" id="myModal" >
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title"> Create an Assessment</h4>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                        <div class="wrap-login">
+                                                            <form action="#">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label required">Instructor's id (e.g. A13789)</label>
+                                                                    <input type="text" class="form-control" required>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label class="form-label required">Assessment id (e.g. COMP 496)</label>
+                                                                    <input type="text" class="form-control" required>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label class="form-label required" >Institution (e.g. Egerton)</label>
+                                                                    <input type="text" class="form-control" required>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label class="form-label required">Department (e.g. CompSci)</label>
+                                                                    <input type="text" class="form-control" required>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label class="form-label required">Year (e.g. 2022)</label>
+                                                                    <input type="date" class="form-control" required>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label class="form-label required">Duration (e.g. 1hr 30min)</label>
+                                                                    <input type="time" class="form-control" required>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <button class="btn btn-primary" type="submit">
+                                                                        Get Started
+                                                                    </button>
+                                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> Cancel</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                                <i class="fa fa-file fs-1 primary-text border rounded full secondary-bg p-3 p-t-2 p-b-2"></i>
+                            </div>
+                        </a>
+
+                    </div>
+
+                    <div class="col-md-3">
+                        <a href="#">
+                            <div class="p-5 bg-white shadow-lg d-flex justify-content-around align-items-center rounded">
+                                <div>
+                                    <button type="button" class="btn btn-success">
+                                        <h3 class="fs-2"> Update</h3>
+                                    </button>
+                                    <p class="fs-5"> Edit Questions</p>
+                                </div>
+                                <i class="fas fa-chart-line fs-1 primary-text border rounded full secondary-bg p-3"></i>
+                            </div>
+                        </a>
+
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#">
+                            <div class="p-5 bg-white shadow-lg d-flex justify-content-around align-items-center rounded">
+                                <div>
+                                    <button type="button" class="btn btn-danger">
+                                        <h3 class="fs-2">Delete</h3>
+                                    </button>
+                                    <p class="fs-5">Remove Quiz</p>
+                                </div>
+                                <i class="fa fa-file fs-1 primary-text border rounded full secondary-bg p-3"></i>
+                            </div>
+                        </a>
+
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#">
+                            <div class="p-5 bg-white shadow-lg d-flex justify-content-around align-items-center rounded">
+                                <div>
+                                    <button type="button" class="btn btn-success">
+                                        <h3 class="fs-2"> Preview</h3>
+                                    </button>
+                                    <p class="fs-5"> Final Layout </p>
+                                </div>
+                                <i class="fas fa-calendar fs-1 primary-text border rounded full secondary-bg p-3"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="container-fluid">
+                <div class="row text-center">
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
+                        <a href="#">
+                            <div class="p-4 bg-white shadow-lg d-flex justify-content-around align-items-center rounded">
+                                <i class="fa fa-file fs-1 primary-text border rounded full secondary-bg p-3 p-t-2 p-b-2"></i>
+                                <div>
+                                    <button type="button" class="btn btn-warning">
+                                        <h3 class="fs-2">Monitor</h3>
+                                    </button>
+                                    <p class="fs-5">Invigilate an Ongoing Assessment</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                </div>
+            </div>
+
+
         </div>
-
-        <!-- Body section -->
-
-
-        <!-- Content Body -->
     </div>
-</div>
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-        <script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script>
         var el = document.getElementById("wrapper")
         var toggleButton = document.getElementById("menu-toggle")
 
@@ -126,26 +262,25 @@
 
         }
     </script>
-
-        <!--===============================================================================================-->
-        <script th:src="@{/vendor/jquery/jquery-3.2.1.min.js}"></script>
-        <!--===============================================================================================-->
-        <script th:src="@{/vendor/animsition/js/animsition.min.js}"></script>
-        <!--===============================================================================================-->
-        <script th:src="@{/vendor/bootstrap/js/popper.js}"></script>
-        <script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
-        <!--===============================================================================================-->
-        <script th:src="@{/vendor/select2/select2.min.js}"></script>
-        <!--===============================================================================================-->
-        <script th:src="@{/vendor/daterangepicker/moment.min.js}"></script>
-        <script th:src="@{/vendor/daterangepicker/daterangepicker.js}"></script>
-        <!--===============================================================================================-->
-        <script th:src="@{/vendor/countdowntime/countdowntime.js}"></script>
-        <!--===============================================================================================-->
-        <script th:src="@{/js/main.js}"></script>
-        <script th:src="@{/js/alert.js}"></script>
-        <script th:src="@{/js/util.js}"></script>
-        <!--=================================================================================================-->
+<!--===============================================================================================-->
+<script th:src="@{/vendor/jquery/jquery-3.2.1.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/vendor/animsition/js/animsition.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/vendor/bootstrap/js/popper.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/vendor/select2/select2.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/vendor/daterangepicker/moment.min.js}"></script>
+<script th:src="@{/vendor/daterangepicker/daterangepicker.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/vendor/countdowntime/countdowntime.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/alert.js}"></script>
+<script th:src="@{/js/util.js}"></script>
+<!--=================================================================================================-->
 
 </body>
 
