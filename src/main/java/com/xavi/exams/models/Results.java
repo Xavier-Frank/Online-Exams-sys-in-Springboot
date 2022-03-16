@@ -30,7 +30,7 @@ public class Results {
 
     //Relationships
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "examId", referencedColumnName = "examId")
+    @JoinColumn(name = "assessmentId", referencedColumnName = "assessmentId")
     private Exams exams;
 
     @OneToOne(cascade = CascadeType.ALL)

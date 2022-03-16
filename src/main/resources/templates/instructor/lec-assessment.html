@@ -136,33 +136,42 @@
                                                 </div>
                                                 <div class="modal-body">
                                                         <div class="wrap-login">
-                                                            <form action="#">
-                                                                <div class="mb-3">
+                                                            <form action="#" th:action="@{/api/exams/createAssessment}" th:object="${exams}" method="post">
+                                                                <div class="mb-2">
                                                                     <label class="form-label required">Instructor's id (e.g. A13789)</label>
-                                                                    <input type="text" class="form-control" required>
+                                                                    <input type="text" class="form-control" field="*{staffId}" name="staffId" required>
                                                                 </div>
-                                                                <div class="mb-3">
-                                                                    <label class="form-label required">Assessment id (e.g. COMP 496)</label>
-                                                                    <input type="text" class="form-control" required>
+                                                                <div class="mb-2">
+                                                                    <label class="form-label required">Assessment id (e.g. COMP 473)</label>
+                                                                    <input type="text" class="form-control" field="*{assessmentId}" name="assessmentId" required>
                                                                 </div>
-                                                                <div class="mb-3">
-                                                                    <label class="form-label required" >Institution (e.g. Egerton)</label>
-                                                                    <input type="text" class="form-control" required>
+                                                                <div class="mb-2">
+                                                                    <label class="form-label required">Assessment name (e.g. Distributed Systems)</label>
+                                                                    <input type="text" class="form-control" field="*{assessmentName}" name="assessmentName" required>
                                                                 </div>
-                                                                <div class="mb-3">
+<!--                                                                <div class="mb-3">-->
+<!--                                                                    <label class="form-label required" >Institution (e.g. Egerton)</label>-->
+<!--                                                                    <input type="text" class="form-control" required>-->
+<!--                                                                </div>-->
+                                                                <div class="mb-2">
                                                                     <label class="form-label required">Department (e.g. CompSci)</label>
-                                                                    <input type="text" class="form-control" required>
+                                                                    <input type="text" class="form-control" field="*{department}" name="department" required>
                                                                 </div>
-                                                                <div class="mb-3">
-                                                                    <label class="form-label required">Year (e.g. 2022)</label>
-                                                                    <input type="date" class="form-control" required>
+                                                                <div class="mb-2">
+                                                                    <label class="form-label required">Date of Examination (e.g. 2022)</label>
+                                                                    <input type="date" class="form-control" field="*{dateOfExamination}" name="dateOfExamination" required>
                                                                 </div>
-                                                                <div class="mb-3">
+                                                                <div class="mb-2">
+                                                                    <label class="form-label required">Class of Examination (e.g. Year 4)</label>
+                                                                    <input type="number" min="1" max="6" class="form-control" field="*{classOfExamination}" name="classOfExamination" required>
+                                                                </div>
+                                                                <div class="mb-2">
                                                                     <label class="form-label required">Duration (e.g. 1hr 30min)</label>
-                                                                    <input type="time" class="form-control" required>
+                                                                    <br>
+                                                                    <input type="text" class="form-control html-duration-picker" data-duration="00:00:59" field="*{duration}" name="duration" required>
                                                                 </div>
-                                                                <div class="mb-3">
-                                                                    <button class="btn btn-primary" type="submit">
+                                                                <div class="mb-2">
+                                                                    <button class="btn btn-success" type="submit">
                                                                         Get Started
                                                                     </button>
                                                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> Cancel</button>
@@ -262,6 +271,7 @@
 
         }
     </script>
+<script src="https://cdn.jsdelivr.net/npm/html-duration-picker@latest/dist/html-duration-picker.min.js"></script>
 <!--===============================================================================================-->
 <script th:src="@{/vendor/jquery/jquery-3.2.1.min.js}"></script>
 <!--===============================================================================================-->
@@ -280,6 +290,8 @@
 <script th:src="@{/js/main.js}"></script>
 <script th:src="@{/js/alert.js}"></script>
 <script th:src="@{/js/util.js}"></script>
+<script th:src="@{/js/html-duration-picker.min.js}"></script>
+
 <!--=================================================================================================-->
 
 </body>

@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface NotificationRepository extends JpaRepository<Notifications, BigInteger> {
 
+    public Long countById(BigInteger id);
 }

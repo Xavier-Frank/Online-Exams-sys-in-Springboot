@@ -2,8 +2,10 @@ package com.xavi.exams.controller;
 
 import com.xavi.exams.models.Instructor;
 import com.xavi.exams.models.Learner;
+import com.xavi.exams.models.Notifications;
 import com.xavi.exams.models.Utility;
 import com.xavi.exams.services.LearnerService;
+import com.xavi.exams.services.NotificationService;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -20,12 +22,16 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/api/student")
 public class LearnerController {
     @Autowired
     private LearnerService learnerService;
+
+    @Autowired
+    private NotificationService notificationService;
 
     @Autowired
     private JavaMailSender mailSender;
@@ -44,7 +50,9 @@ public class LearnerController {
 
     //Return notifications
     @GetMapping("/notification")
-    public String studentNotification(){
+    public String studentNotification(Model model){
+        List<Notifications> notifications = notificationService.notificationsList();
+        model.addAttribute("notifications", notifications);
         return "/student/stud-notification";
     }
 
@@ -97,9 +105,8 @@ public class LearnerController {
     //register a learner
     @PostMapping("/stud-registrationProcess")
     public String studentRegistrationProcess(Learner learner){
-
         learnerService.registerLeaner(learner);
-        return "redirect:/api/student/stud-loginform?success";
+        return "redirect:/api/student/stud-loginform?successM";
     }
 
     //login a student

@@ -113,18 +113,14 @@
               <th> Notification ID </th>
               <th> Date Created </th>
               <th> Notification Body </th>
-              <th class="table-info"> <b> Action </b> </th>
             </tr>
             </thead>
             <tbody>
-            <th:block th:each="notifications: ${notificationsList}">
+            <th:block th:each="notifications: ${notifications}">
               <tr>
                 <td>[[${notifications.id}]] </td>
                 <td>[[${notifications.createdOn}]] </td>
                 <td>[[${notifications.content}]] </td>
-                <td class="table-info">
-                  <button type="button" class="btn btn-danger">Delete</button>
-                </td>
               </tr>
             </th:block>
             </tbody>

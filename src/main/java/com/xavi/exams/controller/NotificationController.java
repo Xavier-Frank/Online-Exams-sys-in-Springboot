@@ -5,11 +5,9 @@ import com.xavi.exams.services.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.math.BigInteger;
 import java.net.http.HttpRequest;
 import java.util.List;
 
@@ -43,4 +41,16 @@ public class NotificationController {
         //return the notification template
         return "/instructor/lec-notification";
     }
+
+    //delete notification
+    @GetMapping("/delete-notification/{id}")
+     public String deleteNotification(@PathVariable("id")BigInteger id){
+        try{
+            notificationService.delete(id);
+        }catch (Exception e){
+            return "redirect:/api/instructor/announcements?error";
+        }
+        return "redirect:/api/instructor/announcements?successN";
+    }
+
 }

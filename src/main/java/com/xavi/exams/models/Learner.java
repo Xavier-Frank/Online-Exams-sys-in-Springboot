@@ -49,7 +49,6 @@ public class Learner {
     @Column(length = 50, insertable = true)
     private String oneTimePassword;
 
-
     @CreationTimestamp
     @Column(updatable = false)
     private Timestamp createdOn;
@@ -57,7 +56,7 @@ public class Learner {
 
     //Relationships
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "examId", referencedColumnName = "examId")
+    @JoinColumn(name = "assessmentId", referencedColumnName = "assessmentId")
     private Exams exams;
 
 

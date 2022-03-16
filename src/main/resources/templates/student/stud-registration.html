@@ -23,6 +23,7 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
 <!--	=============================================================================================-->
 	<link rel="stylesheet" type="text/css" th:href="@{/css/util.css}">
@@ -47,7 +48,7 @@
 	</div>
 	<div class="container-login100" style="background-image: url('/images/examination.jpeg');">
 		<div class="wrap-login100">
-			<form class="login100-form validate-form" action="#" th:action="@{/api/student/stud-regitrationProcess}"  th:object="${learner}" method="POST">
+			<form class="login100-form validate-form" action="#" th:action="@{/api/student/stud-registrationProcess}"  th:object="${learner}" method="POST">
 
 					<span class="login100-form-logo">
 						<i class="fa fa-user"></i>
@@ -70,27 +71,27 @@
 				</div>
 				<div class="wrap-input100 validate-input" data-validate = "Enter Your Institution">
 					<input class="input100" type="text" name="institution" placeholder="Institution" th:field="*{institution}" required>
-					<span class="focus-input100" data-placeholder="&#xf207;"></span>
+					<span class="focus-input100" data-placeholder="&#x2656;"></span>
 				</div>
 
 				<div class="wrap-input100 validate-input" data-validate = "Enter Your Campus">
 					<input class="input100" type="text" name="campus" placeholder="campus" th:field="*{campus}" required>
-					<span class="focus-input100" data-placeholder="&#xf207;"></span>
+					<span class="focus-input100" data-placeholder="&#x2635;"></span>
 				</div>
 
 				<div class="wrap-input100 validate-input" data-validate = "Enter Your Faculty">
 					<input class="input100" type="text" name="faculty" placeholder="Faculty" th:field="*{faculty}" required>
-					<span class="focus-input100" data-placeholder="&#xf207;"></span>
+					<span class="focus-input100" data-placeholder="&#xf209;"></span>
 				</div>
 
 				<div class="wrap-input100 validate-input" data-validate = "Enter Your Department">
 					<input class="input100" type="text" name="department" placeholder="Department" th:field="*{department}" required>
-					<span class="focus-input100" data-placeholder="&#xf207;"></span>
+					<span class="focus-input100" data-placeholder="&#xf209;"></span>
 				</div>
 
 				<div class="wrap-input100 validate-input" data-validate = "Enter Your Year of Study">
 					<input class="input100" type="number" name="yearOfStudy" placeholder="Year Of Study" min="1" max="6" th:field="*{yearOfStudy}" required>
-					<span class="focus-input100" data-placeholder="&#xf207;"></span>
+					<span class="focus-input100" data-placeholder="&#x269D;"></span>
 				</div>
 
 				<div class="wrap-input100 validate-input" data-validate="Enter email">

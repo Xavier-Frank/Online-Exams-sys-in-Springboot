@@ -36,6 +36,21 @@
                     </button>
                 </div>
             </div>
+            <div th:if="${param.successN}">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    Notification Successfully deleted
+                    <button type="button" clasrs="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div th:if="${param.error}">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        Error deleting Notification
+                        <button type="button" clasrs="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+            </div>
         </div>
     </div>
 </div>
@@ -146,7 +161,7 @@
                                     <td>[[${notifications.createdOn}]] </td>
                                     <td>[[${notifications.content}]] </td>
                                     <td class="table-info">
-                                        <button type="button" class="btn btn-danger">Delete</button>
+                                        <a th:href="@{'/api/notifications/delete-notification/' + ${notifications.id}}"><button type="button" class="btn btn-danger">Delete</button></a>
                                     </td>
                                 </tr>
                             </th:block>

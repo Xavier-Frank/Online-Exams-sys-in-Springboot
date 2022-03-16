@@ -74,7 +74,6 @@
                 </a>
 
             </div>
-
         </div>
         <!-- Side bar section -->
         <div id="page-content-wrapper">
@@ -116,34 +115,47 @@
                         <thead>
                         <tr>
                             <th colspan="2">USER DETAILS</th>
-                            <th class="table-danger"> ACTION </th>
+                            <th class=""> ACTION </th>
                         </tr>
-                        </thead>
-                        <tbody>
                         <tr>
                             <td>Staff ID</td>
-                            <td>S13/09420/17</td>
-                            <td class="table-info"> <button type="button" class="btn btn-warning">Edit</button></td>
                         </tr>
                         <tr>
                             <td>First Name</td>
-                            <td>Xavier</td>
-                            <td class="table-info"> <button type="button" class="btn btn-warning">Edit</button></td>
                         </tr>
                         <tr>
                             <td>Last Name</td>
-                            <td>Francis</td>
-                            <td class="table-info"> <button type="button" class="btn btn-warning">Edit</button></td>
                         </tr>
                         <tr>
                             <td>Email</td>
-                            <td>oduorfrancis@gmail.com</td>
-                            <td class="table-info"> <button type="button" class="btn btn-warning">Edit</button></td>
                         </tr>
+                        </thead>
+                        <tbody>
+                        <th:block th:each="instructor: ${instructor}">
+                            <tr>
+                                <td>[[${instructor.staffId}]]</td>
+                                <td class=""> <button type="button" class="btn btn-warning">Edit</button></td>
+                            </tr>
+                            <tr>
+                                <td>[[${instructor.firstName}]]</td>
+                                <td class=""> <button type="button" class="btn btn-warning">Edit</button></td>
+                            </tr>
+                            <tr>
+                                 <td>[[${instructor.lastName}]]</td>
+                                <td class=""> <button type="button" class="btn btn-warning">Edit</button></td>
+                            </tr>
+                            <tr>
+                                <td>[[${instructor.email}]]</td>
+                                <td class=""> <button type="button" class="btn btn-warning">Edit</button></td>
+                            </tr>
+                        </th:block>
                         </tbody>
                     </table>
                 </div>
-                <!--// Content Body-->
+                <!--Content Body-->
+                <!-- //Content Body-->
+
+
 
             </div>
         </div>

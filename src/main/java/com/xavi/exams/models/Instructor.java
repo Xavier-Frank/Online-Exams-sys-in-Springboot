@@ -51,7 +51,7 @@ public class Instructor {
 
     //Relationships
     @ManyToOne
-    @JoinColumn(name = "examId", referencedColumnName = "examId")
+    @JoinColumn(name = "assessmentId", referencedColumnName = "assessmentId")
     private Exams exams;
 
 
