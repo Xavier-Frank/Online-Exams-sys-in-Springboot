@@ -47,7 +47,7 @@
             </div>
 
             <div class="list-group list-group-flush my-3">
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold border">
+                <a href="/api/instructor/lec-dashboard" class="list-group-item list-group-item-action bg-transparent second-text fw-bold border">
                     <i class="fas fa-tachometer-alt me-2"></i> Dashboard
                 </a>
                 <a href="/api/instructor/lec-profile" class="list-group-item list-group-item-action bg-transparent second-text fw-bold border">
@@ -118,71 +118,73 @@
                 <h3> Easily Create an Assessment: </h3>
                 <div class="row g-3 my-2">
                     <div class="col-md-3">
-                        <a href="#">
+                        <a href="/api/exams/createNewAssessment" target="popup"
+                           onclick="window.open('/api/exams/createNewAssessment','popup','width=600,height=600,scrollbars=yes,resizable=yes'); return false;">
                             <div class="p-5 bg-white shadow-lg d-flex justify-content-around align-items-center rounded">
                                 <div>
                                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#myModal">
                                         <h3 class="fs-2">Create</h3>
                                     </button>
-                                    <p class="fs-5">Add Questions</p>
-
-                                    <!--  modal pop up-->
-                                    <div class="modal" id="myModal" >
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h4 class="modal-title"> Create an Assessment</h4>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                        <div class="wrap-login">
-                                                            <form action="#" th:action="@{/api/exams/createAssessment}" th:object="${exams}" method="post">
-                                                                <div class="mb-2">
-                                                                    <label class="form-label required">Instructor's id (e.g. A13789)</label>
-                                                                    <input type="text" class="form-control" field="*{staffId}" name="staffId" required>
-                                                                </div>
-                                                                <div class="mb-2">
-                                                                    <label class="form-label required">Assessment id (e.g. COMP 473)</label>
-                                                                    <input type="text" class="form-control" field="*{assessmentId}" name="assessmentId" required>
-                                                                </div>
-                                                                <div class="mb-2">
-                                                                    <label class="form-label required">Assessment name (e.g. Distributed Systems)</label>
-                                                                    <input type="text" class="form-control" field="*{assessmentName}" name="assessmentName" required>
-                                                                </div>
-<!--                                                                <div class="mb-3">-->
-<!--                                                                    <label class="form-label required" >Institution (e.g. Egerton)</label>-->
-<!--                                                                    <input type="text" class="form-control" required>-->
-<!--                                                                </div>-->
-                                                                <div class="mb-2">
-                                                                    <label class="form-label required">Department (e.g. CompSci)</label>
-                                                                    <input type="text" class="form-control" field="*{department}" name="department" required>
-                                                                </div>
-                                                                <div class="mb-2">
-                                                                    <label class="form-label required">Date of Examination (e.g. 2022)</label>
-                                                                    <input type="date" class="form-control" field="*{dateOfExamination}" name="dateOfExamination" required>
-                                                                </div>
-                                                                <div class="mb-2">
-                                                                    <label class="form-label required">Class of Examination (e.g. Year 4)</label>
-                                                                    <input type="number" min="1" max="6" class="form-control" field="*{classOfExamination}" name="classOfExamination" required>
-                                                                </div>
-                                                                <div class="mb-2">
-                                                                    <label class="form-label required">Duration (e.g. 1hr 30min)</label>
-                                                                    <br>
-                                                                    <input type="text" class="form-control html-duration-picker" data-duration="00:00:59" field="*{duration}" name="duration" required>
-                                                                </div>
-                                                                <div class="mb-2">
-                                                                    <button class="btn btn-success" type="submit">
-                                                                        Get Started
-                                                                    </button>
-                                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> Cancel</button>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <p class="fs-5">Add Quiz</p>
                                 </div>
+
+<!--                                    &lt;!&ndash;  modal pop up&ndash;&gt;-->
+<!--                                    <div class="modal" id="myModal" >-->
+<!--                                        <div class="modal-dialog">-->
+<!--                                            <div class="modal-content">-->
+<!--                                                <div class="modal-header">-->
+<!--                                                    <h4 class="modal-title"> Create an Assessment</h4>-->
+<!--                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>-->
+<!--                                                </div>-->
+<!--                                                <div class="modal-body">-->
+<!--                                                        <div class="wrap-login">-->
+<!--                                                            <form action="#" th:action="@{/api/exams/createAssessment}" th:object="${exams}" method="post">-->
+<!--                                                                <div class="mb-2">-->
+<!--                                                                    <label class="form-label required">Instructor's id (e.g. A13789)</label>-->
+<!--                                                                    <input type="text"  field="*{staffId}" name="staffId" class="form-control" required>-->
+<!--                                                                </div>-->
+<!--                                                                <div class="mb-2">-->
+<!--                                                                    <label class="form-label required">Assessment id (e.g. COMP 473)</label>-->
+<!--                                                                    <input type="text" class="form-control" field="*{assessmentId}" name="assessmentId" required>-->
+<!--                                                                </div>-->
+<!--                                                                <div class="mb-2">-->
+<!--                                                                    <label class="form-label required">Assessment name (e.g. Distributed Systems)</label>-->
+<!--                                                                    <input type="text" class="form-control" field="*{assessmentName}" name="assessmentName" required>-->
+<!--                                                                </div>-->
+<!--&lt;!&ndash;                                                                <div class="mb-3">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                    <label class="form-label required" >Institution (e.g. Egerton)</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                    <input type="text" class="form-control" required>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                </div>&ndash;&gt;-->
+<!--                                                                <div class="mb-2">-->
+<!--                                                                    <label class="form-label required">Department (e.g. CompSci)</label>-->
+<!--                                                                    <input type="text" class="form-control" field="*{department}" name="department" required>-->
+<!--                                                                </div>-->
+<!--                                                                <div class="mb-2">-->
+<!--                                                                    <label class="form-label required">Date of Examination (e.g. 2022)</label>-->
+<!--                                                                    <input type="date" class="form-control" field="*{dateOfExamination}" name="dateOfExamination" required>-->
+<!--                                                                </div>-->
+<!--                                                                <div class="mb-2">-->
+<!--                                                                    <label class="form-label required">Class of Examination (e.g. Year 4)</label>-->
+<!--                                                                    <input type="number" min="1" max="6" class="form-control" field="*{classOfExamination}" name="classOfExamination" required>-->
+<!--                                                                </div>-->
+<!--                                                                <div class="mb-2">-->
+<!--                                                                    <label class="form-label required">Duration (e.g. 1hr 30min)</label>-->
+<!--                                                                    <br>-->
+<!--                                                                    <input type="text" class="form-control html-duration-picker" data-duration="00:00:59" field="*{duration}" name="duration" required>-->
+<!--                                                                </div>-->
+<!--                                                                <div class="mb-2">-->
+<!--                                                                    <button class="btn btn-success" type="submit">-->
+<!--                                                                        Get Started-->
+<!--                                                                    </button>-->
+<!--                                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> Cancel</button>-->
+<!--                                                                </div>-->
+<!--                                                            </form>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                </div>-->
                                 <i class="fa fa-file fs-1 primary-text border rounded full secondary-bg p-3 p-t-2 p-b-2"></i>
                             </div>
                         </a>
@@ -196,7 +198,7 @@
                                     <button type="button" class="btn btn-success">
                                         <h3 class="fs-2"> Update</h3>
                                     </button>
-                                    <p class="fs-5"> Edit Questions</p>
+                                    <p class="fs-5"> Edit Quiz</p>
                                 </div>
                                 <i class="fas fa-chart-line fs-1 primary-text border rounded full secondary-bg p-3"></i>
                             </div>
@@ -243,7 +245,7 @@
                     <div class="col-md-4">
                         <a href="#">
                             <div class="p-4 bg-white shadow-lg d-flex justify-content-around align-items-center rounded">
-                                <i class="fa fa-file fs-1 primary-text border rounded full secondary-bg p-3 p-t-2 p-b-2"></i>
+                                <i class="fa fa-eye fs-1 primary-text border rounded full secondary-bg p-3 p-t-2 p-b-2"></i>
                                 <div>
                                     <button type="button" class="btn btn-warning">
                                         <h3 class="fs-2">Monitor</h3>

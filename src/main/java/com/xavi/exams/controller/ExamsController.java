@@ -6,6 +6,7 @@ import com.xavi.exams.services.ExamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,9 +23,28 @@ public class ExamsController {
 
     //get examination page
     @GetMapping("/createExams")
-    public String examinationPage(){
+    public String examinationPage() {
         return "/examination/create-an-examination";
     }
+
+
+    //return add new assessment page
+    @GetMapping("/createNewAssessment")
+    public String createAssessment(Model model){
+
+        model.addAttribute("exams", new Exams());
+
+        return "/examination/createNewAssessment";
+
+    }
+
+    //Add question page
+    @GetMapping("/add-questions")
+    public String addQuestion(){
+        return "/examination/Add-Question";
+    }
+
+
 
     //save an exam
     @PostMapping("/createAssessment")
@@ -34,5 +54,6 @@ public class ExamsController {
         modelAndView.setViewName("redirect:/api/exams/createExams?success");
         return modelAndView;
     }
+
 
 }
