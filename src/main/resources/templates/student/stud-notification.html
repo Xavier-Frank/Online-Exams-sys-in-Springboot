@@ -102,6 +102,15 @@
           </ul>
         </div>
       </nav>
+
+      <div class="container-fluid">
+        <!-- The form -->
+        <form class="example" action="">
+          <input type="text" placeholder="Search a notification.." name="search">
+          <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+
+      </div>
       <!-- Content Body -->
       <h4>Notifications for upcoming events:</h4>
 
@@ -120,7 +129,7 @@
               <tr>
                 <td>[[${notifications.id}]] </td>
                 <td>[[${notifications.createdOn}]] </td>
-                <td>[[${notifications.content}]] </td>
+                <td th:utext="${notifications.content}"></td>
               </tr>
             </th:block>
             </tbody>

@@ -14,6 +14,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
@@ -41,9 +42,14 @@ public class Exams {
     @Column(name = "classOfExamination")
     private Integer classOfExamination;
 
-    @NotNull
+//    @NotNull
+//    @Column(name = "dateOfExamination")
+//    @DateTimeFormat(pattern = "MM.dd.yyyy")
+//    private Date dateOfExamination;
+
     @Column(name = "dateOfExamination")
-    @DateTimeFormat(pattern = "MM.dd.yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date dateOfExamination;
 
     @NotNull
@@ -54,8 +60,8 @@ public class Exams {
 //    private Double score;
 
     @CreationTimestamp
-    @Column(name = "created_on")
-    private Date createdOn;
+    @Column(name = "created_on", updatable = false)
+    private Timestamp createdOn;
 
     //Relationships
     @ManyToOne(cascade = CascadeType.ALL)

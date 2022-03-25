@@ -37,4 +37,9 @@ public class NotificationService {
         notificationRepository.deleteById(id);
 
     }
+
+    //search a notification
+    public List<Notifications> searchNotification(String keyword){
+        return notificationRepository.searchNotification(keyword);
+    }
 }

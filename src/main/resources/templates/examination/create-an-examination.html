@@ -47,7 +47,7 @@
 
             <div class="list-group list-group-flush my-3">
                 <a href="/api/exams/add-questions" target="popup"
-                   onclick="window.open('/api/exams/add-questions','popup','width=600,height=600,scrollbars=no,resizable=yes'); return false;"
+                   onclick="window.open('/api/exams/add-questions','popup','width=900,height=900,scrollbars=no,resizable=yes'); return false;"
                    class="list-group-item list-group-item-action bg-transparent second-text active border">
                     <i class="fa-solid fa-circle-plus me-2"></i>Add Questions
                 </a>
@@ -117,7 +117,9 @@
                                 <th> Assessment Name</th>
                                 <th> Assessment Date</th>
                                 <th> Assessment Duration</th>
-                                <th class="table-info"> Action</th>
+                                <th> Date Created</th>
+                                <th> Department</th>
+                                <th class="table-success"> Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -126,7 +128,9 @@
                                 <td>[[${exams.assessmentName}]]</td>
                                 <td>[[${exams.dateOfExamination}]]</td>
                                 <td>[[${exams.duration}]]</td>
-                                <td class="table-info"> <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#myModal">Edit</button></td>
+                                <td>[[${exams.createdOn}]]</td>
+                                <td>[[${exams.department}]]</td>
+                                <td class="table-info"> <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal">Edit</button></td>
 
                             </th:block>
                             </tbody>
@@ -136,14 +140,32 @@
             </div>
             <br>
 
-            <div class="row text-center">
-                <div class="col-md-12">
+            <div class="row ">
+                <div class="col-md-12 text-center">
                     <h5>Assessment Preview:</h5>
                 </div>
-                <div class="col-md-12">
-                    <table>
+                <div class="col-md-4">
 
-                    </table>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-black bg-light">
+                        <div class="card-header">
+                            Qst no:
+                        </div>
+                        <div class="card-body">
+                            <div>
+                                Question body:
+
+
+                            </div>
+
+                        </div>
+                        <div class="card-footer">
+                            Options:
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
                 </div>
             </div>
 

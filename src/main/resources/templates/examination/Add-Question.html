@@ -1,10 +1,279 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add Question</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create New Assessment</title>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/fonts/iconic/css/material-design-iconic-font.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/vendor/animate/animate.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/vendor/css-hamburgers/hamburgers.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/vendor/animsition/css/animsition.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/vendor/select2/select2.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/vendor/daterangepicker/daterangepicker.css}">
+    <!--===============================================================================================-->
+    <!--	=============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/util.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/question.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+    <link th:href="@{/css/dashboard.css}" type="text/css" rel="stylesheet">
+    <!--===============================================================================================-->
 </head>
 <body>
+<div class="limiter">
+    <!--		For sending alerts about the errors on the forms-->
+    <div class="row text-center">
+        <div class="col-md-12">
+            <div th:if="${param.error}">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong> Email account is already taken </strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-login100" style="background-image: url('/images/examination.jpeg');">
+        <div>
+
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <select id="questionType">
+                        <option value="">Select Question Type...</option>
+                        <option value="multi-choice-question">Multi-Choice</option>
+                        <option value="open-end-question">Open-End</option>
+                        <option value="close">Close</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="question-form">
+                <div id="multi-choice-question" class="hide">
+                    <form>
+                        <div class="card question-card">
+                            <div class="card-header text-muted">
+                              <b>Type your Question in the editor below</b>
+                            </div>
+                            <div class="card-body">
+                                <div data-validate="Add a question and mark the correct option">
+                                    <textarea id="editor" class="editor" name="content" placeholder="Add a Question" rows="70" cols="80" required>
+                                    </textarea>
+                                </div>
+
+                            </div>
+                            <div class="card-footer text-muted">
+                                Mark the correct option
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="card options option1-card">
+                                    <div class="card-header">
+                                        <h6>Option 1</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <textarea id="editor1" class="editor" name="content" placeholder="Add option 1" required>
+                                        </textarea>
+                                    </div>
+                                    <div class="card-footer correct-answer">
+                                        <input class="correct-answer-input" type="radio" name="correctAnswer" id="option1">
+                                        <label class="correct-answer-label" for="option1">
+                                            Mark as correct
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="card options option2-card">
+                                    <div class="card-header">
+                                        <h6>Option 2</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <textarea id="editor2" class="editor" name="content" placeholder="Add option 2">
+                                        </textarea>
+                                    </div>
+                                    <div class="card-footer correct-answer">
+                                        <input class="correct-answer-input" type="radio" name="correctAnswer" id="option2">
+                                        <label class="correct-answer-label" for="option2">
+                                            <b>Mark as correct</b>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="card options option3-card">
+                                    <div class="card-header">
+                                        <h6>Option 3</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <textarea id="editor3" class="editor" name="content" placeholder="Add option 3">
+                                        </textarea>
+                                    </div>
+                                    <div class="card-footer correct-answer">
+                                        <input class="correct-answer-input" type="radio" name="correctAnswer" id="option3">
+                                        <label class="correct-answer-label" for="option3">
+                                            Mark as correct
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="card options option4-card">
+                                    <div class="card-header">
+                                        <h6>Option 4</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <textarea id="editor4" class="editor" name="content" placeholder="Add option 4" required>
+                                        </textarea>
+                                    </div>
+                                    <div class="card-footer correct-answer">
+                                        <input class="correct-answer-input" type="radio" name="correctAnswer" id="option4">
+                                        <label class="correct-answer-label" for="option4">
+                                            Mark as correct
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <button class="login100-form-btn buttons" type="submit"> Save Question </button>
+
+                            <button class="login100-form-btn buttons" type="button">Cancel</button>
+
+                        </div>
+                    </form>
+
+                </div>
+
+                <div id="open-end-question" class="hide">
+                    <form>
+                        <div class="card question-card">
+                            <div class="card-header text-muted">
+                                <b>Type your Question in the editor below</b>
+                            </div>
+                            <div class="card-body">
+                                <div data-validate="Add a question and mark the correct option">
+                                    <textarea id="editor5" class="editor" name="content" placeholder="Add a Question" required>
+                                    </textarea>
+                                </div>
+
+                            </div>
+                            <div class="card-footer text-muted">
+                                Open-end question
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row text-center">
+                            <button class="login100-form-btn buttons" type="submit"> Save Question </button>
+
+                            <button class="login100-form-btn btn btn-danger buttons" type="button">Cancel</button>
+
+                        </div>
+
+                    </form>
+                </div>
+
+                <div class="alert alert-info" style="display: none;"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<div id="dropDownSelect1"></div>
+<!--Close the popup after data submit-->
+
+<script type="text/javascript">
+  function closeSelf (f) {
+     f.submit();
+     window.close();
+  }
+</script>
+
+<!-- Include the Ckeditor library -->
+<script src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.js"></script>
+
+<!-- Initialize Ckeditor editors -->
+        <script>
+            ClassicEditor
+                .create( document.querySelector( '#editor' ) )
+                .catch( error => {
+                    console.error( error );
+                } );
+        </script>
+
+        <script>
+            ClassicEditor
+                .create( document.querySelector( '#editor1' ))
+                .catch( error => {
+                    console.error( error );
+                } );
+        </script>
+        <script>
+            ClassicEditor
+                .create( document.querySelector( '#editor2' ) )
+                .catch( error => {
+                    console.error( error );
+                } );
+        </script>
+        <script>
+            ClassicEditor
+                .create( document.querySelector( '#editor3' ) )
+                .catch( error => {
+                    console.error( error );
+                } );
+        </script>
+        <script>
+            ClassicEditor
+                .create( document.querySelector( '#editor4' ) )
+                .catch( error => {
+                    console.error( error );
+                } );
+        </script>
+        <script>
+            ClassicEditor
+                .create( document.querySelector( '#editor5' ) )
+                .catch( error => {
+                    console.error( error );
+                } );
+        </script>
+
+
+<!--===============================================================================================-->
+<script th:src="@{/vendor/jquery/jquery-3.2.1.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/vendor/animsition/js/animsition.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/vendor/bootstrap/js/popper.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/vendor/select2/select2.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/vendor/daterangepicker/moment.min.js}"></script>
+<script th:src="@{/vendor/daterangepicker/daterangepicker.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/vendor/countdowntime/countdowntime.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/js/main.js}"></script>
+<!--=================================================================================================-->
+<script th:src="@{/js/alert.js}"></script>
+<script th:src="@{/js/question.js}"></script>
+<script th:src="@{/js/util.js}"></script>
+<script th:src="@{/js/html-duration-picker.min.js}"></script>
+<!--=================================================================================================-->
 
 
 </body>

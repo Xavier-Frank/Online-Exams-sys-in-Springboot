@@ -22,13 +22,13 @@ public class MainController {
     @GetMapping("/recordUserType")
     public String userTypes(@RequestParam("usertype") String usertype){
             if (usertype.equals("instructor")){
-                return "redirect:/api/instructor/lec-loginform?successM";
+                return "redirect:/api/instructor/lec-registrationform";
             }else if (usertype.equals("learner")){
-                return "redirect:/api/student/stud-loginform?successM";
+                return "redirect:/api/student/stud-registrationform";
             }else if (usertype.equals("")){
-                return "redirect:/user-type?error";
+                return "redirect:/api/main/user-type?error";
             }else{
-                return "redirect:/user-type?error";
+                return "redirect:/api/main/user-type?error";
             }
 
            }

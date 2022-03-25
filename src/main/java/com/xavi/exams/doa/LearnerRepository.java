@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface LearnerRepository extends JpaRepository <Learner, String> {
 //    @Query("SELECT l FROM Learner l WHERE l.email = ?1")
@@ -17,8 +19,10 @@ public interface LearnerRepository extends JpaRepository <Learner, String> {
     public Learner findByOneTimePassword(String otp);
 
 
-//    @Query("SELECT u FROM Learner u WHERE u.learnerId = ?1")
-//    public Learner findByLearnerId(String leanerId);
+    @Query(value = "SELECT * FROM learner WHERE" + " " +
+            "MATCH (learner_id, first_name, last_name, email, department, faculty)" + " "
+            + "AGAINST (?1)", nativeQuery = true)
+    public List<Learner> searchLearner(String keyword);
 
-//    public Learner findByResetPasswordToken(String token);
+
 }

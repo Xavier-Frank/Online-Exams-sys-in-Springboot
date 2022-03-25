@@ -2,6 +2,7 @@ package com.xavi.exams.controller;
 
 
 import com.xavi.exams.models.Exams;
+import com.xavi.exams.models.Notifications;
 import com.xavi.exams.services.ExamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Controller
 @RequestMapping("/api/exams")
@@ -21,12 +23,15 @@ public class ExamsController {
     private ExamService examService;
 
 
-    //get examination page
+    //get examination page and display assessment details
     @GetMapping("/createExams")
-    public String examinationPage() {
+    public String examinationPage(Model model) {
+        List<Exams> examsList = examService.assessmentList();
+        model.addAttribute("exams", examsList);
+
+        //return the template
         return "/examination/create-an-examination";
     }
-
 
     //return add new assessment page
     @GetMapping("/createNewAssessment")
@@ -48,12 +53,12 @@ public class ExamsController {
 
     //save an exam
     @PostMapping("/createAssessment")
-    public ModelAndView createExams(@DateTimeFormat(iso=DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateTime,
-                                    Exams exams, ModelAndView modelAndView){
+    public ModelAndView createExams(Exams exams, ModelAndView modelAndView){
         examService.saveAnExam(exams);
         modelAndView.setViewName("redirect:/api/exams/createExams?success");
         return modelAndView;
     }
+
 
 
 }

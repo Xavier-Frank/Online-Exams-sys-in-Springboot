@@ -9,7 +9,11 @@ body, html {
 	height: 100%;
 	font-family: Poppins-Regular, sans-serif;
 }
-
+.image-cover{
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+}
 :root{
     --main-bg-color: #009d63;
     --main-text-color: #009d63;
@@ -127,4 +131,41 @@ a:hover {
     margin-right: auto;
     margin-top: 20px !important;
     padding:5px;
+}
+/* Style the search field */
+.example{
+    float: right;
+
+}
+form.example input[type=search] {
+  padding: 10px;
+  font-size: 15px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+/* Style the submit button */
+form.example button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 15px;
+  border: 1px solid grey;
+  border-left: none; /* Prevent double borders */
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background: #0b7dda;
+}
+
+/* Clear floats */
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
 }

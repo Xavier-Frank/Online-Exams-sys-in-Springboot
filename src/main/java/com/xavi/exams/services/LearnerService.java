@@ -95,4 +95,9 @@ public class LearnerService {
 
     //contact lecturer
 
+    //Search for a learner
+    public List<Learner> search(String keyword){
+        return learnerRepository.searchLearner(keyword);
+    }
+
 }

@@ -1,9 +1,7 @@
 package com.xavi.exams.controller;
 
-import com.xavi.exams.models.Instructor;
-import com.xavi.exams.models.Learner;
-import com.xavi.exams.models.Notifications;
-import com.xavi.exams.models.Utility;
+import com.xavi.exams.models.*;
+import com.xavi.exams.services.ExamService;
 import com.xavi.exams.services.InstructorService;
 import com.xavi.exams.services.LearnerService;
 import com.xavi.exams.services.NotificationService;
@@ -33,6 +31,9 @@ public class InstructorController {
 
     @Autowired
     private NotificationService notificationService;
+
+    @Autowired
+    private ExamService examService;
 
 
     /* ======================= Dashboard Navigation =================================== */
@@ -138,8 +139,6 @@ public class InstructorController {
             String email = instructorService.getUserByEmailAddress(staffId);
             instructorService.sendEmail(email, link, otp);
             modelAndView.setViewName("redirect:/api/instructor/lec-loginform?success");
-
-
         } catch (ClassNotFoundException | MessagingException | UnsupportedEncodingException e) {
             modelAndView.setViewName("redirect:/api/instructor/lec-loginform?error");
 
@@ -205,6 +204,45 @@ public class InstructorController {
 
         return "/instructor/list-learners";
     }
+
+    //Search a learner
+    @GetMapping("/searchlearner")
+    public String searchLearner(Model model, @Param("keyword") String keyword){
+
+        List<Learner> searchedLearner = learnerService.search(keyword);
+
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("searchedLearner", searchedLearner);
+        model.addAttribute("pageTitle", "Search Results for: '" + keyword + "'");
+
+        return "/instructor/search/search-results";
+
+    }
+    //Search a Notification
+    @GetMapping("/searchNotification")
+    public String searchNotification(@Param("keyword") String keyword, Model model){
+        List<Notifications> searchedNotification = notificationService.searchNotification(keyword);
+
+
+        model.addAttribute("searchedNotification", searchedNotification);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("pageTitle", "Search Results for: '" + keyword + "'");
+
+
+        return "/instructor/search/search-notifications";
+    }
+    //Search exams
+    @GetMapping("/searchAssessment")
+    public String searchExams(@Param("keyword") String keyword, Model model){
+        List<Exams> searchedExam = examService.searchExams(keyword);
+
+        model.addAttribute("searchedExam", searchedExam);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("pageTitle", "Search Results for: '" + keyword + "'");
+
+        return "/instructor/search/search-exams";
+    }
+
 }
 
 

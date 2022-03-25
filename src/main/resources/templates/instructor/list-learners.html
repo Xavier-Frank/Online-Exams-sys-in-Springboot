@@ -108,7 +108,20 @@
                     </ul>
                 </div>
             </nav>
+            <div class="row text-center">
+                <hr>
+            </div>
+            <div class="container-fluid">
+                <!-- The form -->
+                <form class="example" th:action="@{/api/instructor/searchlearner}" method="get">
+                    <input type="search" placeholder="Search for a learner.." name="keyword">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
 
+
+            <br>
+            <br>
             <!--    Body section    -->
             <div class="container-fluid text-center">
                 <div class="table-responsive">
