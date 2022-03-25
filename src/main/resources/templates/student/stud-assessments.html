@@ -75,7 +75,7 @@
       <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
         <div class="d-flex align-items-center">
           <i class="fas fa-align-left primary-left fs-4 me-3" id="menu-toggle"></i>
-          <h2 class="fs-2 m-0">Online Exams</h2>
+          <h2 class="fs-2 m-0"><b style="color: black;">Online Exams</b></h2>
         </div>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -103,18 +103,20 @@
           </ul>
         </div>
       </nav>
-      <br>
-      <br>
+      <div class="row text-center">
+        <hr>
+      </div>
       <div class="container-fluid">
         <!-- The form -->
-        <form class="example" action="">
-          <input type="text" placeholder="Search Assessments.." name="search">
+        <form class="example" th:action="@{/api/student/searchAssessment}" method="get">
+          <input type="search" placeholder="Search assessment.." name="keyword">
           <button type="submit"><i class="fa fa-search"></i></button>
         </form>
-
       </div>
+      <br>
+      <br>
       <!-- Content Body -->
-
+      <br>
       <div class="row text-center">
         <div class="col-md-12">
           <div class="container-fluid table-responsive">
@@ -132,13 +134,14 @@
                 </tr>
               </thead>
               <tbody>
-                <th:block th:each="exams: ${exams}">
+                <th:block th:each="exams: ${examsList}">
+                  <tr>
                   <td>[[${exams.assessmentId}]]</td>
                   <td>[[${exams.assessmentName}]]</td>
                   <td>[[${exams.dateOfExamination}]]</td>
                   <td>[[${exams.duration}]]</td>
                   <td class=""> <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#myModal">Start Quiz</button></td>
-
+                  </tr>
                   <!--Modal Pop up-->
                   <div class="modal" id="myModal">
                     <div class="modal-dialog">

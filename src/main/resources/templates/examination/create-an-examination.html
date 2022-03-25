@@ -110,7 +110,7 @@
                         <table class="table table-dark table-hover center">
                             <thead>
                             <tr>
-                                <th colspan="5">Assessments Details</th>
+                                <th colspan="7">Assessments Details</th>
                             </tr>
                             <tr>
                                 <th> Assessment ID</th>
@@ -124,14 +124,15 @@
                             </thead>
                             <tbody>
                             <th:block th:each="exams: ${exams}">
-                                <td>[[${exams.assessmentId}]]</td>
-                                <td>[[${exams.assessmentName}]]</td>
-                                <td>[[${exams.dateOfExamination}]]</td>
-                                <td>[[${exams.duration}]]</td>
-                                <td>[[${exams.createdOn}]]</td>
-                                <td>[[${exams.department}]]</td>
-                                <td class="table-info"> <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal">Edit</button></td>
-
+                                <tr>
+                                    <td>[[${exams.assessmentId}]]</td>
+                                    <td>[[${exams.assessmentName}]]</td>
+                                    <td>[[${exams.dateOfExamination}]]</td>
+                                    <td>[[${exams.duration}]]</td>
+                                    <td>[[${exams.createdOn}]]</td>
+                                    <td>[[${exams.department}]]</td>
+                                    <td class="table-info"> <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal">Edit</button></td>
+                                </tr>
                             </th:block>
                             </tbody>
                         </table>

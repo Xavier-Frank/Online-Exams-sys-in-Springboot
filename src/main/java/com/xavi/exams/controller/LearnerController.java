@@ -1,9 +1,7 @@
 package com.xavi.exams.controller;
 
-import com.xavi.exams.models.Instructor;
-import com.xavi.exams.models.Learner;
-import com.xavi.exams.models.Notifications;
-import com.xavi.exams.models.Utility;
+import com.xavi.exams.models.*;
+import com.xavi.exams.services.ExamService;
 import com.xavi.exams.services.LearnerService;
 import com.xavi.exams.services.NotificationService;
 import net.bytebuddy.utility.RandomString;
@@ -36,6 +34,9 @@ public class LearnerController {
     @Autowired
     private JavaMailSender mailSender;
 
+    @Autowired
+    private ExamService examService;
+
     /* ====================== Navigation controllers for student dashboard ===========================*/
     // Return Student Dashboard
     @GetMapping("/stud-dashboard")
@@ -64,7 +65,11 @@ public class LearnerController {
 
     // return Assessment page
     @GetMapping("/assessments")
-    public String studentAssessment(){
+    public String studentAssessment(Model model){
+
+        List<Exams> examsList = examService.assessmentList();
+        model.addAttribute("examsList", examsList);
+
         return "/student/stud-assessments";
     }
 
@@ -172,6 +177,32 @@ public class LearnerController {
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public ModelAndView handleMissingTokens(MissingServletRequestParameterException ex) {
         return new ModelAndView("redirect:/api/student/stud-loginform?successM");
+    }
+
+    //Search a Notification
+    @GetMapping("/searchNotification")
+    public String searchNotification(@Param("keyword") String keyword, Model model){
+        List<Notifications> searchedNotification = notificationService.searchNotification(keyword);
+
+
+        model.addAttribute("searchedNotification", searchedNotification);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("pageTitle", "Search Results for: '" + keyword + "'");
+
+
+        return "/student/search-results/search-notifications";
+    }
+
+    //Search exams
+    @GetMapping("/searchAssessment")
+    public String searchExams(@Param("keyword") String keyword, Model model){
+        List<Exams> searchedExam = examService.searchExams(keyword);
+
+        model.addAttribute("searchedExam", searchedExam);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("pageTitle", "Search Results for: '" + keyword + "'");
+
+        return "/student/search-results/search-exams";
     }
 
     /* ############### End of Login and registration controllers with forgot password fxns ################################## */
