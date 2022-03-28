@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NotificationService {
@@ -41,5 +42,16 @@ public class NotificationService {
     //search a notification
     public List<Notifications> searchNotification(String keyword){
         return notificationRepository.searchNotification(keyword);
+    }
+
+    public Notifications editNotification(BigInteger id) throws UserNotFoundException {
+        Optional<Notifications> getNotification = notificationRepository.findById(id);
+
+        if (getNotification.isPresent()){
+            getNotification.get().getId();
+            getNotification.get().getContent();
+        }
+        throw new UserNotFoundException("Notification not Found");
+
     }
 }

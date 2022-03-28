@@ -14,11 +14,7 @@ import java.util.Properties;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
-    @Override
-    protected void configure(HttpSecurity security) throws Exception
-    {
-        security.httpBasic().disable();
-    }
+
     //define the bean for sending emails
     @Bean
     public JavaMailSender getJavaMailSender(){
@@ -37,4 +33,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         return mailSender;
 
     }
+
+    @Override
+    protected void configure(HttpSecurity security) throws Exception
+    {
+        security.csrf().disable().rememberMe().rememberMeParameter("remember-me").tokenValiditySeconds(7200)
+                        .and().logout().invalidateHttpSession(true).deleteCookies("JSESSIONID")
+        .and().logout().logoutSuccessUrl("/api/main/user-type");
+        security.httpBasic().disable();
+
+    }
+
+
 }

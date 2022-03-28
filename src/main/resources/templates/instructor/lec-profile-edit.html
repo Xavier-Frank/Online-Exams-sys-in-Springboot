@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>[[${pageTitle}]]</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" th:href="@{/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" th:href="@{/fonts/iconic/css/material-design-iconic-font.min.css}">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" th:href="@{/vendor/animate/animate.css}">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" th:href="@{/vendor/css-hamburgers/hamburgers.min.css}">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" th:href="@{/vendor/animsition/css/animsition.min.css}">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" th:href="@{/vendor/select2/select2.min.css}">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" th:href="@{/vendor/daterangepicker/daterangepicker.css}">
+  <!--===============================================================================================-->
+  <!--	=============================================================================================-->
+  <link rel="stylesheet" type="text/css" th:href="@{/css/util.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+  <link th:href="@{/css/dashboard.css}" type="text/css" rel="stylesheet">
+  <!--===============================================================================================-->
+</head>
+
+<body>
+<div class="limiter">
+  <!--		For sending alerts about the errors on the forms-->
+  <div class="row text-center">
+    <div class="col-md-12">
+      <div th:if="${param.error}">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <strong> Email account is already taken </strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-login100" style="background-image: url('/images/online-desk.jpg');">
+    <div class="wrap-login100">
+      <form class="login100-form validate-form" action="#" th:action="@{/api/instructor/lec-profileEdit}"  th:object="${instructor}" method="POST">
+
+					<span class="login100-form-logo">
+						<i class="fa fa-user"></i>
+					</span>
+
+        <span class="login100-form-title p-b-10 p-t-10">
+						[[${formHeader}]]
+                </span>
+        <div class="wrap-input100 validate-input" data-validate = "Enter Your Staff ID">
+          <input class="input100" type="text" placeholder="Staff id" maxlength="20" minlength="3" th:field="*{staffId}" required>
+          <span class="focus-input100" data-placeholder="&#xf207;"></span>
+        </div>
+        <div class="wrap-input100 validate-input" data-validate = "Enter First Name">
+          <input class="input100" type="text" placeholder="First Name" maxlength="20" minlength="3" th:field="*{firstName}" required>
+          <span class="focus-input100" data-placeholder="&#xf207;"></span>
+        </div>
+        <div class="wrap-input100 validate-input" data-validate = "Enter Last Name">
+          <input class="input100" type="text" name="lastname" placeholder="Last Name" minlength="3" maxlength="20" th:field="*{lastName}" required>
+          <span class="focus-input100" data-placeholder="&#xf207;"></span>
+        </div>
+        <div class="wrap-input100 validate-input" data-validate="Enter email">
+          <input class="input100" type="email" name="email" placeholder="Email" th:field="*{email}" required>
+          <span class="focus-input100" data-placeholder="&#x2709;"></span>
+        </div>
+        <div class="container-login100-form-btn">
+          <button class="login100-form-btn" name="" type="submit">
+            Update Details
+          </button>
+          <a href="/api/instructor/lec-profile"><button class="login100-form-btn" name="" type="button">
+            Cancel
+          </button> </a>
+        </div>
+      </form>
+      <div class="alert alert-info" style="display: none;"></div>
+    </div>
+  </div>
+</div>
+
+
+<div id="dropDownSelect1"></div>
+
+<!--===============================================================================================-->
+<script th:src="@{/vendor/jquery/jquery-3.2.1.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/vendor/animsition/js/animsition.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/vendor/bootstrap/js/popper.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/vendor/select2/select2.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/vendor/daterangepicker/moment.min.js}"></script>
+<script th:src="@{/vendor/daterangepicker/daterangepicker.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/vendor/countdowntime/countdowntime.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/js/main.js}"></script>
+<!--=================================================================================================-->
+<script th:src="@{/js/alert.js}"></script>
+<script th:src="@{/js/util.js}"></script>
+<!--=================================================================================================-->
+
+</body>
+</html>

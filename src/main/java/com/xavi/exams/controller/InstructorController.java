@@ -1,10 +1,7 @@
 package com.xavi.exams.controller;
 
 import com.xavi.exams.models.*;
-import com.xavi.exams.services.ExamService;
-import com.xavi.exams.services.InstructorService;
-import com.xavi.exams.services.LearnerService;
-import com.xavi.exams.services.NotificationService;
+import com.xavi.exams.services.*;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -48,6 +45,7 @@ public class InstructorController {
     // Return Lecturers Profile
     @GetMapping("/lec-profile")
     public String instructorProfile() {
+
         return "/instructor/lec-profile";
     }
 
@@ -106,6 +104,8 @@ public class InstructorController {
     @GetMapping("/lec-registrationform")
     public String intructorRegistrationForm(Model model) {
         model.addAttribute("instructor", new Instructor());
+        model.addAttribute("pageTitle", "User Registration Page");
+        model.addAttribute("formHeader", "Create An Account");
         return "/instructor/lec-registration";
     }
 
@@ -242,6 +242,31 @@ public class InstructorController {
 
         return "/instructor/search/search-exams";
     }
+
+    //Edit user profile
+    @GetMapping("/edit-profile/{staffId}")
+    public String EditUserProfile(@PathVariable("staffId") String staffId, Model model){
+
+        try{
+            Instructor instructor = instructorService.get(staffId);
+            model.addAttribute("instructor", instructor);
+            model.addAttribute("pageTitle", "Edit Instructor Page");
+            model.addAttribute("formHeader", "Edit Your Details:" + " " + "User id:" + " " + staffId);
+        } catch (UserNotFoundException e){
+
+            return "redirect:/api/instructor/lec-profile?erroredit";
+
+        }
+        return "/instructor/lec-profile-edit";
+    }
+
+    //edit lec profile
+    @PostMapping("/lec-profileEdit")
+    public String editLecProfile(Instructor instructor) {
+        instructorService.registerInstructor(instructor);
+        return "redirect:/api/instructor/lec-profile?successedit";
+    }
+
 
 }
 

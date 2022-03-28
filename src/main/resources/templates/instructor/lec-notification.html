@@ -27,31 +27,7 @@
 <div class="limiter">
     <!--		For sending alerts about the errors on the forms-->
     <div class="row text-center">
-        <div class="col-md-12">
-            <div th:if="${param.success}">
-                <div class="alert alert-info alert-dismissible fade show" role="alert">
-                     Notification Successfully Posted
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            </div>
-            <div th:if="${param.successN}">
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    Notification Successfully deleted
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div th:if="${param.error}">
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        Error deleting Notification
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-            </div>
-        </div>
+
     </div>
 </div>
 
@@ -87,7 +63,7 @@
                 <a href="/api/instructor/results" class="list-group-item list-group-item-action bg-transparent second-text fw-bold border">
                     <i class="fa fa-file me-2"></i> Results
                 </a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
+                <a href="/api/main/logout" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
                     <i class="fa fa-sign-out me-2"></i> Logout
                 </a>
 
@@ -108,7 +84,12 @@
 
                 <!-- Drop down list in boostrap -->
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <ul class="navbar-nav ms-auto mb-3 mb-lg-0">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link second-text fw-bold">
+                                <i class="fas fa-question-circle me-2"></i> Help
+                            </a>
+                        </li>
                         <li class="nav-item-dropdown">
                             <a href="#" class="nav-link dropdown-toggle second-text fw-bold" id="navbarDropdown" role="button"
                                data-bs-toggle="dropdown" aria-expanded="false">
@@ -116,7 +97,7 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown" >
                                 <li>
-                                    <a href="#" class="dropdown-item">
+                                    <a href="/api/main/logout" class="dropdown-item">
                                         <i class="fa fa-sign-out me-2"></i> Logout
                                     </a>
                                 </li>
@@ -130,6 +111,56 @@
             <div class="row text-center">
                 <hr>
             </div>
+
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <div th:if="${param.successedit}">
+                        <div class="alert alert-info alert-dismissible fade show" role="alert">
+                            Profile Updated successfully
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div th:if="${param.erroredit}">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            Error editing notification
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div th:if="${param.success}">
+                        <div class="alert alert-info alert-dismissible fade show" role="alert">
+                            Notification Successfully Posted
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div th:if="${param.successN}">
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            Notification Successfully deleted
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div th:if="${param.error}">
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                Error deleting Notification
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="container-fluid">
                 <!-- The form -->
                 <form class="example" th:action="@{/api/instructor/searchNotification}" method="get">
@@ -138,6 +169,8 @@
                 </form>
             </div>
 
+
+            <br>
             <br>
 
             <!-- Body section -->
@@ -174,6 +207,7 @@
                                     <td>[[${notifications.createdOn}]] </td>
                                     <td th:utext="${notifications.content}"></td>
                                     <td class="table-info">
+                                        <a th:href="@{'/api/notifications/edit-notification/' + ${notifications.id}}"><button type="button" class="btn btn-info">Edit</button></a>
                                         <a th:href="@{'/api/notifications/delete-notification/' + ${notifications.id}}"><button type="button" class="btn btn-danger">Delete</button></a>
                                     </td>
                                 </tr>

@@ -4,6 +4,7 @@ import com.xavi.exams.models.*;
 import com.xavi.exams.services.ExamService;
 import com.xavi.exams.services.LearnerService;
 import com.xavi.exams.services.NotificationService;
+import com.xavi.exams.services.UserNotFoundException;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -103,6 +104,8 @@ public class LearnerController {
     @GetMapping("/stud-registrationform")
     public String studentRegistrationForm(Model model){
         model.addAttribute("learner", new Learner());
+        model.addAttribute("pageTitle", "Learner Registration Form");
+        model.addAttribute("formHeader", "Create An Account");
         return "/student/stud-registration";
     }
 
@@ -204,6 +207,32 @@ public class LearnerController {
 
         return "/student/search-results/search-exams";
     }
+
+    //Edit user profile
+    @GetMapping("/edit-profile/{learnerId}")
+    public String EditUserProfile(@PathVariable("learnerId") String learnerId, Model model) {
+
+        try{
+            Learner learner  = learnerService.get(learnerId);
+            model.addAttribute("learner", learner);
+            model.addAttribute("pageTitle", "Edit Learner Page");
+            model.addAttribute("formHeader", "Edit Your Details: " + "User id:" + "(" + learnerId + ")");
+        } catch (UserNotFoundException e){
+            return "redirect:/api/student/profile?erroredit";
+        }
+
+
+        return "/student/stud-profile-edit";
+    }
+
+    //edit learner details
+    @PostMapping("/stud-profileEdit")
+    public String editLearnerProfile(Learner learner){
+        learnerService.registerLeaner(learner);
+        return "redirect:/api/student/profile?successedit";
+    }
+
+
 
     /* ############### End of Login and registration controllers with forgot password fxns ################################## */
 

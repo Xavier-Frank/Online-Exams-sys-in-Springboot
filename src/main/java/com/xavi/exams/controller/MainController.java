@@ -17,6 +17,11 @@ public class MainController {
         return "index";
     }
 
+    @GetMapping("/logout")
+    public String userLogout(){
+        return "redirect:/api/main/index?logoutsuccess";
+    }
+
 
     //Control User types
     @GetMapping("/recordUserType")

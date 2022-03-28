@@ -23,16 +23,7 @@
 <div class="limiter">
     <!--		For sending alerts about the errors on the forms-->
     <div class="row text-center">
-        <div class="col-md-12">
-            <div th:if="${param.success}">
-                <div class="alert alert-info alert-dismissible fade show" role="alert">
-                    Welcome Dear Learner
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            </div>
-        </div>
+
     </div>
 </div>
     <div class="d-flex" id="wrapper">
@@ -61,7 +52,7 @@
                 <a href="/api/student/results" class="list-group-item list-group-item-action bg-transparent second-text fw-bold border">
                     <i class="fa fa-file me-2"></i> Results
                 </a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
+                <a href="/api/main/logout" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
                     <i class="fa fa-sign-out me-2"></i> Logout
                 </a>
 
@@ -83,7 +74,12 @@
 
                 <!-- Drop down list in boostrap -->
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <ul class="navbar-nav ms-auto mb-3 mb-lg-0">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link second-text fw-bold">
+                                <i class="fas fa-question-circle me-2"></i> Help
+                            </a>
+                        </li>
                         <li class="nav-item-dropdown">
                             <a href="#" class="nav-link dropdown-toggle second-text fw-bold" id="navbarDropdown" role="button"
                                data-bs-toggle="dropdown" aria-expanded="false">
@@ -91,7 +87,7 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li>
-                                    <a href="#" class="dropdown-item">
+                                    <a href="/api/main/logout" class="dropdown-item">
                                         <i class="fa fa-sign-out me-2"></i> Logout
                                     </a>
                                 </li>
@@ -106,14 +102,47 @@
             <div class="row text-center">
                 <hr>
             </div>
+
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <div th:if="${param.successedit}">
+                        <div class="alert alert-info alert-dismissible fade show" role="alert">
+                            Profile Updated successfully
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div th:if="${param.erroredit}">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            Error editing profile
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div th:if="${param.success}">
+                        <div class="alert alert-info alert-dismissible fade show" role="alert">
+                            Welcome Dear Learner
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- Content Body -->
             <div class="container-fluid text-center">
                     <div class="table-responsive">
                         <table class="table table-dark table-hover center">
                             <thead>
                             <tr>
-                                <th colspan="2">USER DETAILS</th>
-                                <th class="table-danger"> ACTION </th>
+                                <th colspan="1">USER DETAILS</th>
+<!--                                <th class="table-danger"> ACTION </th>-->
                             </tr>
                             </thead>
                             <tbody>
@@ -121,47 +150,52 @@
                                 <tr>
                                     <td>Leaner ID</td>
                                     <td>[[${learner.learnerId}]]</td>
-                                    <td class="table-info"> <button type="button" class="btn btn-warning">Edit</button></td>
+<!--                                    <td class="table-info"> <button type="button" class="btn btn-warning">Edit</button></td>-->
                                 </tr>
                                 <tr>
                                     <td>First Name</td>
                                     <td>[[${learner.firstName}]]</td>
-                                    <td class="table-info"> <button type="button" class="btn btn-warning">Edit</button></td>
+<!--                                    <td class="table-info"> <button type="button" class="btn btn-warning">Edit</button></td>-->
                                 </tr>
                                 <tr>
                                     <td>Last Name</td>
                                     <td>[[${learner.lastName}]]</td>
-                                    <td class="table-info"> <button type="button" class="btn btn-warning">Edit</button></td>
+<!--                                    <td class="table-info"> <button type="button" class="btn btn-warning">Edit</button></td>-->
                                 </tr>
                                 <tr>
                                     <td>Email</td>
                                     <td>[[${learner.email}]]</td>
-                                    <td class="table-info"> <button type="button" class="btn btn-warning">Edit</button></td>
+<!--                                    <td class="table-info"> <button type="button" class="btn btn-warning">Edit</button></td>-->
                                 </tr>
                                 <tr>
                                     <td>Year of Study</td>
                                     <td>[[${learner.yearOfStudy}]]</td>
-                                    <td class="table-info"> <button type="button" class="btn btn-warning">Edit</button></td>
+<!--                                    <td class="table-info"> <button type="button" class="btn btn-warning">Edit</button></td>-->
                                 </tr>
                                 <tr>
                                     <td>Faculty</td>
                                     <td>[[${learner.faculty}]]</td>
-                                    <td class="table-info"> <button type="button" class="btn btn-warning">Edit</button></td>
+<!--                                    <td class="table-info"> <button type="button" class="btn btn-warning">Edit</button></td>-->
                                 </tr>
                                 <tr>
                                     <td>Department</td>
                                     <td>[[${learner.department}]]</td>
-                                    <td class="table-info"> <button type="button" class="btn btn-warning">Edit</button></td>
+<!--                                    <td class="table-info"> <button type="button" class="btn btn-warning">Edit</button></td>-->
                                 </tr>
                                 <tr>
                                     <td>Institution</td>
                                     <td>[[${learner.institution}]]</td>
-                                    <td class="table-info"> <button type="button" class="btn btn-warning">Edit</button></td>
+<!--                                    <td class="table-info"> <button type="button" class="btn btn-warning">Edit</button></td>-->
                                 </tr>
                                 <tr>
                                     <td>Campus</td>
                                     <td>[[${learner.campus}]]</td>
-                                    <td class="table-info"> <button type="button" class="btn btn-warning">Edit</button></td>
+<!--                                    <td class="table-info"> <button type="button" class="btn btn-warning">Edit</button></td>-->
+                                </tr>
+                                <tr>
+                                    <td>Action</td>
+                                    <td>_</td>
+                                    <td class="table-info"><a th:href="@{'/api/student/edit-profile/' + ${learner.learnerId}}"><button type="button" class="btn btn-warning">Edit</button></a></td>
                                 </tr>
                             </th:block>
                             </tbody>

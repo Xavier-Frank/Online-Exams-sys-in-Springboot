@@ -14,6 +14,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LearnerService {
@@ -100,4 +101,11 @@ public class LearnerService {
         return learnerRepository.searchLearner(keyword);
     }
 
+    //edit a leaner
+    public Learner get(String learnerId) throws UserNotFoundException {
+        Optional<Learner> getLearner = learnerRepository.findById(learnerId);
+        if (getLearner.isPresent()){
+            getLearner.get();
+        } throw new UserNotFoundException("Learner not Found");
+    }
 }

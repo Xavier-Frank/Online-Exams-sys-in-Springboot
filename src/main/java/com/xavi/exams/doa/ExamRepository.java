@@ -15,4 +15,6 @@ public interface ExamRepository extends JpaRepository <Exams, String> {
             + "MATCH (assessment_id, assessment_name, department, staff_id)" + " "
             + "AGAINST (?1)", nativeQuery = true)
     public List<Exams> searchExam(String keyword);
+
+
 }

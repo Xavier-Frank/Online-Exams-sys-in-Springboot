@@ -13,6 +13,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class InstructorService {
@@ -89,6 +90,16 @@ public class InstructorService {
     //get user by email address
     public String getUserByEmailAddress(String staffId){
         return instructorRepository.findByEmail(staffId);
+    }
+
+    //get user by id for edit
+    public Instructor get(String staffId) throws UserNotFoundException {
+        Optional<Instructor> getInstructor = instructorRepository.findById(staffId);
+        if (getInstructor.isPresent()){
+            getInstructor.get();
+
+        } throw new UserNotFoundException("Could not load user");
+
     }
 
 

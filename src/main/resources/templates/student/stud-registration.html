@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Registration Form</title>
+	<title>[[${pageTitle}]]</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -55,7 +55,7 @@
 					</span>
 
 				<span class="login100-form-title p-b-10 p-t-10">
-						Create An Account
+						[[${formHeader}]]
                 </span>
 				<div class="wrap-input100 validate-input" data-validate = "Enter Your Student Registration Number">
 					<input class="input100" type="text" placeholder="Learner Id" maxlength="20" minlength="3" th:field="*{learnerId}" required>
