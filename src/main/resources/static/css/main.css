@@ -166,6 +166,15 @@ iframe {
   margin: 0 auto;
 }
 
+.background-image{
+    min-height: 88vh;
+   background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  z-index: 1;
+
+}
 
 .container-login100 {
   width: 100%;

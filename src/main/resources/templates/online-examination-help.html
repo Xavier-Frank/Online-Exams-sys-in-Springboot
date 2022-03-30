@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Help Desk</title>
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" th:href="@{/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" th:href="@{/fonts/iconic/css/material-design-iconic-font.min.css}">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" th:href="@{/vendor/animate/animate.css}">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" th:href="@{/vendor/css-hamburgers/hamburgers.min.css}">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" th:href="@{/vendor/animsition/css/animsition.min.css}">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" th:href="@{/vendor/select2/select2.min.css}">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" th:href="@{/vendor/daterangepicker/daterangepicker.css}">
+  <!--===============================================================================================-->
+  <!--	=============================================================================================-->
+  <link rel="stylesheet" type="text/css" th:href="@{/css/util.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/question.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+  <link th:href="@{/css/dashboard.css}" type="text/css" rel="stylesheet">
+  <!--===============================================================================================-->
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!--  ===================================================================================================-->
+</head>
+<body>
+<div class="limiter">
+  <!--		For sending alerts about the errors on the forms-->
+  <div class="row text-center">
+    <div class="col-md-12">
+      <div th:if="${param.success}">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          Let us assist you: leave a comment or view the Frequently Asked Questions (FAQs)
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-login100" style="background-image: url('/images/online-examsII.jpg')">
+    <div>
+
+      <div class="row text-center">
+        <div class="col-md-12">
+          <select id="questionType">
+            <option value="">Select your user type to get help</option>
+            <option value="instructor">Instructor</option>
+            <option value="student">Student</option>
+            <option value="close">Close</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="question-form">
+        <div id="instructor" class="hide">
+
+<!--          Accordion questions-->
+          <button class="accordion">How do I Register and Log in to the System?</button>
+          <div class="panel">
+            <p>Lorem ipsum...</p>
+          </div>
+
+          <button class="accordion">How do I create an Assessment?</button>
+          <div class="panel">
+            <p>Lorem ipsum...</p>
+          </div>
+
+          <button class="accordion">How do I Monitor Learners?</button>
+          <div class="panel">
+            <p>Lorem ipsum...</p>
+          </div>
+
+          <button class="accordion">What type of Questions can I set using the System?</button>
+          <div class="panel">
+            <p>Lorem ipsum...</p>
+          </div>
+
+
+<!--          Accordion questions-->
+
+
+
+          <div class="notification">
+            <p> Leave a comment for the Developers: </p>
+
+            <form action="#"  object="" method="POST">
+              <!-- Create the editor container -->
+              <div data-validate="Enter comment to post">
+                        <textarea id="editor" class="editor" name="content" placeholder="Help us improve the system" field="*{content}" required>
+                        </textarea>
+              </div>
+              <br>
+              <div>
+                <button type="submit" class="btn btn-warning">Post</button></td>
+              </div>
+            </form>
+          </div>
+        </div>
+<!--        =====================================================================================================-->
+
+        <div id="student" class="hide">
+
+          <!--          Accordion questions-->
+
+          <button class="accordion">How do I Register and Log in to the System?</button>
+          <div class="panel">
+            <p>Lorem ipsum...</p>
+          </div>
+
+          <button class="accordion">How do I create an Assessment?</button>
+          <div class="panel">
+            <p>Lorem ipsum...</p>
+          </div>
+
+          <button class="accordion">How do I Monitor Learners?</button>
+          <div class="panel">
+            <p>Lorem ipsum...</p>
+          </div>
+
+          <button class="accordion">What type of Questions can I set using the System?</button>
+          <div class="panel">
+            <p>Lorem ipsum...</p>
+          </div>
+
+
+          <!--          Accordion questions-->
+
+
+          <div class="notification">
+            <h2> Leave a comment for the Developers: </h2>
+
+            <form action="#"  object="" method="POST">
+              <!-- Create the editor container -->
+              <div data-validate="Enter comment to post">
+                        <textarea id="editor1" class="editor" name="content" placeholder="Help us improve the system" field="*{content}" required>
+                        </textarea>
+              </div>
+              <br>
+              <div>
+                <button type="submit" class="btn btn-warning">Post</button></td>
+              </div>
+            </form>
+          </div>
+
+        </div>
+
+        <div class="alert alert-info" style="display: none;"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<div id="dropDownSelect1"></div>
+<!--Close the popup after data submit-->
+
+<script type="text/javascript">
+  function closeSelf (f) {
+     f.submit();
+     window.close();
+  }
+</script>
+
+<!-- Include the Ckeditor library -->
+<script src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.js"></script>
+
+<!-- Initialize Ckeditor editors -->
+<script>
+            ClassicEditor
+                .create( document.querySelector( '#editor' ) )
+                .catch( error => {
+                    console.error( error );
+                } )
+</script>
+
+<script>
+            ClassicEditor
+                .create( document.querySelector( '#editor1' ) )
+                .catch( error => {
+                    console.error( error );
+                } )
+</script>
+
+
+<!--===============================================================================================-->
+<script th:src="@{/vendor/jquery/jquery-3.2.1.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/vendor/animsition/js/animsition.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/vendor/bootstrap/js/popper.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/vendor/select2/select2.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/vendor/daterangepicker/moment.min.js}"></script>
+<script th:src="@{/vendor/daterangepicker/daterangepicker.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/vendor/countdowntime/countdowntime.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/js/main.js}"></script>
+<!--=================================================================================================-->
+<script th:src="@{/js/alert.js}"></script>
+<script th:src="@{/js/question.js}"></script>
+<script th:src="@{/js/util.js}"></script>
+<script th:src="@{/js/html-duration-picker.min.js}"></script>
+<!--=================================================================================================-->
+
+
+</body>
+</html>

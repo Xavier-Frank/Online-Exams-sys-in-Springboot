@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
     <!-- =======================================================================================================    -->
     <link th:href="@{/css/dashboard.css}" type="text/css" rel="stylesheet">
+    <link th:href="@{/css/main.css}" type="text/css" rel="stylesheet">
     <link th:href="@{/css/modal.css}" rel="stylesheet" type="text/css" >
 <!--    ====================================================================================================================================================================================-->
 
@@ -81,7 +82,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-3 mb-lg-0">
                         <li class="nav-item">
-                            <a href="#" class="nav-link second-text fw-bold">
+                            <a href="/api/main/online-help" class="nav-link second-text fw-bold" target="_blank">
                                 <i class="fas fa-question-circle me-2"></i> Help
                             </a>
                         </li>
@@ -102,9 +103,9 @@
                     </ul>
                 </div>
             </nav>
-            <div class="row text-center">
-                <hr>
-            </div>
+<!--            <div class="row text-center">-->
+<!--                <hr>-->
+<!--            </div>-->
 
             <!--		For sending alerts about the errors on the forms-->
             <div class="row text-center">
@@ -128,13 +129,15 @@
                 </form>
             </div>
             <br>
+            <br>
+
             <!-- Content Body -->
-            <div class="container-fluid px-4 overview-boxes">
+            <div class="container-fluid px-4 overview-boxes background-image" style="background-image: url('/images/laptop-plan-view.jpg');">
                 <h3> Easily Create an Assessment: </h3>
                 <div class="row g-3 my-2">
                     <div class="col-md-3">
                         <a href="#">
-                            <div class="p-5 bg-white shadow-lg d-flex justify-content-around align-items-center rounded">
+                            <div class="p-5 bg-info shadow-lg d-flex justify-content-around align-items-center rounded">
                                 <div>
                                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#myModal">
                                         <h3 class="fs-2">Create</h3>
@@ -206,7 +209,7 @@
 
                     <div class="col-md-3">
                         <a href="/api/exams/createExams">
-                            <div class="p-5 bg-white shadow-lg d-flex justify-content-around align-items-center rounded">
+                            <div class="p-5 bg-info shadow-lg d-flex justify-content-around align-items-center rounded">
                                 <div>
                                     <button type="button" class="btn btn-success">
                                         <h3 class="fs-2"> Update</h3>
@@ -220,7 +223,7 @@
                     </div>
                     <div class="col-md-3">
                         <a href="/api/exams/createExams">
-                            <div class="p-5 bg-white shadow-lg d-flex justify-content-around align-items-center rounded">
+                            <div class="p-5 bg-info shadow-lg d-flex justify-content-around align-items-center rounded">
                                 <div>
                                     <button type="button" class="btn btn-danger">
                                         <h3 class="fs-2">Delete</h3>
@@ -234,7 +237,7 @@
                     </div>
                     <div class="col-md-3">
                         <a href="/api/exams/createExams">
-                            <div class="p-5 bg-white shadow-lg d-flex justify-content-around align-items-center rounded">
+                            <div class="p-5 bg-info shadow-lg d-flex justify-content-around align-items-center rounded">
                                 <div>
                                     <button type="button" class="btn btn-success">
                                         <h3 class="fs-2"> Preview</h3>
@@ -246,33 +249,36 @@
                         </a>
                     </div>
                 </div>
-            </div>
-            <br>
-            <br>
-            <br>
-            <br>
-            <div class="container-fluid">
-                <div class="row text-center">
-                    <div class="col-md-4">
-                    </div>
-                    <div class="col-md-4">
-                        <a href="#">
-                            <div class="p-4 bg-white shadow-lg d-flex justify-content-around align-items-center rounded">
-                                <i class="fa fa-eye fs-1 primary-text border rounded full secondary-bg p-3 p-t-2 p-b-2"></i>
-                                <div>
-                                    <button type="button" class="btn btn-warning">
-                                        <h3 class="fs-2">Monitor</h3>
-                                    </button>
-                                    <p class="fs-5">Invigilate an Ongoing Assessment</p>
+
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <div class="container-fluid">
+                    <div class="row text-center">
+                        <div class="col-md-4">
+                        </div>
+                        <div class="col-md-4">
+                            <a href="#">
+                                <div class="p-4 bg-info shadow-lg d-flex justify-content-around align-items-center rounded">
+                                    <i class="fa fa-eye fs-1 primary-text border rounded full secondary-bg p-3 p-t-2 p-b-2"></i>
+                                    <div>
+                                        <button type="button" class="btn btn-warning">
+                                            <h3 class="fs-2">Monitor</h3>
+                                        </button>
+                                        <p class="fs-5">Invigilate an Ongoing Assessment</p>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-4">
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                        </div>
                     </div>
                 </div>
-            </div>
 
+
+            </div>
 
         </div>
     </div>

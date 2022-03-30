@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
     <!-- =======================================================================================================    -->
     <link th:href="@{/css/dashboard.css}" type="text/css" rel="stylesheet">
+    <link th:href="@{/css/main.css}" type="text/css" rel="stylesheet">
 
 </head>
 <body>
@@ -86,7 +87,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-3 mb-lg-0">
                         <li class="nav-item">
-                            <a href="#" class="nav-link second-text fw-bold">
+                            <a href="/api/main/online-help" class="nav-link second-text fw-bold" target="_blank">
                                 <i class="fas fa-question-circle me-2"></i> Help
                             </a>
                         </li>
@@ -108,9 +109,9 @@
                 </div>
             </nav>
 
-            <div class="row text-center">
-                <hr>
-            </div>
+<!--            <div class="row text-center">-->
+<!--                <hr>-->
+<!--            </div>-->
 
             <div class="row text-center">
                 <div class="col-md-12">
@@ -172,6 +173,7 @@
 
             <br>
             <br>
+            <div class="background-image" style="background-image: url('/images/laptop-plan-view.jpg');">
 
             <!-- Body section -->
 
@@ -189,8 +191,7 @@
                         <button type="submit" class="btn btn-warning">Post</button></td>
                     </div>
                 </form>
-                <br>
-                <h4>All notifications for upcoming events:</h4>
+                <h5>All notifications for upcoming events:</h5>
                 <table class="table table-responsive table-dark table-hover center">
                             <thead>
                             <tr>
@@ -217,7 +218,8 @@
                 </div>
 
                 </div>
-            </div>
+        </div>
+    </div>
 
             <!-- Content Body -->
 <br>

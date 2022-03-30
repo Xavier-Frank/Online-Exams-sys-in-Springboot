@@ -17,10 +17,18 @@ public class MainController {
         return "index";
     }
 
+    //return help page
+    @GetMapping("/help")
+    public String helpPage()
+    {
+        return "online-examination-help";
+    }
+
     @GetMapping("/logout")
     public String userLogout(){
-        return "redirect:/api/main/index?logoutsuccess";
+        return "redirect:/api/main/user-type?logoutsuccess";
     }
+
 
 
     //Control User types
@@ -37,5 +45,12 @@ public class MainController {
             }
 
            }
+
+    //Open the online help feature
+    @GetMapping("/online-help")
+    public String helpUsers(){
+        return "redirect:/api/main/help?success";
+
+    }
 
 }

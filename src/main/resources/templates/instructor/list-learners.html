@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
     <!-- =======================================================================================================    -->
     <link th:href="@{/css/dashboard.css}" type="text/css" rel="stylesheet">
+    <link th:href="@{/css/main.css}" type="text/css" rel="stylesheet">
 
 </head>
 <body>
@@ -80,7 +81,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-3 ml-2 mb-lg-0">
                         <li class="nav-item">
-                            <a href="#" class="nav-link second-text fw-bold">
+                            <a href="/api/main/online-help" class="nav-link second-text fw-bold" target="_blank">
                                 <i class="fas fa-question-circle me-2"></i> Help
                             </a>
                         </li>
@@ -101,9 +102,9 @@
                     </ul>
                 </div>
             </nav>
-            <div class="row text-center">
-                <hr>
-            </div>
+<!--            <div class="row text-center">-->
+<!--                <hr>-->
+<!--            </div>-->
 
             <!--		For sending alerts about the errors on the forms-->
             <div class="row text-center">
@@ -131,7 +132,7 @@
             <br>
             <br>
             <!--    Body section    -->
-            <div class="container-fluid text-center">
+            <div class="container-fluid text-center background-image" style="background-image: url('/images/photo.jpg');">
                 <div class="table-responsive">
                     <table class="table table-dark table-hover center">
                         <thead>
