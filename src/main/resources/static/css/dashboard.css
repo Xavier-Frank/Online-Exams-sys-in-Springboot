@@ -132,6 +132,19 @@ a:hover {
     margin-top: 20px !important;
     padding:5px;
 }
+
+
+.background-image{
+    min-height: 89vh;
+   background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  z-index: 1;
+
+}
+
+
 /* Style the search field */
 .example{
     float: right;

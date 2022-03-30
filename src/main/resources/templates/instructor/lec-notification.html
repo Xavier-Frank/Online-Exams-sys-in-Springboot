@@ -21,7 +21,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
     <!-- =======================================================================================================    -->
     <link th:href="@{/css/dashboard.css}" type="text/css" rel="stylesheet">
-    <link th:href="@{/css/main.css}" type="text/css" rel="stylesheet">
 
 </head>
 <body>
@@ -179,6 +178,7 @@
 
             <div class="notification">
                 <h2> Post a comment for Learners: </h2>
+                <br>
 
                 <form action="#" th:action="@{/api/notifications/save-notification}" th:object="${notifications}" method="POST">
                     <!-- Create the editor container -->
@@ -192,7 +192,7 @@
                     </div>
                 </form>
                 <h5>All notifications for upcoming events:</h5>
-                <table class="table table-responsive table-dark table-hover center">
+                <table class="table table-responsive table-dark table-hover center" style="overflow-x:auto;">
                             <thead>
                             <tr>
                                 <th> Notification Id </th>
