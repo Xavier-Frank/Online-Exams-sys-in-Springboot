@@ -143,6 +143,24 @@ a:hover {
   z-index: 1;
 
 }
+/* Carousel
+
+#carouselExampleCaptions{
+    background: none !important;
+    filter: none !important;
+    progid:none !important;
+    opacity: 100%;
+    }
+
+
+    #couresel{
+        background: none !important;
+        filter: none !important;
+        progid:none !important;
+        opacity: 100%;
+
+    }
+*/
 
 
 /* Style the search field */
@@ -186,8 +204,9 @@ form.example::after {
     color: #0b7dda;
 }
 
-/* Online help feature with Accordions */
+/* Online help feature with Accordions*/
 /* Style the buttons that are used to open and close the accordion panel */
+/*
 .accordion {
   background-color: #eee;
   color: #444;
@@ -199,14 +218,18 @@ form.example::after {
   outline: none;
   transition: 0.4s;
 }
+*/
+
 
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+/*
 .active, .accordion:hover {
   background-color: #ccc;
 }
+*/
 
 /* Style the accordion panel. Note: hidden by default */
-.panel {
+/*.panel {
   padding: 0 18px;
     background-color: white;
     max-height: 0;
@@ -214,14 +237,19 @@ form.example::after {
     transition: max-height 0.2s ease-out;
 
 }
+*/
+/*
 .accordion:after {
-  content: '\02795'; /* Unicode character for "plus" sign (+) */
+  content: '\02795'; /* Unicode character for "plus" sign (+)
   font-size: 13px;
   color: #777;
   float: right;
   margin-left: 5px;
 }
+*/
 
+/*
 .active:after {
-  content: "\2796"; /* Unicode character for "minus" sign (-) */
+  content: "\2796"; /* Unicode character for "minus" sign (-)
 }
+*/

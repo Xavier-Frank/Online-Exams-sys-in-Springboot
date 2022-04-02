@@ -23,33 +23,33 @@
   <!--===============================================================================================-->
   <!--	=============================================================================================-->
   <link rel="stylesheet" type="text/css" th:href="@{/css/util.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/accordion.css}">
   <link rel="stylesheet" type="text/css" th:href="@{/css/question.css}">
   <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
   <link th:href="@{/css/dashboard.css}" type="text/css" rel="stylesheet">
   <!--===============================================================================================-->
-  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!--  ===================================================================================================-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <!--===============================================================================================-->
 </head>
 <body>
-<div class="limiter">
-  <!--		For sending alerts about the errors on the forms-->
-  <div class="row text-center">
+<!--		For sending alerts about the errors on the forms-->
+<!--		For sending alerts about the errors on the forms-->
+<div class="row text-center">
     <div class="col-md-12">
-      <div th:if="${param.success}">
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-          Let us assist you: leave a comment or view the Frequently Asked Questions (FAQs)
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+        <div th:if="${param.success}">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                Let us assist you: leave a comment or view the Frequently Asked Questions (FAQs)
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
+<!--        //alerts -->
+<div class="limiter">
   <div class="container-login100" style="background-image: url('/images/online-examsII.jpg')">
     <div>
-
       <div class="row text-center">
         <div class="col-md-12">
           <select id="questionType">
@@ -64,34 +64,122 @@
       <div class="question-form">
         <div id="instructor" class="hide">
 
+            <div class = "container">
+
+
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                    <b>#1 How do I Register and Log in to the System?</b>
+                                </a>
+                            </h2>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <h5>
+                                An instructor is first required to select their user type from the "User Type" form that
+                                first appears when they load the Online Web Application. Upon selecting a user type,
+                                an instructor will be directed to the registration page where they will be required to enter their details
+                                to register with the system.
+                                <br>
+                                After a successful registration, an instructor is required to use their Staff id (they registered with)
+                                to log in. The system will generate a unique One Time Password (OTP) that they will use
+                                as their password and send it to their email.
+                                <br>
+                                Therefore, an instructor is required to have internet access during the whole process of
+                                registration and login.
+                                </h5>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                    <b>#2 How do I create an Assessment?</b>
+                                </a>
+                            </h2>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <h5>
+                                Upon a successful login, an instructor can access the Create Assessment tab to create an assessment.
+                                <br>
+                                The instructor will receive a pop-up modal that will assist them to fill in the examination details.
+                                An instructor is then required to click create button to create an assessment. They can
+                                then add questions to the assessment and modify the assessment to meet their needs.
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                    <b>#3 How do I Monitor Learners?</b>
+                                </a>
+                            </h2>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <h5>
+                                Under the "Create Assessment" tab, an instructor will encounter a button labelled "Monitor".
+                                To supervise learners, the instructor click the button to join a virtual classroom where they can assess
+                                learners taking their assessment.
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                                    <b>#4 What type of Questions can I set using the System?</b>
+                                </a>
+                            </h2>
+                        </div>
+                        <div id="collapseFour" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <h5>
+                                This system offers an instructor to set two types of questions:
+                                <br>
+                                1. Multi-choice questions: Questions with options which learners are required to choose the correct options
+                                <br>
+                                2. Open-ended questions: Questions that allow learners to express their opinions based on what the question demands
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+                                    <b>#5 Auto-marking and Submission</b>
+                                </a>
+                            </h2>
+                        </div>
+                        <div id="collapseFive" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <h5>
+                                Upon completion and submission of an assessment by a learner/ an auto-submission when time alloted expires, the system will automatically
+                                mark the multi-choice questions and send results to both the instructor and the learner.
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div> <!-- end container -->
 <!--          Accordion questions-->
-          <button class="accordion">How do I Register and Log in to the System?</button>
-          <div class="panel">
-            <p>Lorem ipsum...</p>
-          </div>
-
-          <button class="accordion">How do I create an Assessment?</button>
-          <div class="panel">
-            <p>Lorem ipsum...</p>
-          </div>
-
-          <button class="accordion">How do I Monitor Learners?</button>
-          <div class="panel">
-            <p>Lorem ipsum...</p>
-          </div>
-
-          <button class="accordion">What type of Questions can I set using the System?</button>
-          <div class="panel">
-            <p>Lorem ipsum...</p>
-          </div>
 
 
-<!--          Accordion questions-->
-
-
-
+<!-- Leave a Comment-->
           <div class="notification">
-            <p> Leave a comment for the Developers: </p>
+            <p> Leave a comment or a Question for the Developers: </p>
 
             <form action="#"  object="" method="POST">
               <!-- Create the editor container -->
@@ -106,36 +194,123 @@
             </form>
           </div>
         </div>
+<!--          // Leave a Comment -->
 <!--        =====================================================================================================-->
+
 
         <div id="student" class="hide">
 
+            <div class = "container">
+                <!--          Accordion questions-->
+
+                <div class="panel-group" id="accordion2">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseSix">
+                                    <b>#1 How do I Register and Log in to the System?</b>
+                                </a>
+                            </h2>
+                        </div>
+                        <div id="collapseSix" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <h5>
+                                A Student  is first required to select their user type from the "User Type" form that
+                                first appears when they load the Online Web Application. Upon selecting a user type,
+                                a student  will be directed to the registration page where they will be required to enter their details
+                                to register with the system.
+                                <br>
+                                After a successful registration, a student is required to use their Student id (they registered with)
+                                to log in. The system will generate a unique One Time Password (OTP) that they will use
+                                as their password and send it to their email.
+                                <br>
+                                Therefore, a student is required to have internet access during the whole process of
+                                registration and login.
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseSeven">
+                                    <b>#2 How Take an Assessment?</b>
+                                </a>
+                            </h2>
+                        </div>
+                        <div id="collapseSeven" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <h5>
+                                Upon successful login to the system, a learner is required to access the "Assessment" tab.
+                                This tab contains a list of all assessments that have been set by respective instructors.
+                                The student should click the "Start Assessment" button to start an assessment.
+                                <br>
+                                <b><u>Points to note</u></b>
+                                <br>
+                                #1. Once the start assessment button is clicked, the assessment begins a count down <br>
+                                #2. Assessments are strictly controlled by time and are auto-submitted when time expires. <br>
+                                #3. Students will be monitored throughout the session and are required to keep camera n audion ON.
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseEight">
+                                    <b>#3 Accessing Results</b>
+                                </a>
+                            </h2>
+                        </div>
+                        <div id="collapseEight" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <h5>
+                                 A student can access his/her results under the "Results" tab on their dashboard. The results will display the
+                                list of assessments and their respective scores.
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseNine">
+                                    <b>#4 What type of Questions can I expect during the Assessment?</b>
+                                </a>
+                            </h2>
+                        </div>
+                        <div id="collapseNine" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <h5>
+                                This system allows an instructor to set two types of questions:
+                                <br>
+                                1. Multi-choice questions: Questions with options which learners are required to choose the correct option.
+                                <br>
+                                2. Open-ended questions: Questions that allow learners to express their opinions based on what the question demands.
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTen">
+                                    <b> #5 Auto-marking and Submission</b>
+                                </a>
+                            </h2>
+                        </div>
+                        <div id="collapseTen" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <h5>
+                                Upon completion and submission of an assessment by a learner/ an auto-submission when time alloted expires, the system will automatically
+                                mark the multi-choice questions and send results to both the instructor and the learner.
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
           <!--          Accordion questions-->
-
-          <button class="accordion">How do I Register and Log in to the System?</button>
-          <div class="panel">
-            <p>Lorem ipsum...</p>
-          </div>
-
-          <button class="accordion">How do I create an Assessment?</button>
-          <div class="panel">
-            <p>Lorem ipsum...</p>
-          </div>
-
-          <button class="accordion">How do I Monitor Learners?</button>
-          <div class="panel">
-            <p>Lorem ipsum...</p>
-          </div>
-
-          <button class="accordion">What type of Questions can I set using the System?</button>
-          <div class="panel">
-            <p>Lorem ipsum...</p>
-          </div>
-
-
-          <!--          Accordion questions-->
-
-
           <div class="notification">
             <h2> Leave a comment for the Developers: </h2>
 
@@ -159,6 +334,7 @@
     </div>
 
   </div>
+</div>
 </div>
 
 
@@ -193,6 +369,10 @@
                 } )
 </script>
 
+
+<!--Accordion-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 <!--===============================================================================================-->
 <script th:src="@{/vendor/jquery/jquery-3.2.1.min.js}"></script>
