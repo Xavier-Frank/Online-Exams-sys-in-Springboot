@@ -1,13 +1,10 @@
 package com.xavi.exams.services;
 
 import com.xavi.exams.doa.LearnerRepository;
-import com.xavi.exams.models.Instructor;
 import com.xavi.exams.models.Learner;
-import org.dom4j.swing.LeafTreeNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
@@ -24,8 +21,14 @@ public class LearnerService {
     private JavaMailSender mailSender;
 
     //register a leaner
-    public Learner registerLeaner(Learner learner){
-        return learnerRepository.save(learner);
+    public Learner registerLeaner(Learner learner, String learnerId) throws UserNotFoundException {
+        String email = learnerRepository.findByEmail(learnerId);
+        if (email == null) {
+            return learnerRepository.save(learner);
+        }
+        else {
+            throw new UserNotFoundException("Email already exists");
+        }
 
     }
 
@@ -107,5 +110,9 @@ public class LearnerService {
         if (getLearner.isPresent()){
             getLearner.get();
         } throw new UserNotFoundException("Learner not Found");
+    }
+
+    public Learner updateLeaner(Learner learner) {
+        return learnerRepository.save(learner);
     }
 }

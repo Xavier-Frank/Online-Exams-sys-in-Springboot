@@ -112,9 +112,14 @@ public class LearnerController {
     /* ############### Login and registration controllers ################################## */
     //register a learner
     @PostMapping("/stud-registrationProcess")
-    public String studentRegistrationProcess(Learner learner){
-        learnerService.registerLeaner(learner);
-        return "redirect:/api/student/stud-loginform?successM";
+    public String studentRegistrationProcess(Learner learner, String learnerId){
+        try{
+            learnerService.registerLeaner(learner, learnerId);
+            return "redirect:/api/student/stud-loginform?successM";
+        }catch (Exception | UserNotFoundException e){
+            return "redirect:/api/student/stud-registrationform?error";
+        }
+
     }
 
     //login a student
@@ -228,7 +233,7 @@ public class LearnerController {
     //edit learner details
     @PostMapping("/stud-profileEdit")
     public String editLearnerProfile(Learner learner){
-        learnerService.registerLeaner(learner);
+        learnerService.updateLeaner(learner);
         return "redirect:/api/student/profile?successedit";
     }
 

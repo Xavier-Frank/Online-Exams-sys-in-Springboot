@@ -29,8 +29,15 @@ public class InstructorService {
     private JavaMailSender mailSender;
 
     //register an instructor
-    public Instructor registerInstructor(Instructor instructor){
-        return instructorRepository.save(instructor);
+    public Instructor registerInstructor(Instructor instructor, String staffId) throws UserNotFoundException {
+        String email = instructorRepository.findByEmail(staffId);
+
+        if (email == null) {
+            return instructorRepository.save(instructor);
+        } else {
+            throw new UserNotFoundException("Email already exists");
+        }
+
 
     }
 
@@ -110,6 +117,11 @@ public class InstructorService {
     //View results
     public List<Results> getAllResults(){
         return resultsRepository.findAll();
+    }
+
+    //update instructor
+    public Instructor updateInstructor(Instructor instructor) {
+        return instructorRepository.save(instructor);
     }
 
     //Create exams

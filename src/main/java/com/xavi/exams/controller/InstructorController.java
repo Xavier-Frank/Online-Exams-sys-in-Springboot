@@ -117,9 +117,16 @@ public class InstructorController {
 
     //register an instructor
     @PostMapping("/lec-regitrationProcess")
-    public String lecRegistrationProcess(Instructor instructor) {
-        instructorService.registerInstructor(instructor);
-        return "redirect:/api/instructor/lec-loginform?successMe";
+    public String lecRegistrationProcess(Instructor instructor, String staffId) {
+
+        try{
+            instructorService.registerInstructor(instructor, staffId);
+            return "redirect:/api/instructor/lec-loginform?successMe";
+
+        }catch (Exception | UserNotFoundException e){
+            return "redirect:/api/instructor/lec-registrationform?error";
+        }
+
     }
 
     //login an instructor
@@ -263,8 +270,9 @@ public class InstructorController {
     //edit lec profile
     @PostMapping("/lec-profileEdit")
     public String editLecProfile(Instructor instructor) {
-        instructorService.registerInstructor(instructor);
-        return "redirect:/api/instructor/lec-profile?successedit";
+            instructorService.updateInstructor(instructor);
+            return "redirect:/api/instructor/lec-profile?successedit";
+
     }
 
 
