@@ -167,15 +167,16 @@
             <!-- Body section -->
             <div class="row text-center" >
                 <div class="col-md-12">
-                    <div class="container-fluid table-responsive">
+                    <div class="container-fluid table-responsive" style="overflow-x:auto;">
                         <table class="table table-dark table-hover center">
                             <thead>
                             <tr>
-                                <th colspan="7">Assessments Details</th>
+                                <th colspan="8">Assessments Details</th>
                             </tr>
                             <tr>
                                 <th> Assessment ID</th>
                                 <th> Assessment Name</th>
+                                <th> Instructor's Id</th>
                                 <th> Assessment Date</th>
                                 <th> Assessment Duration</th>
                                 <th> Date Created</th>
@@ -188,6 +189,7 @@
                                 <tr>
                                     <td>[[${exams.assessmentId}]]</td>
                                     <td>[[${exams.assessmentName}]]</td>
+                                    <td>[[${exams.staffId}]]</td>
                                     <td>[[${exams.dateOfExamination}]]</td>
                                     <td>[[${exams.duration}]]</td>
                                     <td>[[${exams.createdOn}]]</td>

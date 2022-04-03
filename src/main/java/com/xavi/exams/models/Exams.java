@@ -63,10 +63,18 @@ public class Exams {
     @Column(name = "created_on", updatable = false)
     private Timestamp createdOn;
 
+    @NotNull
+    @Column
+    private String staffId;
+
+
+
     //Relationships
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "staffId", referencedColumnName = "staffId")
-    private Instructor instructor;
+//    @ManyToOne
+//    @PrimaryKeyJoinColumn(name = "staffId")
+//    Instructor instructor;
+//    @JoinColumn(name = "staff_id", referencedColumnName = "")
+//    private Instructor instructor;
 
 
 }

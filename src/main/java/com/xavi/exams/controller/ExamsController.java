@@ -9,12 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServlet;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -56,7 +54,8 @@ public class ExamsController {
 
     //save an exam
     @PostMapping("/createAssessment")
-    public ModelAndView createExams(Exams exams, ModelAndView modelAndView){
+    public ModelAndView createExams(Exams exams, ModelAndView modelAndView, @RequestParam("staffId") String staffId){
+        exams.setStaffId(staffId);
         examService.saveAnExam(exams);
         modelAndView.setViewName("redirect:/api/exams/createExams?success");
         return modelAndView;
