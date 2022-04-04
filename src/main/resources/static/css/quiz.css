@@ -54,3 +54,6 @@ hr {
   background-color: white;
 
 }
+.hline{
+    border: 3px dashed;
+}

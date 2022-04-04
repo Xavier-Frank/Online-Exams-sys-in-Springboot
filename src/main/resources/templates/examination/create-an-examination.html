@@ -214,15 +214,8 @@
 
                     <form action="submit" method="POST" th:object=${qForm}>
                         <div class="ques-box bg-dark text-light" th:each="ques, i: ${qForm.questions}">
-                            <div style="display: flex; margin: 0; padding: 0;">
                                 <p th:utext="${ques.quesId}"> </p>
-                                <p class="title" th:utext="${ques.title}"> </p>
-                            </div>
-
-
-                            <div class="option">
-                                <hr>
-                            </div>
+                                <p class="title" th:utext="${ques.title}"></p>
 
                             <div class="option">
                                 <input type="radio" th:name="|questions[${i.index}].chose|" th:value="1" />
@@ -244,9 +237,7 @@
                                 <p th:utext="${ques.optionD}"></p>
                             </div>
                             <div class="option">
-                                <hr>
                                 <p>Ans:</p>
-                                <hr>
                             </div>
                             <div class="option">
                                 <input type="radio" th:name="|questions[${i.index}].chose|" th:value="5" checked />
