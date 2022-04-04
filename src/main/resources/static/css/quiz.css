@@ -1,0 +1,56 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	width: 100%;
+	overflow-x: hidden;
+}
+
+h1 {
+	font-size: 22px;
+	text-align: center;
+	padding: 5px 10px;
+	border-radius: 4px;
+	width: 100%;
+}
+
+.ques-box {
+	width: 100%;
+	max-width: 800px;
+	padding: 5px 15px;
+	margin: 10px auto 0 auto;
+	border-radius: 4px;
+}
+
+.option {
+	display: flex;
+	flex-direction: row;
+}
+
+.title {
+	font-size: 18px;
+	font-weight: 500;
+	color: #61bcf8;
+	width: 100%;
+    max-width: 800px;
+}
+
+.option p {
+	margin-left: 15px;
+	position: relative;
+	margin-top: -6px;
+}
+
+footer {
+	height: 80px;
+	text-align: center;
+	line-height: 80px;
+}
+hr {
+  border-top: 15px dashed white;
+  background-color: white;
+
+}

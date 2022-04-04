@@ -35,7 +35,25 @@
         <div class="col-md-12">
             <div th:if="${param.error}">
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    Error
+                    Question Id already exists
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            <div th:if="${param.omission}">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    Fill in all the sections and provide an answer for the question
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div th:if="${param.success}">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Question Addedd successfully
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -52,21 +70,32 @@
                         <option value="">Select Question Type...</option>
                         <option value="multi-choice-question">Multi-Choice</option>
                         <option value="open-end-question">Open-End</option>
-                        <option value="close">Close</option>
                     </select>
                 </div>
             </div>
 
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <button type="button" onclick="self.close()"> Go Back </button>
+                </div>
+            </div>
+
+
             <div class="question-form">
                 <div id="multi-choice-question" class="hide">
-                    <form>
+                    <form th:action="@{/api/question_and_answer/save-question-multichoice}"  th:object="${question}" method="POST">
+                        <div class="card">
+
+
+
+                        </div>
                         <div class="card question-card">
                             <div class="card-header text-muted">
                               <b>Type your Question in the editor below</b>
                             </div>
                             <div class="card-body">
                                 <div data-validate="Add a question and mark the correct option">
-                                    <textarea id="editor" class="editor" name="content" placeholder="Add a Question" rows="70" cols="80" required>
+                                    <textarea id="editor" class="editor" name="title" placeholder="Add a Question" rows="70" cols="80" required>
                                     </textarea>
                                 </div>
 
@@ -83,12 +112,12 @@
                                         <h6>Option 1</h6>
                                     </div>
                                     <div class="card-body">
-                                        <textarea id="editor1" class="editor" name="content" placeholder="Add option 1" required>
+                                        <textarea id="editor1" class="editor" name="optionA" placeholder="Add option A" required>
                                         </textarea>
                                     </div>
                                     <div class="card-footer correct-answer">
-                                        <input class="correct-answer-input" type="radio" name="correctAnswer" id="option1">
-                                        <label class="correct-answer-label" for="option1">
+                                        <input class="correct-answer-input"  type="radio" value="1" name="ans" id="optionA" required>
+                                        <label class="correct-answer-label" for="optionA">
                                             Mark as correct
                                         </label>
                                     </div>
@@ -100,12 +129,12 @@
                                         <h6>Option 2</h6>
                                     </div>
                                     <div class="card-body">
-                                        <textarea id="editor2" class="editor" name="content" placeholder="Add option 2">
+                                        <textarea id="editor2" class="editor" name="optionB" placeholder="Add option B">
                                         </textarea>
                                     </div>
                                     <div class="card-footer correct-answer">
-                                        <input class="correct-answer-input" type="radio" name="correctAnswer" id="option2">
-                                        <label class="correct-answer-label" for="option2">
+                                        <input class="correct-answer-input" type="radio" value="2" name="ans" id="optionB" required>
+                                        <label class="correct-answer-label" for="optionB">
                                             <b>Mark as correct</b>
                                         </label>
                                     </div>
@@ -117,12 +146,12 @@
                                         <h6>Option 3</h6>
                                     </div>
                                     <div class="card-body">
-                                        <textarea id="editor3" class="editor" name="content" placeholder="Add option 3">
+                                        <textarea id="editor3" class="editor" name="optionC" placeholder="Add option C">
                                         </textarea>
                                     </div>
                                     <div class="card-footer correct-answer">
-                                        <input class="correct-answer-input" type="radio" name="correctAnswer" id="option3">
-                                        <label class="correct-answer-label" for="option3">
+                                        <input class="correct-answer-input" value="3" type="radio" name="ans" id="optionC" required>
+                                        <label class="correct-answer-label" for="optionC">
                                             Mark as correct
                                         </label>
                                     </div>
@@ -134,22 +163,28 @@
                                         <h6>Option 4</h6>
                                     </div>
                                     <div class="card-body">
-                                        <textarea id="editor4" class="editor" name="content" placeholder="Add option 4" required>
+                                        <textarea id="editor4" class="editor" name="optionD" placeholder="Add option D" required>
                                         </textarea>
                                     </div>
                                     <div class="card-footer correct-answer">
-                                        <input class="correct-answer-input" type="radio" name="correctAnswer" id="option4">
-                                        <label class="correct-answer-label" for="option4">
+                                        <input class="correct-answer-input" value="4" type="radio" name="ans" id="optionD" required>
+                                        <label class="correct-answer-label" for="optionD">
                                             Mark as correct
                                         </label>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row text-center">
-                            <button class="login100-form-btn buttons" type="submit"> Save Question </button>
 
-                            <button class="login100-form-btn buttons" type="button">Cancel</button>
+                            <div class="container-login100-form-btn row text-center">
+                                <button class="login100-form-btn" name="" type="submit">
+                                    Save Question
+                                </button>
+                                <a href="/api/question_and_answer/add-question">
+                                    <button class="login100-form-btn" name="" type="button">
+                                        Cancel
+                                    </button>
+                                </a>
 
                         </div>
                     </form>
@@ -157,27 +192,33 @@
                 </div>
 
                 <div id="open-end-question" class="hide">
-                    <form>
+                    <form th:action="@{/api/question_and_answer/save-question-openend}"  th:object="${question}" method="POST">
                         <div class="card question-card">
                             <div class="card-header text-muted">
                                 <b>Type your Question in the editor below</b>
                             </div>
                             <div class="card-body">
                                 <div data-validate="Add a question and mark the correct option">
-                                    <textarea id="editor5" class="editor" name="content" placeholder="Add a Question" required>
+                                    <textarea id="editor5"  class="editor" name="title" placeholder="Add a Question" required>
                                     </textarea>
                                 </div>
-
                             </div>
                             <div class="card-footer text-muted">
                                 Open-end question
                             </div>
-                        </div>
-                        <br>
-                        <div class="row text-center">
-                            <button class="login100-form-btn buttons" type="submit"> Save Question </button>
+                            <br>
+                            <br>
+                            <div class="container-login100-form-btn row text-center">
+                                <button class="login100-form-btn" name="" type="submit">
+                                    Save Question
+                                </button>
+                                <a href="/api/question_and_answer/add-question">
+                                    <button class="login100-form-btn" name="" type="button">
+                                        Cancel
+                                    </button>
+                                </a>
 
-                            <button class="login100-form-btn btn btn-danger buttons" type="button">Cancel</button>
+                            </div>
 
                         </div>
 

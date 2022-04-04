@@ -3,7 +3,10 @@ package com.xavi.exams.controller;
 
 import com.xavi.exams.models.Exams;
 import com.xavi.exams.models.Notifications;
+import com.xavi.exams.models.Question;
+import com.xavi.exams.models.QuestionForm;
 import com.xavi.exams.services.ExamService;
+import com.xavi.exams.services.QuizService;
 import com.xavi.exams.services.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -23,6 +26,11 @@ public class ExamsController {
     @Autowired
     private ExamService examService;
 
+    @Autowired
+    private QuizService qService;
+    @Autowired
+    private QuestionForm questionForm;
+
 
     //get examination page and display assessment details
     @GetMapping("/createExams")
@@ -30,9 +38,13 @@ public class ExamsController {
         List<Exams> examsList = examService.assessmentList();
         model.addAttribute("exams", examsList);
 
+        QuestionForm qForm = qService.getQuestions();
+        model.addAttribute("qForm", qForm);
+
         //return the template
         return "/examination/create-an-examination";
     }
+
 
     //return add new assessment page
     @GetMapping("/createNewAssessment")
@@ -46,7 +58,8 @@ public class ExamsController {
 
     //Add question page
     @GetMapping("/add-questions")
-    public String addQuestion(){
+    public String addQuestion(Model model){
+        model.addAttribute("question", new Question());
         return "/examination/Add-Question";
     }
 
