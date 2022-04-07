@@ -12,7 +12,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
 @Controller
 @RequestMapping("/api/question_and_answer")
 public class QuestionAnswerController {
@@ -32,39 +37,6 @@ public class QuestionAnswerController {
             return result;
         }
 
-//        @GetMapping("/")
-//        public String home() {
-//            return "index.html";
-//        }
-
-
-        @PostMapping("/start-quiz")
-        public String quiz(@RequestParam String username, Model m, RedirectAttributes ra) {
-//            if(username.equals("")) {
-//                ra.addFlashAttribute("warning", "You must enter your name");
-//                return "redirect:/";
-//            }
-
-            submitted = false;
-
-            result.setUsername(username);
-
-            QuestionForm qForm = (QuestionForm) qService.getQuestions();
-            m.addAttribute("qForm", qForm);
-
-            return "quiz.html";
-        }
-
-        @PostMapping("/submit-answers")
-        public String submit(@ModelAttribute QuestionForm qForm, Model m) {
-            if(!submitted) {
-                result.setTotalCorrect(qService.getResult(qForm));
-                qService.saveScore(result);
-                submitted = true;
-            }
-
-            return "result.html";
-        }
 
         @GetMapping("/student-score")
         public String score(Model m) {
@@ -148,6 +120,32 @@ public class QuestionAnswerController {
         }
 
     }
+
+    @GetMapping("/start-assessment")
+    public String startAssessment(Model model) throws ParseException {
+        QuestionForm qForm = qService.getQuestions();
+        model.addAttribute("qForm", qForm);
+
+        model.addAttribute("timer", new SimpleDateFormat("HH-mm-ss").parse("2022-01-01"));
+
+        //return the template
+        return "/examination/take-assessment";
+
+    }
+    @PostMapping("/submit-answers")
+    public String submit(@ModelAttribute QuestionForm qForm, Model m) {
+        if(!submitted) {
+            result.setTotalCorrect(qService.getResult(qForm));
+            qService.saveScore(result);
+            submitted = true;
+        }
+
+        return "redirect:/api/student/results?success";
+    }
+
+
+
+
 
 
 }

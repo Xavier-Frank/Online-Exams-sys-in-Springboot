@@ -58,7 +58,7 @@ public class QuizService {
 	
 	public void saveScore(Result result) {
 		Result saveResult = new Result();
-		saveResult.setUsername(result.getUsername());
+		saveResult.setLearnerId(result.getLearnerId());
 		saveResult.setTotalCorrect(result.getTotalCorrect());
 		rRepo.save(saveResult);
 	}

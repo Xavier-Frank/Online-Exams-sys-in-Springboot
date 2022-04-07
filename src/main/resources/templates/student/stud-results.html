@@ -103,7 +103,7 @@
                 <div class="col-md-12">
                     <div th:if="${param.success}">
                         <div class="alert alert-info alert-dismissible fade show" role="alert">
-                            Welcome Dear Learner
+                           Assessment completed successfully, View your results from the table below
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -124,6 +124,35 @@
             <br>
 
             <div class="main background-image" style="background-image: url('/images/laptop-on-desk.jpg');">
+
+                <!-- Main Container Start -->
+                <div class="main-container container py-5 px-4">
+                    <div class="card bg-light text-light py-5 px-4 mx-auto">
+                        <img th:src="@{/images/exam.svg}" alt="image">
+
+                        <h3 class="bg-success text-center mb-5 p-2">Your Score</h3>
+
+                        <div class="d-flex justify-content-center">
+                            <p>Learner's ID:&nbsp;&nbsp;</p>
+                            <p th:if="${result}" th:text="${result.learnerId}"></p>
+                        </div>
+
+                        <div class="d-flex justify-content-center">
+                            <p>Total correct answer:&nbsp;&nbsp;</p>
+                            <p th:if="${result}" th:text="${result.totalCorrect}"></p>
+                        </div>
+
+<!--                        <div class="d-flex justify-content-center">-->
+<!--                            <p>Total false answer:&nbsp;&nbsp;</p>-->
+<!--                            <p th:if="${result}" th:text="5 - ${result.totalCorrect}"></p>-->
+<!--                        </div>-->
+
+                        <div class="d-flex justify-content-center mt-4">
+                            <button type="button" th:onclick="window.location.href='/api/student/stud-dashboard'"
+                                    class="btn btn-outline-info mx-auto">Back to Dashboard</button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- // Content Body-->

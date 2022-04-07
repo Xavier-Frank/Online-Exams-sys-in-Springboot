@@ -62,10 +62,6 @@ public class NotificationController {
         System.out.println("The notification id to delete is" + ":" + id);
         try{
             Notifications notifications = notificationService.editNotification(id);
-            System.out.println("Notifications id " + notifications.getId());
-            System.out.println("Notifications content " + notifications.getContent());
-            System.out.println("Notifications created on " + notifications.getCreatedOn());
-            model.addAttribute("notifications", notifications);
             model.addAttribute("pageTitle", "Update Notifications");
             model.addAttribute("formHeader", "Edit Notification: " + "Notification ID" + "(" + id + ")" );
         } catch (UserNotFoundException e){

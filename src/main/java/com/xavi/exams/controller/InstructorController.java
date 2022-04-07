@@ -216,12 +216,21 @@ public class InstructorController {
     @GetMapping("/searchlearner")
     public String searchLearner(Model model, @Param("keyword") String keyword){
 
-        List<Learner> searchedLearner = learnerService.search(keyword);
+        try{
+            List<Learner> searchedLearner = learnerService.search(keyword);
 
-        model.addAttribute("keyword", keyword);
-        model.addAttribute("searchedLearner", searchedLearner);
-        model.addAttribute("pageTitle", "Search Results for: '" + keyword + "'");
+            model.addAttribute("keyword", keyword);
+            model.addAttribute("searchedLearner", searchedLearner);
+            model.addAttribute("pageTitle", "Search Results for: '" + keyword + "'");
 
+
+        }catch (UserNotFoundException userNotFoundException){
+            model.addAttribute("keyword", keyword);
+            model.addAttribute("pageTitle", "User not Found");
+            model.addAttribute("message", "User does not exist");
+            return "/instructor/search/search-results";
+
+        }
         return "/instructor/search/search-results";
 
     }

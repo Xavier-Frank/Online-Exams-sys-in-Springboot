@@ -100,7 +100,12 @@ public class LearnerService {
     //contact lecturer
 
     //Search for a learner
-    public List<Learner> search(String keyword){
+    public List<Learner> search(String keyword) throws UserNotFoundException {
+        List<Learner> serchedLearner = learnerRepository.searchLearner(keyword);
+
+        if (serchedLearner.isEmpty()){
+            throw new UserNotFoundException("No Learner with the key word exists");
+        }
         return learnerRepository.searchLearner(keyword);
     }
 
