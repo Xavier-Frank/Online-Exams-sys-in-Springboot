@@ -22,7 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
         mailSender.setUsername("oduorfrancis134@gmail.com");
-        mailSender.setPassword("vrzfeugozfjdjgaa");
+        mailSender.setPassword("xjdqcenacsqmuiwt");
 
         Properties properties = mailSender.getJavaMailProperties();
         properties.put("mail.transport.protocol", "smtp");

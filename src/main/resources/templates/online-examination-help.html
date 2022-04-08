@@ -44,6 +44,15 @@
                 </button>
             </div>
         </div>
+
+        <div th:if="${param.saveSuccess}">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                Comment posted Successfully, your feedback matters to us.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
     </div>
 </div>
 <!--        //alerts -->
@@ -181,7 +190,7 @@
           <div class="notification">
             <p> Leave a comment or a Question for the Developers: </p>
 
-            <form action="#"  object="" method="POST">
+            <form th:action="@{/api/comments/save-comments}"  th:object="${comments}" method="POST">
               <!-- Create the editor container -->
               <div data-validate="Enter comment to post">
                         <textarea id="editor" class="editor" name="content" placeholder="Help us improve the system" field="*{content}" required>
@@ -314,7 +323,7 @@
           <div class="notification">
             <h2> Leave a comment for the Developers: </h2>
 
-            <form action="#"  object="" method="POST">
+            <form th:action="@{/api/comments/save-comments}"  th:object="${comments}" method="POST">
               <!-- Create the editor container -->
               <div data-validate="Enter comment to post">
                         <textarea id="editor1" class="editor" name="content" placeholder="Help us improve the system" field="*{content}" required>
