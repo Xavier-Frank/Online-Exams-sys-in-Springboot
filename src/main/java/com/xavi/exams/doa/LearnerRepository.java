@@ -24,5 +24,17 @@ public interface LearnerRepository extends JpaRepository <Learner, String> {
             + "AGAINST (?1)", nativeQuery = true)
     public List<Learner> searchLearner(String keyword);
 
+    @Query("SELECT firstName FROM Learner i WHERE i.learnerId = :learnerId")
+    public String findByFirstName(@Param("learnerId") String learnerId);
+
+    @Query("SELECT lastName FROM Learner i WHERE i.learnerId = :learnerId")
+    public String findByLastName(@Param("learnerId") String learnerId);
+
+    @Query("SELECT firstName FROM Learner i WHERE i.oneTimePassword = :pass")
+    public String findFirstName(String pass);
+
+    @Query("SELECT lastName FROM Learner i WHERE i.oneTimePassword = :pass")
+    public String findLastName(String pass);
+
 
 }

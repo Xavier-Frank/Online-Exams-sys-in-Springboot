@@ -77,11 +77,11 @@
                         </a>
                     </li>
                     <li class="nav-item-dropdown">
-                        <a href="#" class="nav-link dropdown-toggle second-text fw-bold" id="navbarDropdown" role="button"
+                        <a href="#" class="nav-link dropdown-toggle second-text fw-bold px-3" id="navbarDropdown" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-user me-2"></i> User
+                            <i class="fas fa-user me-2"></i> [[${firstName}]] [[${lastName}]]
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <ul class="dropdown-menu px-3" aria-labelledby="navbarDropdown">
                             <li>
                                 <a href="/api/main/logout" class="dropdown-item">
                                     <i class="fa fa-sign-out me-2"></i> Logout
@@ -98,14 +98,12 @@
         <!--		For sending alerts about the errors on the forms-->
         <div class="row text-center">
             <div class="col-md-12">
-                <div th:if="${param.success}">
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        Welcome
+                        Welcome: [[${firstName}]] [[${lastName}]]
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                </div>
             </div>
         </div>
 <!--        // alerts-->

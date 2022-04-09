@@ -40,6 +40,10 @@ public class LearnerService {
         if (learner != null){
             //get the string email
             String email = learnerRepository.findByEmail(learnerId);
+
+            String firstName = learnerRepository.findByFirstName(learnerId);
+            String lastName = learnerRepository.findByLastName(learnerId);
+
             learner.setOneTimePassword(otp);
 
             learnerRepository.save(learner);
@@ -50,7 +54,7 @@ public class LearnerService {
 
     }
     //    //send the email
-    public void sendEmail(String email,String link, String otp) throws MessagingException, UnsupportedEncodingException {
+    public void sendEmail(String email,String link, String otp, String firstName, String lastName) throws MessagingException, UnsupportedEncodingException {
 //        String email = instructorRepository.findByEmail(staffId);
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
@@ -59,7 +63,7 @@ public class LearnerService {
         helper.setTo(String.valueOf(email));
 
         String subject = "OTP Password Generated";
-        String content = "<p>Dear user,</p>"
+        String content = "<p>Dear user:" + firstName + " " + lastName + " </p>"
                 + "<p>Your request to generate an OTP (one time password) is successful.</p>"
                 + "<p> Copy this code to complete login</p>" + otp
                 + "<p><a href=\"" + link + "\">Complete Login</a></p>"
@@ -77,6 +81,13 @@ public class LearnerService {
         return learnerRepository.findByOneTimePassword(otp);
     }
 
+    public String getFirstName(String pass){
+        return learnerRepository.findFirstName(pass);
+    }
+    public String getLastName(String pass){
+        return learnerRepository.findLastName(pass);
+    }
+
     //Process OTP for login
     public void loginLearner(Learner learner){
         //set OTP to null
@@ -88,6 +99,16 @@ public class LearnerService {
     //get user by email address
     public String getUserByEmailAddress(String learnerId){
         return learnerRepository.findByEmail(learnerId);
+    }
+
+    //get user by first name
+    public String getUserByFirstName(String learnerId) {
+        return learnerRepository.findByFirstName(learnerId);
+    }
+
+    //get user by last name
+    public String getUserByLastName(String learnerId) {
+        return learnerRepository.findByLastName(learnerId);
     }
 
     public List<Learner> learnerList() {

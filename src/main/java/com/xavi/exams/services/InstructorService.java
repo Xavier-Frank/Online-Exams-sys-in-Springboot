@@ -49,6 +49,10 @@ public class InstructorService {
         if (instructor != null){
             //get the string email
             String email = instructorRepository.findByEmail(staffId);
+
+            String firstName = instructorRepository.findByFirstName(staffId);
+            String lastName = instructorRepository.findByLastName(staffId);
+
             instructor.setOneTimePassword(otp);
 
             instructorRepository.save(instructor);
@@ -59,7 +63,7 @@ public class InstructorService {
 
     }
     //    //send the email
-    public void sendEmail(String email,String link, String otp) throws MessagingException, UnsupportedEncodingException {
+    public void sendEmail(String email,String link, String otp, String firstName, String lastName) throws MessagingException, UnsupportedEncodingException {
 //        String email = instructorRepository.findByEmail(staffId);
         MimeMessage message = mailSender.createMimeMessage();
           MimeMessageHelper helper = new MimeMessageHelper(message);
@@ -68,7 +72,7 @@ public class InstructorService {
           helper.setTo(String.valueOf(email));
 
           String subject = "OTP Password Generated";
-          String content = "<p>Dear user,</p>"
+          String content = "<p>Dear user:" + firstName + " " + lastName + "</p>"
                   + "<p>Your request to generate an OTP (one time password) is successful.</p>"
                   + "<p> Copy this code to complete login</p>" + otp
                   + "<p><a href=\"" + link + "\">Complete Login</a></p>"
@@ -86,6 +90,18 @@ public class InstructorService {
         return instructorRepository.findByOneTimePassword(otp);
     }
 
+        public String getFirstName(String pass){
+            return instructorRepository.findFirstName(pass);
+        }
+        public String getLastName(String pass){
+            return instructorRepository.findLastName(pass);
+        }
+        public String getEmail(String pass){
+            return instructorRepository.findEmail(pass);
+        }
+        public String getStaffId(String pass){return instructorRepository.findStaffId(pass);}
+        public String getCreatedOn(String pass){return (String) instructorRepository.findCreatedOn(pass);}
+
     //Process OTP for login
     public void loginInstructor(Instructor instructor){
         //set OTP to null
@@ -98,6 +114,24 @@ public class InstructorService {
     public String getUserByEmailAddress(String staffId){
         return instructorRepository.findByEmail(staffId);
     }
+
+
+    //get user by first name
+    public String getUserByFirstName(String staffId) {
+        return instructorRepository.findByFirstName(staffId);
+    }
+
+    //get user by last name
+    public String getUserByLastName(String staffId) {
+        return instructorRepository.findByLastName(staffId);
+    }
+
+    //get User details
+//    public List<Instructor> getDetails(String pass) {
+//
+//
+//        return instructorRepository.getInstructorDetails(pass);
+//    }
 
     //get user by id for edit
     public Instructor get(String staffId) throws UserNotFoundException {
@@ -123,6 +157,7 @@ public class InstructorService {
     public Instructor updateInstructor(Instructor instructor) {
         return instructorRepository.save(instructor);
     }
+
 
     //Create exams
 

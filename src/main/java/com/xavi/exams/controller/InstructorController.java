@@ -11,10 +11,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.mail.MessagingException;
+import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 
 @Controller
@@ -44,7 +50,23 @@ public class InstructorController {
 
     // Return Lecturers Profile
     @GetMapping("/lec-profile")
-    public String instructorProfile() {
+    public String instructorProfile(ServletRequest request, ServletResponse response,
+                                    Model model) throws ServletException, UserNotFoundException, IOException {
+
+        //include content of another servlet
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/api/instructor/lec-otpVerification");
+
+        requestDispatcher.include(request,response);
+
+        response.setContentType("application/json");
+
+
+        Instructor instructor = (Instructor) request.getAttribute("instructor");
+
+
+//         Instructor instructor = (Instructor) httpServletRequest.getAttribute("instructor");
+
+         model.addAttribute("instructor", instructor);
 
         return "/instructor/lec-profile";
     }
@@ -142,9 +164,11 @@ public class InstructorController {
         // check if staff id and save the otp in database
         try {
             instructorService.validateStaffId(otp, staffId);
-            String link = Utility.getSiteURL(httpServletRequest) + "/api/instructor/lec-OtpValidationPage?otp=" + otp;
             String email = instructorService.getUserByEmailAddress(staffId);
-            instructorService.sendEmail(email, link, otp);
+            String firstName = instructorService.getUserByFirstName(staffId);
+            String lastName = instructorService.getUserByLastName(staffId);
+            String link = Utility.getSiteURL(httpServletRequest) + "/api/instructor/lec-OtpValidationPage?otp=" + otp;
+            instructorService.sendEmail(email, link, otp, firstName, lastName);
             modelAndView.setViewName("redirect:/api/instructor/lec-loginform?success");
         } catch (ClassNotFoundException | MessagingException | UnsupportedEncodingException e) {
             modelAndView.setViewName("redirect:/api/instructor/lec-loginform?error");
@@ -155,7 +179,8 @@ public class InstructorController {
 
     //Get the login form
     @GetMapping("/lec-OtpValidationPage")
-    public ModelAndView showResetPasswordForm(@Param(value = "otp") String otp, ModelAndView modelAndView) {
+    public ModelAndView showResetPasswordForm(@Param(value = "otp") String otp,
+                                              ModelAndView modelAndView) {
         Instructor instructor = instructorService.getByOneTimePassword(otp);
 
         modelAndView.addObject("otp", otp);
@@ -172,20 +197,51 @@ public class InstructorController {
 
     //Login an instructor
     @PostMapping("/lec-otpVerification")
-    public ModelAndView verifyOTP(ModelAndView modelAndView, HttpServletRequest httpServletRequest) {
+    public String verifyOTP(Model model, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException, UserNotFoundException {
         String pass = httpServletRequest.getParameter("pass");
 
 
         Instructor instructor = instructorService.getByOneTimePassword(pass);
+//        String otp = instructor.getOneTimePassword();
 
         if (instructor != null) {
+
+            String firstname = instructorService.getFirstName(pass);
+            String lastname = instructorService.getLastName(pass);
+            String staffId = instructorService.getStaffId(pass);
+            String email = instructorService.getEmail(pass);
+
+            //List<Instructor> instructor1 = instructorService.getDetails(pass);
+            Instructor instructor1 = new Instructor();
+            instructor1.setStaffId(staffId);
+            instructor1.setFirstName(firstname);
+            instructor1.setLastName(lastname);
+            instructor1.setEmail(email);
+
+            /* User Profile section */
+            //set instructor object and send it to profile handler
+            httpServletRequest.setAttribute("instructor", instructor1);
+//
+//            //forward the request to the profile page
+//
+//            String url = "/api/instructor/lec-profile";
+//
+//            ServletContext context = httpServletRequest.getServletContext();
+//            RequestDispatcher requestDispatcher = context.getRequestDispatcher("/api/instructor/lec-profile");
+//            requestDispatcher.include(httpServletRequest, httpServletResponse);
+
+            /* End of user profile */
+
+            String firstName = instructorService.getFirstName(pass);
+            String lastName= instructorService.getLastName(pass);
+
+            model.addAttribute("firstName", firstName);
+            model.addAttribute("lastName", lastName);
             instructorService.loginInstructor(instructor);
-            modelAndView.setViewName("redirect:/api/instructor/lec-dashboard?success");
-            return modelAndView;
         } else {
-            modelAndView.setViewName("redirect:/api/instructor/lec-OtpValidation?error");
+            return "redirect:/api/instructor/lec-OtpValidation?error";
         }
-        return modelAndView;
+        return "/instructor/lec-dashboard";
     }
 
     //handling the exception of accessing the resetPassword page without token redirects to login page

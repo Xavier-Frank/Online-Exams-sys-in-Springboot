@@ -133,9 +133,11 @@ public class LearnerController {
         // check if staff id and save the otp in database
         try {
             learnerService.validateLearnerId(otp, learnerId);
+            String firstName = learnerService.getUserByFirstName(learnerId);
+            String lastName = learnerService.getUserByLastName(learnerId);
             String link = Utility.getSiteURL(httpServletRequest) + "/api/student/stud-OtpValidationPage?otp=" + otp;
             String email = learnerService.getUserByEmailAddress(learnerId);
-            learnerService.sendEmail(email, link, otp);
+            learnerService.sendEmail(email, link, otp, firstName, lastName);
             modelAndView.setViewName("redirect:/api/student/stud-loginform?success");
 
 
@@ -165,20 +167,24 @@ public class LearnerController {
 
     //Login an instructor
     @PostMapping("/stud-otpVerification")
-    public ModelAndView verifyOTP(ModelAndView modelAndView, HttpServletRequest httpServletRequest) {
+    public String verifyOTP(Model model, HttpServletRequest httpServletRequest) {
         String pass = httpServletRequest.getParameter("pass");
 
 
         Learner learner  = learnerService.getByOneTimePassword(pass);
 
         if (learner != null) {
+
+            String firstName = learnerService.getFirstName(pass);
+            String lastName= learnerService.getLastName(pass);
+
+            model.addAttribute("firstName", firstName);
+            model.addAttribute("lastName", lastName);
             learnerService.loginLearner(learner);
-            modelAndView.setViewName("redirect:/api/student/stud-dashboard?success");
-            return modelAndView;
         } else {
-            modelAndView.setViewName("redirect:/api/student/stud-OtpValidation?error");
+            return "redirect:/api/student/stud-OtpValidation?error";
         }
-        return modelAndView;
+        return "/student/stud-dashboard";
     }
 
    //handling the exception of accessing the resetPassword page without token redirects to login page
