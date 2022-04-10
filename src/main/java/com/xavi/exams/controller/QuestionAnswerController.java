@@ -10,13 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 @Controller
 @RequestMapping("/api/question_and_answer")
@@ -144,6 +141,16 @@ public class QuestionAnswerController {
     }
 
 
+    //delete question
+    @GetMapping("/delete-question/{quesId}")
+    public String deleteExams(@PathVariable("quesId") Integer quesId){
+        try{
+            qService.deleteById(quesId);
+        }catch (Exception e){
+            return "redirect:/api/exams/createExams?errorDeleteQ";
+        }
+        return "redirect:/api/exams/createExams?successDeleteQ";
+    }
 
 
 

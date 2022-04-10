@@ -6,7 +6,6 @@ import com.xavi.exams.models.Exams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.management.openmbean.OpenType;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,5 +53,13 @@ public class ExamService {
             getExam.get();
         }
         throw new UserNotFoundException("Assessment Not Found");
+    }
+
+    public void update(Exams exams) {
+        examRepository.save(exams);
+    }
+
+    public Optional<Exams> findById(String assessmentId) throws UserNotFoundException{
+        return examRepository.findById(assessmentId);
     }
 }

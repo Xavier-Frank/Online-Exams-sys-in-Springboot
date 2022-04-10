@@ -2,23 +2,19 @@ package com.xavi.exams.controller;
 
 
 import com.xavi.exams.models.Exams;
-import com.xavi.exams.models.Notifications;
 import com.xavi.exams.models.Question;
 import com.xavi.exams.models.QuestionForm;
 import com.xavi.exams.services.ExamService;
 import com.xavi.exams.services.QuizService;
 import com.xavi.exams.services.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServlet;
-import java.math.BigInteger;
-import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/api/exams")
@@ -86,30 +82,46 @@ public class ExamsController {
         return "redirect:/api/exams/createExams?successDelete";
     }
 
-    //edit exams
-    @GetMapping("/edit-exam/{assessmentId}")
-    public String editExams(@PathVariable("assessmentId") String assessmentId, Model model){
+    //edit assessments
+    @GetMapping(value = {"/{assessmentId}/edit"})
+    public String showEditAssessmentForm(Model model, @PathVariable String assessmentId) {
+        Optional<Exams> exams = null;
         try {
-            Exams exams = examService.get(assessmentId);
-            model.addAttribute("exams", exams);
-            model.addAttribute("pageTitle", "Update Assessment");
-            model.addAttribute("formHeader", "Edit Assessment: " + "Assessment ID" + "(" + assessmentId + ")" );
+            examService.findById(assessmentId).ifPresent(o -> model.addAttribute("exams", o) );
+//            System.out.println("the retrieved notification id is: " + );
+            model.addAttribute("pageTitle", "Edit an Assessment");
+            model.addAttribute("formHeader", "Update details");
+//            model.addAttribute("notifications", notifications);
 
-        }catch (UserNotFoundException e){
-            return "redirect:/api/exams/createExams?erroredit";
-
+        } catch (UserNotFoundException ex) {
+            model.addAttribute("errorMessage", "Assessment not found");
+            return "/examination/create-an-examination";
         }
-
-        return "examination/registerAssessment";
-
+        return "/examination/registerAssessment";
     }
-    //edit an exam
-    @PostMapping("/editAssessment")
-    public ModelAndView editExams(Exams exams, ModelAndView modelAndView){
-        examService.saveAnExam(exams);
-        modelAndView.setViewName("redirect:/api/exams/createExams?successedit");
-        return modelAndView;
+
+    //update notification
+    @PostMapping(value = {"/{assessmentId}/edit"})
+    public String updateContact(Model model,
+                                @PathVariable String assessmentId,
+                                @ModelAttribute("exams") Exams exams) {
+        try {
+            exams.setAssessmentId(assessmentId);
+            examService.update(exams);
+            return "redirect:/api/exams/createExams?successedit";
+        } catch (Exception ex) {
+            // log exception first,
+            // then show error
+//            String errorMessage = ex.getMessage();
+//            logger.error(errorMessage);
+            model.addAttribute("errorMessage", "Error editing notification");
+
+            return "/examination/create-an-examination";
+        }
     }
+
+
+
 
 
 

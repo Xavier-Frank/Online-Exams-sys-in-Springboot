@@ -116,7 +116,7 @@
                 <div class="col-md-12">
                     <div th:if="${param.successedit}">
                         <div class="alert alert-info alert-dismissible fade show" role="alert">
-                            Profile Updated successfully
+                            Notification Updated successfully
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -178,6 +178,7 @@
 
             <div class="notification">
                 <h2> Post a comment for Learners: </h2>
+                <h2 style="color:red;">[[${errorMessage}]]</h2>
                 <br>
 
                 <form action="#" th:action="@{/api/notifications/save-notification}" th:object="${notifications}" method="POST">
@@ -208,7 +209,7 @@
                                     <td>[[${notifications.createdOn}]] </td>
                                     <td th:utext="${notifications.content}"></td>
                                     <td class="table-info">
-                                        <a th:href="@{'/api/notifications/edit-notification/' + ${notifications.id}}"><button type="button" class="btn btn-info">Edit</button></a>
+                                        <a th:href="@{/api/notifications/{id}/edit(id=${notifications.id})}"><button type="button" class="btn btn-info">Edit</button></a>
                                         <a th:href="@{'/api/notifications/delete-notification/' + ${notifications.id}}"><button type="button" class="btn btn-danger">Delete</button></a>
                                     </td>
                                 </tr>

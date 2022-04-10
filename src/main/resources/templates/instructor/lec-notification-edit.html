@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>[[${pageTitle}]] </title>
+  <title>[[${pageTitle}]]</title>
   <link rel="stylesheet" type="text/css" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
   <!--===============================================================================================-->
   <link rel="stylesheet" type="text/css" th:href="@{/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
@@ -151,14 +151,28 @@
       <!-- Body section -->
 
       <div class="notification">
-        <h2> [[${formHeader}]]</h2>
+        <h2> [[${pageTitle}]] </h2>
+        <h2 style="color:red;">[[${errorMessage}]]</h2>
 
-        <form action="#" th:action="@{/api/notifications/edit-notification}" th:object="${notifications}" method="POST">
+
+        <form th:object="${notifications}" th:action="@{/api/notifications/{id}/edit(id=${notifications.id})}"  method="POST">
           <!-- Create the editor container -->
-          <div data-validate="Enter comment to post">
-                        <textarea id="editor" class="editor" name="content" placeholder="Post comments here" field="*{content}" required>
-                        </textarea>
-          </div>
+
+          <tr th:if="${notifications.id}">
+            <td>ID</td>
+            <td>:</td>
+            <td th:utext="${notifications.id}">...</td>
+          </tr>
+          <tr>
+            <td>Content</td>
+            <td>:</td>
+            <td><textarea id="editor" class="editor" name="content" placeholder="Post comments here" field="*{content}" required>
+                        </textarea></td>
+          </tr>
+
+<!--          <div data-validate="Enter comment to post">-->
+<!--                        -->
+<!--          </div>-->
           <br>
           <div>
             <button type="submit" class="btn btn-warning">Post</button></td>
@@ -182,7 +196,7 @@
               <td>[[${notifications.createdOn}]] </td>
               <td th:utext="${notifications.content}"></td>
               <td class="table-info">
-                <a th:href="@{'/api/notifications/edit-notification/' + ${notifications.id}}"><button type="button" class="btn btn-info">Edit</button></a>
+                <a th:href="@{/api/notifications/{id}/edit(id=${notifications.id})}"><button type="button" class="btn btn-info">Edit</button></a>
                 <a th:href="@{'/api/notifications/delete-notification/' + ${notifications.id}}"><button type="button" class="btn btn-danger">Delete</button></a>
               </td>
             </tr>
@@ -194,6 +208,8 @@
 
     </div>
   </div>
+</div>
+
 
   <!-- Content Body -->
   <br>

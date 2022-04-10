@@ -3,7 +3,6 @@ package com.xavi.exams.services;
 import com.xavi.exams.doa.NotificationRepository;
 import com.xavi.exams.models.Notifications;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
@@ -52,6 +51,16 @@ public class NotificationService {
             getNotification.get().getContent();
         }
         throw new UserNotFoundException("Notification not Found");
+
+    }
+
+    public Notifications update(Notifications notifications) {
+        return notificationRepository.save(notifications);
+    }
+
+    public Optional<Notifications> findById(BigInteger id) throws UserNotFoundException {
+
+        return notificationRepository.findById(id);
 
     }
 }
