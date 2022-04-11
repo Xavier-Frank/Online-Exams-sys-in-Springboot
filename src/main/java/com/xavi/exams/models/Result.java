@@ -17,7 +17,7 @@ public class Result {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String learnerId;
+//	private String learnerId;
 //	@Column(length = 20)
 //	private String firstName;
 //	@Column(length = 20)

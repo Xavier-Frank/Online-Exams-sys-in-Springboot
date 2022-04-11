@@ -24,8 +24,8 @@ public class Question {
 	private String optionB;
 	private String optionC;
 	private String optionD;
-	private int ans;
-	private int chose;
+	private Integer ans;
+	private Integer chose;
 
 	@Override
 	public String toString() {

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage System Users </title>
+    <link rel="stylesheet" type="text/css" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{/fonts/iconic/css/material-design-iconic-font.min.css}">
+    <!--===========================================================================================================-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!--===========================================================================================================     -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <!-- =============================================================================================================    -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
+    <!-- =======================================================================================================    -->
+    <link th:href="@{/css/dashboard.css}" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/util.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/accordion.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/question.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+
+</head>
+<body>
+<div class="limiter">
+
+</div>
+
+<div class="d-flex" id="wrapper">
+    <!-- Side bar section -->
+    <div class="bg-white" id="sidebar-wrapper">
+        <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">
+            <i class="fas fa-user me-2"></i> ADMIN
+        </div>
+
+        <div class="list-group list-group-flush my-3">
+            <a href="#" class="list-group-item list-group-item-action bg-transparent second-text active border">
+                <i class="fas fa-users me-2"></i> Manage Users
+            </a>
+            <a href="/api/admin/comments" class="list-group-item list-group-item-action bg-transparent second-textborder">
+                <i class="fas fa-tachometer-alt me-2"></i> View Comments
+            </a>
+            <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
+                <i class="fa fa-sign-out me-2"></i> Logout
+            </a>
+
+        </div>
+
+    </div>
+    <!-- Side bar section -->
+    <div id="page-content-wrapper">
+        <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-align-left primary-left fs-4 me-3" id="menu-toggle"></i>
+                <h2 class="fs-2 m-0"><b style="color: black;">Online Exams</b></h2>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Drop down list in boostrap -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-3 ml-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a href="/api/main/online-help" class="nav-link second-text fw-bold" target="_blank">
+                            <i class="fas fa-question-circle me-2"></i> Help
+                        </a>
+                    </li>
+                    <li class="nav-item-dropdown">
+                        <a href="#" class="nav-link dropdown-toggle second-text fw-bold" id="navbarDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user me-2"></i> ADMIN
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown" >
+                            <li>
+                                <a href="#" class="dropdown-item">
+                                    <i class="fa fa-sign-out me-2"></i> Logout
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="row text-center">
+            <div class="col-md-12">
+                <div th:if="${param.success}">
+                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                        List of Enrolled learners
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <!-- The form -->
+            <form class="example" th:action="@{/api/instructor/searchlearner}" method="get">
+                <input type="search" placeholder="Search user" name="keyword">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+
+
+        <br>
+        <br>
+        <!--    Body section    -->
+        <div class="container-fluid text-center background-image" style="background-image: url('/images/online-examsII.jpg');">
+            <h3 style="color: white;"> <b>Manage Users:</b> </h3>
+
+            <!--        //alerts -->
+            <div class="limiter">
+                <div class="container">
+                    <div>
+                        <div class="row text-center">
+                            <div class="col-md-12">
+                                <select id="questionType">
+                                    <option value="">Select user type</option>
+                                    <option value="instructor">Instructor</option>
+                                    <option value="student">Student</option>
+                                    <option value="close">Close</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="question-form">
+                            <div id="instructor" class="hide">
+
+                                <div class = "container">
+                                    <div class="table-responsive">
+                                        <table class="table table-dark table-hover center">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="5">USER DETAILS</th>
+                                                <!--                            <th class=""> ACTION </th>-->
+                                            </tr>
+                                            <tr>
+                                                <th>Staff ID</th>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                <th>Email</th>
+                                                <th class="table-success">Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <th:block th:each="instructor: ${instructor}">
+                                                <tr>
+                                                    <td>[[${instructor.staffId}]]</td>
+
+                                                    <td>[[${instructor.firstName}]]</td>
+
+                                                    <td>[[${instructor.lastName}]]</td>
+
+                                                    <td>[[${instructor.email}]]</td>
+
+                                                    <td class="table-info">
+                                                        <a th:href="@{/api/instructor/{staffId}/edit(staffId=${instructor.staffId})}"><button type="button" class="btn btn-info">Edit</button></a>
+                                                        <a th:href="@{'/api/instructor/delete-exam/' + ${instructor.staffId}}"><button type="button" class="btn btn-danger">Delete</button></a>
+                                                    </td>
+                                                </tr>
+                                            </th:block>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="student" class="hide">
+
+                                <div class = "container">
+
+                                    <div class="table-responsive">
+                                        <table class="table table-dark table-hover center">
+                                            <thead>
+                                            <tr>
+                                                <th> Learner ID </th>
+                                                <th> First Name </th>
+                                                <th> Last Name </th>
+                                                <th> Year of Study </th>
+                                                <th> Faculty </th>
+                                                <th> Department </th>
+                                                <th> Institution </th>
+                                                <th> Campus </th>
+                                                <th> Email </th>
+                                                <!--                            <th class=""> <b> Action </b> </th>-->
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <th:block th:each="learner: ${learner}">
+                                                <tr>
+                                                    <td>[[${learner.learnerId}]] </td>
+                                                    <td>[[${learner.firstName}]] </td>
+                                                    <td>[[${learner.lastName}]] </td>
+                                                    <td>[[${learner.yearOfStudy}]] </td>
+                                                    <td>[[${learner.faculty}]] </td>
+                                                    <td>[[${learner.department}]] </td>
+                                                    <td>[[${learner.institution}]] </td>
+                                                    <td>[[${learner.campus}]] </td>
+                                                    <td>[[${learner.email}]] </td>
+                                                    <td class="table-info">
+                                                        <a th:href="@{/api/learner/{learnerId}/eit(learnerId=${learner.learnerId})}"><button type="button" class="btn btn-info">Edit</button></a>
+                                                        <a th:href="@{'/api/exams/delete-exam/' + ${learner.learnerId}}"><button type="button" class="btn btn-danger">Delete</button></a>
+                                                    </td>
+                                                </tr>
+
+                                            </th:block>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div><!--        oiewhihwe-->
+        <!-- //Body section   -->
+    </div>
+</div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script>
+        var el = document.getElementById("wrapper")
+        var toggleButton = document.getElementById("menu-toggle")
+
+        toggleButton.onclick = function () {
+            el.classList.toggle("toggled")
+
+        }
+    </script>
+<!--===============================================================================================-->
+<script th:src="@{/vendor/jquery/jquery-3.2.1.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/vendor/animsition/js/animsition.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/vendor/bootstrap/js/popper.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/vendor/select2/select2.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/vendor/daterangepicker/moment.min.js}"></script>
+<script th:src="@{/vendor/daterangepicker/daterangepicker.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/vendor/countdowntime/countdowntime.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/alert.js}"></script>
+<script th:src="@{/js/util.js}"></script>
+        <script th:src="@{/js/alert.js}"></script>
+        <script th:src="@{/js/question.js}"></script>
+        <script th:src="@{/js/util.js}"></script>
+        <script th:src="@{/js/html-duration-picker.min.js}"></script>
+<!--=================================================================================================-->
+
+</body>
+
+</html>

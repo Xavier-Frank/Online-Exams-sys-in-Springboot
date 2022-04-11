@@ -261,17 +261,19 @@
                         <div class="col-md-4">
                         </div>
                         <div class="col-md-4">
-                            <a href="#">
+<!--                            <a href="#">-->
                                 <div class="p-4 bg-info shadow-lg d-flex justify-content-around align-items-center rounded">
                                     <i class="fa fa-eye fs-1 primary-text border rounded full secondary-bg p-3 p-t-2 p-b-2"></i>
                                     <div>
-                                        <button type="button" class="btn btn-warning">
+<!--                                        <a href="/video-conference/converge-and-monitor">-->
+                                        <button id="video" type="button" class="btn btn-warning" onclick="createMeeting();">
                                             <h3 class="fs-2">Monitor</h3>
                                         </button>
                                         <p class="fs-5">Invigilate an Ongoing Assessment</p>
+<!--                                        </a>-->
                                     </div>
                                 </div>
-                            </a>
+<!--                            </a>-->
                         </div>
                         <div class="col-md-4">
                         </div>
@@ -293,6 +295,49 @@
 
         }
     </script>
+
+<!--Video conferencing -->
+
+<script> //create the meeting and pass the response to another function.
+        var videoButton = document.getElementById("video")
+        videoButton.onclick = function(){
+            createMeeting();
+        }
+
+            function createMeeting() {
+              //scheduledDateTime and meetingName
+              var date = moment().format("ddd MMM D YYYY HH:mm:ss Z");
+              var prettyDate = moment().format('MMMM Do YYYY, h:mm:ss A');
+              var meetingName = prettyDate;
+              //scheduledTimeZone
+              var zoneName = moment.tz.guess();
+              var timezone = moment.tz(zoneName).zoneAbbr();
+              var zoneOffset = moment().format('Z');
+              var scheduledZone = timezone + '/UTC' + zoneOffset;
+              //change button appearance after click
+              var createButton = document.getElementById("createButton");
+              createButton.classList.add("disabled", "loading");
+              //make request to graphql api server
+              fetch('https://app-123.megameeting.com/api', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'apiToken': 'RA7CJPX025THH4XPZMMZP3UZ2PKSBIGG',
+                  },
+                  body: JSON.stringify({
+                    "query": "mutation{createMeeting(input:{meetingName:\"" + meetingName + "\",   scheduledDateTime:\"" + date + "\",scheduledTimeZone:\"" + scheduledZone + "\",enableTwilio: 1,}){result}}"
+                  })
+                })
+                .then(r => r.json())
+
+
+
+
+
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/html-duration-picker@latest/dist/html-duration-picker.min.js"></script>
 <!--===============================================================================================-->
 <script th:src="@{/vendor/jquery/jquery-3.2.1.min.js}"></script>

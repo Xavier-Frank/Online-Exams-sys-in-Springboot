@@ -1,5 +1,6 @@
 package com.xavi.exams.controller;
 
+import com.xavi.exams.doa.InstructorRepository;
 import com.xavi.exams.models.*;
 import com.xavi.exams.services.*;
 import net.bytebuddy.utility.RandomString;
@@ -11,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.mail.MessagingException;
 import javax.servlet.*;
@@ -20,8 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/api/instructor")
@@ -34,9 +34,12 @@ public class InstructorController {
 
     @Autowired
     private NotificationService notificationService;
+    @Autowired
+    private InstructorRepository instructorRepository;
 
     @Autowired
     private ExamService examService;
+    private Object HttpServletRequest;
 
 
     /* ======================= Dashboard Navigation =================================== */
@@ -44,28 +47,52 @@ public class InstructorController {
 
     //  Return Lecturers Dashboard
     @GetMapping("/lec-dashboard")
-    public String instructorDashboard() {
+    public String instructorDashboard(){
+
+
         return "/instructor/lec-dashboard";
     }
 
     // Return Lecturers Profile
     @GetMapping("/lec-profile")
-    public String instructorProfile(ServletRequest request, ServletResponse response,
-                                    Model model) throws ServletException, UserNotFoundException, IOException {
+    public String instructorProfile(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Model model,
+                                    String pass) throws ServletException, UserNotFoundException, IOException {
 
+
+//        String url = "/api/instructor/lec-otpVerification";
+//        ServletContext context = httpServletRequest.getServletContext();
+//        RequestDispatcher requestDispatcher = context.getRequestDispatcher(url);
+//        requestDispatcher.include(httpServletRequest, httpServletResponse);
         //include content of another servlet
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/api/instructor/lec-otpVerification");
 
-        requestDispatcher.include(request,response);
-
-        response.setContentType("application/json");
+        Instructor instructor = (Instructor) httpServletRequest.getAttribute("instructor");
 
 
-        Instructor instructor = (Instructor) request.getAttribute("instructor");
+
+        String firstName = instructor.getFirstName();
+        String lastName= instructor.getLastName();
+        String staffId = instructor.getStaffId();
+        String email = instructor.getEmail();
+        Timestamp createdOn = instructor.getCreatedOn();
+
+        instructor.setFirstName(firstName);
+        instructor.setLastName(lastName);
+        instructor.setStaffId(staffId);
+        instructor.setEmail(email);
+        instructor.setCreatedOn(createdOn);
+        model.addAttribute("firstName", firstName);
+        model.addAttribute("lastName", lastName);
+
+        instructorService.loginInstructor(instructor);
+
+        model.addAttribute("firstName", firstName);
+        model.addAttribute("lastName", lastName);
+
+        System.out.println("The name of instructor received is" + instructor.getFirstName());
 
 
-//         Instructor instructor = (Instructor) httpServletRequest.getAttribute("instructor");
-
+//        verifyOTP(model, httpServletRequest, httpServletResponse,instructor, pass);
+//        Optional<Instructor> instructor = instructorService.findById(pass);
          model.addAttribute("instructor", instructor);
 
         return "/instructor/lec-profile";
@@ -196,9 +223,10 @@ public class InstructorController {
     }
 
     //Login an instructor
-    @PostMapping("/lec-otpVerification")
-    public String verifyOTP(Model model, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException, UserNotFoundException {
-        String pass = httpServletRequest.getParameter("pass");
+    @GetMapping("/lec-otpVerification")
+    public String verifyOTP(Model model, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+                            Instructor instructor1, String pass) throws ServletException, IOException, UserNotFoundException {
+        pass = httpServletRequest.getParameter("pass");
 
 
         Instructor instructor = instructorService.getByOneTimePassword(pass);
@@ -212,34 +240,25 @@ public class InstructorController {
             String email = instructorService.getEmail(pass);
 
             //List<Instructor> instructor1 = instructorService.getDetails(pass);
-            Instructor instructor1 = new Instructor();
+            instructor1 = new Instructor();
             instructor1.setStaffId(staffId);
             instructor1.setFirstName(firstname);
             instructor1.setLastName(lastname);
             instructor1.setEmail(email);
-
+            
             /* User Profile section */
             //set instructor object and send it to profile handler
             httpServletRequest.setAttribute("instructor", instructor1);
+
 //
 //            //forward the request to the profile page
 //
-//            String url = "/api/instructor/lec-profile";
-//
-//            ServletContext context = httpServletRequest.getServletContext();
-//            RequestDispatcher requestDispatcher = context.getRequestDispatcher("/api/instructor/lec-profile");
-//            requestDispatcher.include(httpServletRequest, httpServletResponse);
-
-            /* End of user profile */
-
-            String firstName = instructorService.getFirstName(pass);
-            String lastName= instructorService.getLastName(pass);
-
-            model.addAttribute("firstName", firstName);
-            model.addAttribute("lastName", lastName);
-            instructorService.loginInstructor(instructor);
+            String url = "/api/instructor/lec-profile";
+            ServletContext context = httpServletRequest.getServletContext();
+            RequestDispatcher requestDispatcher = context.getRequestDispatcher(url);
+            requestDispatcher.forward(httpServletRequest, httpServletResponse);
         } else {
-            return "redirect:/api/instructor/lec-OtpValidation?error";
+            return "redirect:/api/instructor/lec-loginform?successM";
         }
         return "/instructor/lec-dashboard";
     }
@@ -315,29 +334,40 @@ public class InstructorController {
         return "/instructor/search/search-exams";
     }
 
-    //Edit user profile
-    @GetMapping("/edit-profile/{staffId}")
-    public String EditUserProfile(@PathVariable("staffId") String staffId, Model model){
+    //edit lec profile
+    @GetMapping(value = {"/{staffId}/edit"})
+    public String showEditLecForm(Model model, @PathVariable String staffId) {
+        Optional<Instructor> instructor = null;
+        try {
+            examService.findById(staffId).ifPresent(o -> model.addAttribute("instructor", o) );
+//            model.addAttribute("pageTitle", "Edit instructor profile");
+            model.addAttribute("formHeader", "Update details");
 
-        try{
-            Instructor instructor = instructorService.get(staffId);
-            model.addAttribute("instructor", instructor);
-            model.addAttribute("pageTitle", "Edit Instructor Page");
-            model.addAttribute("formHeader", "Edit Your Details:" + " " + "User id:" + " " + staffId);
-        } catch (UserNotFoundException e){
-
-            return "redirect:/api/instructor/lec-profile?erroredit";
-
+        } catch (UserNotFoundException ex) {
+            model.addAttribute("errorMessage", "Instructor not found");
+            return "/instructor/lec-profile";
         }
         return "/instructor/lec-profile-edit";
     }
 
-    //edit lec profile
-    @PostMapping("/lec-profileEdit")
-    public String editLecProfile(Instructor instructor) {
+    //update notification
+    @PostMapping(value = {"/{staffId}/edit"})
+    public String updateContact(Model model,
+                                @PathVariable String staffId,
+                                @ModelAttribute("instructor") Instructor instructor) {
+        try {
+            instructor.setStaffId(staffId);
             instructorService.updateInstructor(instructor);
             return "redirect:/api/instructor/lec-profile?successedit";
+        } catch (Exception ex) {
+            // log exception first,
+            // then show error
+//            String errorMessage = ex.getMessage();
+//            logger.error(errorMessage);
+            model.addAttribute("errorMessage", "Error editing instructor");
 
+            return "/instructor/lec-profile-edit";
+        }
     }
 
 

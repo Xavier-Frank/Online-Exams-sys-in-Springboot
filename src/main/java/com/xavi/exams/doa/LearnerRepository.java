@@ -1,6 +1,5 @@
 package com.xavi.exams.doa;
 
-import com.xavi.exams.models.Instructor;
 import com.xavi.exams.models.Learner;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -30,11 +29,31 @@ public interface LearnerRepository extends JpaRepository <Learner, String> {
     @Query("SELECT lastName FROM Learner i WHERE i.learnerId = :learnerId")
     public String findByLastName(@Param("learnerId") String learnerId);
 
+    // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     @Query("SELECT firstName FROM Learner i WHERE i.oneTimePassword = :pass")
     public String findFirstName(String pass);
 
     @Query("SELECT lastName FROM Learner i WHERE i.oneTimePassword = :pass")
     public String findLastName(String pass);
 
+    @Query("SELECT learnerId FROM Learner i WHERE i.oneTimePassword = :pass")
+    String findLearnerId(String pass);
 
+    @Query("SELECT email FROM Learner i WHERE i.oneTimePassword = :pass")
+    String findEmail(String pass);
+
+    @Query("SELECT yearOfStudy FROM Learner i WHERE i.oneTimePassword = :pass")
+    Integer findYearOfStudy(String pass);
+
+    @Query("SELECT faculty FROM Learner i WHERE i.oneTimePassword = :pass")
+    String findFaculty(String pass);
+
+    @Query("SELECT department FROM Learner i WHERE i.oneTimePassword = :pass")
+    String findDepartment(String pass);
+
+    @Query("SELECT institution FROM Learner i WHERE i.oneTimePassword = :pass")
+    String findInstitution(String pass);
+
+    @Query("SELECT campus FROM Learner i WHERE i.oneTimePassword = :pass")
+    String getCampus(String pass);
 }

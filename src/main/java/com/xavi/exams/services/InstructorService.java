@@ -1,9 +1,7 @@
 package com.xavi.exams.services;
 
 import com.xavi.exams.doa.InstructorRepository;
-//import com.xavi.exams.doa.ResultsRepository;
 import com.xavi.exams.models.Instructor;
-//import com.xavi.exams.models.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -146,7 +144,6 @@ public class InstructorService {
 
 
 
-
 //
 //    //View results
 //    public List<Results> getAllResults(){
@@ -156,6 +153,14 @@ public class InstructorService {
     //update instructor
     public Instructor updateInstructor(Instructor instructor) {
         return instructorRepository.save(instructor);
+    }
+
+    public Optional<Instructor> findById(String staffId) {
+        return instructorRepository.findById(staffId);
+    }
+
+    public List<Instructor> instructorList() {
+        return instructorRepository.findAll();
     }
 
 

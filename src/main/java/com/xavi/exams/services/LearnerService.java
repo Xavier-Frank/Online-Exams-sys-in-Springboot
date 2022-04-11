@@ -88,6 +88,16 @@ public class LearnerService {
         return learnerRepository.findLastName(pass);
     }
 
+    public String getlearnerId(String pass) { return learnerRepository.findLearnerId(pass);
+    }
+    public String getLearnerEmail(String pass){return learnerRepository.findEmail(pass);}
+    public Integer getYearOfStudy(String pass){return learnerRepository.findYearOfStudy(pass);}
+    public String getInstitution(String pass){return  learnerRepository.findInstitution(pass);}
+    public String getFaculty(String pass){return learnerRepository.findFaculty(pass);}
+    public String getDepartment(String pass){return learnerRepository.findDepartment(pass);}
+    public String getCampus(String pass) { return learnerRepository.getCampus(pass);}
+
+
     //Process OTP for login
     public void loginLearner(Learner learner){
         //set OTP to null
@@ -110,6 +120,12 @@ public class LearnerService {
     public String getUserByLastName(String learnerId) {
         return learnerRepository.findByLastName(learnerId);
     }
+
+
+
+
+
+
 
     public List<Learner> learnerList() {
         return learnerRepository.findAll();
@@ -141,4 +157,7 @@ public class LearnerService {
     public Learner updateLeaner(Learner learner) {
         return learnerRepository.save(learner);
     }
+
+
+
 }

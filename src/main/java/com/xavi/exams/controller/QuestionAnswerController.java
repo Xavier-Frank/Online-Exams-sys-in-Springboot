@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Controller
@@ -71,7 +70,8 @@ public class QuestionAnswerController {
                                    @RequestParam("optionB") String optionB,
                                    @RequestParam("optionC") String optionC,
                                    @RequestParam("optionD") String optionD,
-                                   @RequestParam("ans") Integer ans) throws Exception {
+                                   @RequestParam("ans") Integer ans,
+                                              @RequestParam("chose") Integer chose) throws Exception {
 
             if(title.isEmpty() || optionA.isEmpty() || optionB.isEmpty() || optionC.isEmpty() || optionD.isEmpty()){
                 return "redirect:/api/question_and_answer/add-questionE?omission";
@@ -79,12 +79,14 @@ public class QuestionAnswerController {
 
             }
             //add question attributes
+            chose = -1;
             question.setTitle(title);
             question.setOptionA(optionA);
             question.setOptionB(optionB);
             question.setOptionC(optionC);
             question.setOptionD(optionD);
             question.setAns(ans);
+            question.setChose(chose);
             try {
                 qService.saveQuestion(question);
                 System.out.println("Hello world");
@@ -123,19 +125,22 @@ public class QuestionAnswerController {
         QuestionForm qForm = qService.getQuestions();
         model.addAttribute("qForm", qForm);
 
-        model.addAttribute("timer", new SimpleDateFormat("HH-mm-ss").parse("2022-01-01"));
+//        model.addAttribute("timer", new SimpleDateFormat("HH-mm-ss").parse("2022-01-01"));
 
+        model.addAttribute("Hello", "hello goodluck");
         //return the template
         return "/examination/take-assessment";
 
     }
     @PostMapping("/submit-answers")
-    public String submit(@ModelAttribute QuestionForm qForm, Model m) {
+    public String submit(@ModelAttribute QuestionForm qForm, Model model) {
         if(!submitted) {
             result.setTotalCorrect(qService.getResult(qForm));
             qService.saveScore(result);
             submitted = true;
         }
+
+//        return "result.html";
 
         return "redirect:/api/student/results?success";
     }

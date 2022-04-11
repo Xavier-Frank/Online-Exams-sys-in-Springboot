@@ -35,15 +35,24 @@
 
     <div class="container-login100" style="background-image: url('/images/examination.jpeg');">
         <div class="wrap-login100">
-            <form class="login100-form validate-form" action="#" th:action="@{/api/student/stud-registrationProcess}"  th:object="${learner}" method="POST">
+            <form class="login100-form validate-form" th:object="${learner}" th:action="@{/api/student/{learnerId}/edit(learnerId=${learner.learnerId})}"  method="POST">
 
 					<span class="login100-form-logo">
 						<i class="fa fa-user"></i>
 					</span>
 
                 <span class="login100-form-title p-b-10 p-t-10">
-						[[${formHeader}]]
+                    [[${formHeader}]]
+                    <br>
+                    [[${errorMessage}]]
                 </span>
+
+                <div th:if="${learner.learnerId}">
+                    <td>Your student ID</td>
+                    <td>:</td>
+                    <td th:utext="${learner.learnerId}">...</td>
+                </div>
+
                 <div class="wrap-input100 validate-input" data-validate = "Enter Your Student Registration Number">
                     <input class="input100" type="text" placeholder="Learner Id" maxlength="20" minlength="3" th:field="*{learnerId}" required>
                     <span class="focus-input100" data-placeholder="&#xf207;"></span>

@@ -5,6 +5,8 @@ import com.xavi.exams.models.Comments;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CommentsService {
     @Autowired
@@ -14,5 +16,9 @@ public class CommentsService {
     //Save a comment
     public Comments saveComment(Comments comments){
         return commentsRepository.save(comments);
+    }
+
+    public List<Comments> commentList() {
+        return commentsRepository.findAll();
     }
 }

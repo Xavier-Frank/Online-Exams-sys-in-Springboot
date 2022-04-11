@@ -9,8 +9,6 @@ import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.MissingServletRequestParameterException;
@@ -18,10 +16,15 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/api/student")
@@ -46,7 +49,30 @@ public class LearnerController {
     }
     //return profile
     @GetMapping("/profile")
-    public String studentProfile(){
+    public String studentProfile(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+                                 Model model) throws ServletException, IOException {
+
+//        String url = "/api/student/stud-otpVerification";
+//        ServletContext context = httpServletRequest.getServletContext();
+//        RequestDispatcher requestDispatcher = context.getRequestDispatcher(url);
+//        requestDispatcher.include(httpServletRequest, httpServletResponse);
+        //include content of another servlet
+
+        Learner learner  = (Learner) httpServletRequest.getAttribute("learner");
+
+        String firstName = learner.getFirstName();
+        String lastName= learner.getLastName();
+
+        model.addAttribute("firstName", firstName);
+        model.addAttribute("lastName", lastName);
+
+        System.out.println("The name of instructor received is" + learner.getFirstName());
+
+        learnerService.loginLearner(learner);
+        model.addAttribute("learner", learner);
+
+
+
         return "/student/stud-profile";
     }
 
@@ -166,18 +192,51 @@ public class LearnerController {
     }
 
     //Login an instructor
-    @PostMapping("/stud-otpVerification")
-    public String verifyOTP(Model model, HttpServletRequest httpServletRequest) {
+    @GetMapping("/stud-otpVerification")
+    public String verifyOTP(Model model, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+                            Learner learner1) throws ServletException, IOException {
         String pass = httpServletRequest.getParameter("pass");
 
 
         Learner learner  = learnerService.getByOneTimePassword(pass);
 
         if (learner != null) {
+            String firstname = learnerService.getFirstName(pass);
+            String lastname = learnerService.getLastName(pass);
+            String leanerId = learnerService.getlearnerId(pass);
+            String email = learnerService.getLearnerEmail(pass);
+            String faculty = learnerService.getFaculty(pass);
+            String department = learnerService.getDepartment(pass);
+            Integer yearOfStudy = learnerService.getYearOfStudy(pass);
+            String institution = learnerService.getInstitution(pass);
+            String campus =learnerService.getCampus(pass);
+
+            //List<Instructor> instructor1 = instructorService.getDetails(pass);
+            learner1 = new Learner();
+            learner1.setFirstName(firstname);
+            learner1.setLastName(lastname);
+            learner1.setLearnerId(leanerId);
+            learner1.setEmail(email);
+            learner1.setFaculty(faculty);
+            learner1.setDepartment(department);
+            learner1.setYearOfStudy(yearOfStudy);
+            learner1.setInstitution(institution);
+            learner1.setCampus(campus);
+            /* User Profile section */
+            //set instructor object and send it to profile handler
+            httpServletRequest.setAttribute("learner", learner1);
+
+//
+//            //forward the request to the profile page
+//
+            String url = "/api/student/profile";
+            ServletContext context = httpServletRequest.getServletContext();
+            RequestDispatcher requestDispatcher = context.getRequestDispatcher(url);
+            requestDispatcher.forward(httpServletRequest, httpServletResponse);
+
 
             String firstName = learnerService.getFirstName(pass);
             String lastName= learnerService.getLastName(pass);
-
             model.addAttribute("firstName", firstName);
             model.addAttribute("lastName", lastName);
             learnerService.loginLearner(learner);
@@ -219,28 +278,35 @@ public class LearnerController {
         return "/student/search-results/search-exams";
     }
 
-    //Edit user profile
-    @GetMapping("/edit-profile/{learnerId}")
-    public String EditUserProfile(@PathVariable("learnerId") String learnerId, Model model) {
+    //edit stud profile
+    @GetMapping(value = {"/{learnerId}/edit"})
+    public String showEditLecForm(Model model, @PathVariable String learnerId) {
+        Optional<Learner> learner = null;
+        try {
+            examService.findById(learnerId).ifPresent(o -> model.addAttribute("instructor", o) );
+            model.addAttribute("formHeader", "Update details");
 
-        try{
-            Learner learner  = learnerService.get(learnerId);
-            model.addAttribute("learner", learner);
-            model.addAttribute("pageTitle", "Edit Learner Page");
-            model.addAttribute("formHeader", "Edit Your Details: " + "User id:" + "(" + learnerId + ")");
-        } catch (UserNotFoundException e){
-            return "redirect:/api/student/profile?erroredit";
+        } catch (UserNotFoundException ex) {
+            model.addAttribute("errorMessage", "Instructor not found");
+            return "/student/stud-profile";
         }
-
-
-        return "/student/stud-profile-edit";
+        return "/instructor/stud-profile-edit";
     }
 
-    //edit learner details
-    @PostMapping("/stud-profileEdit")
-    public String editLearnerProfile(Learner learner){
-        learnerService.updateLeaner(learner);
-        return "redirect:/api/student/profile?successedit";
+    //update notification
+    @PostMapping(value = {"/{learnerId}/edit"})
+    public String updateContact(Model model,
+                                @PathVariable String learnerId,
+                                @ModelAttribute("learner") Learner learner) {
+        try {
+            learner.setLearnerId(learnerId);
+            learnerService.updateLeaner(learner);
+            return "redirect:/api/student/stud-profile?successedit";
+        } catch (Exception ex) {
+            model.addAttribute("errorMessage", "Error editing instructor");
+
+            return "/student/stud-profile-edit";
+        }
     }
 
 

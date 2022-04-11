@@ -147,6 +147,8 @@
                 </div>
             </div>
 
+            <h2 style="color:red;">[[${errorMessage}]]</h2>
+            <h2>[[${formHeader}]]</h2>
             <!--  Body Section          -->
             <div class="container-fluid text-center background-image" style="background-image: url('/images/photo.jpg');">
                 <div class="table-responsive">
@@ -179,7 +181,9 @@
 
                                 <td>[[${instructor.email}]]</td>
 
-                                <td class=""><a th:href="@{'/api/instructor/edit-profile/' + ${instructor.staffId}}"><button type="button" class="btn btn-warning">Edit</button> </a></td>
+                                <td class="table-info">
+                                    <a th:href="@{/api/instructor/{staffId}/edit(staffId=${instructor.staffId})}"><button type="button" class="btn btn-warning">Edit</button> </a>
+                                </td>
                             </tr>
                         </th:block>
                         </tbody>

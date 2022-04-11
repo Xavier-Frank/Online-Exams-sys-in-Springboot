@@ -68,7 +68,7 @@
         <div class="col-md-12">
             <div class="container-login100" style="background-image: url('/images/examination.jpeg');">
                 <div class="wrap-login100">
-                    <form class="login100-form validate-form"  th:action="@{/api/student/stud-otpVerification}" method="POST">
+                    <form class="login100-form validate-form"  th:action="@{/api/student/stud-otpVerification}" method="GET">
 
                         <input type="hidden" name="otp" th:value=${otp}>
                          <span class="login100-form-logo">

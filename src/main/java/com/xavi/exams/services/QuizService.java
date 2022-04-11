@@ -52,10 +52,10 @@ public class QuizService {
 		
 		return correct;
 	}
-	
+
 	public void saveScore(Result result) {
 		Result saveResult = new Result();
-		saveResult.setLearnerId(result.getLearnerId());
+//		saveResult.setUsername(result.getUsername());
 		saveResult.setTotalCorrect(result.getTotalCorrect());
 		rRepo.save(saveResult);
 	}

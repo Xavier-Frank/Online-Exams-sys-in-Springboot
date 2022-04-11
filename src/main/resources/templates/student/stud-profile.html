@@ -98,11 +98,6 @@
                     </ul>
                 </div>
             </nav>
-
-            <div class="row text-center">
-                <hr>
-            </div>
-
             <div class="row text-center">
                 <div class="col-md-12">
                     <div th:if="${param.successedit}">
@@ -124,78 +119,49 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12">
-                    <div th:if="${param.success}">
-                        <div class="alert alert-info alert-dismissible fade show" role="alert">
-                            Welcome Dear Learner
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
             </div>
+
+            <h2 style="color:red;">[[${errorMessage}]]</h2>
+            <h2>[[${formHeader}]]</h2>
             <!-- Content Body -->
             <div class="container-fluid text-center background-image" style="background-image: url('/images/photo.jpg');">
                     <div class="table-responsive">
                         <table class="table table-dark table-hover center">
                             <thead>
                             <tr>
-                                <th colspan="1">USER DETAILS</th>
+                                <th colspan="10">USER DETAILS</th>
 <!--                                <th class="table-danger"> ACTION </th>-->
                             </tr>
+                            <tr>
+                                <th>Leaner ID</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th>Year of Study</th>
+                                <th>Faculty</th>
+                                <th>Department</th>
+                                <th>Institution</th>
+                                <th>Campus</th>
+                                <th class="table-success">Action</th>
+                            </tr>
+
+
                             </thead>
                             <tbody>
                             <th:block th:each="learner: ${learner}">
                                 <tr>
-                                    <td>Leaner ID</td>
                                     <td>[[${learner.learnerId}]]</td>
-<!--                                    <td class="table-info"> <button type="button" class="btn btn-warning">Edit</button></td>-->
-                                </tr>
-                                <tr>
-                                    <td>First Name</td>
                                     <td>[[${learner.firstName}]]</td>
-<!--                                    <td class="table-info"> <button type="button" class="btn btn-warning">Edit</button></td>-->
-                                </tr>
-                                <tr>
-                                    <td>Last Name</td>
                                     <td>[[${learner.lastName}]]</td>
-<!--                                    <td class="table-info"> <button type="button" class="btn btn-warning">Edit</button></td>-->
-                                </tr>
-                                <tr>
-                                    <td>Email</td>
                                     <td>[[${learner.email}]]</td>
-<!--                                    <td class="table-info"> <button type="button" class="btn btn-warning">Edit</button></td>-->
-                                </tr>
-                                <tr>
-                                    <td>Year of Study</td>
                                     <td>[[${learner.yearOfStudy}]]</td>
-<!--                                    <td class="table-info"> <button type="button" class="btn btn-warning">Edit</button></td>-->
-                                </tr>
-                                <tr>
-                                    <td>Faculty</td>
                                     <td>[[${learner.faculty}]]</td>
-<!--                                    <td class="table-info"> <button type="button" class="btn btn-warning">Edit</button></td>-->
-                                </tr>
-                                <tr>
-                                    <td>Department</td>
                                     <td>[[${learner.department}]]</td>
-<!--                                    <td class="table-info"> <button type="button" class="btn btn-warning">Edit</button></td>-->
-                                </tr>
-                                <tr>
-                                    <td>Institution</td>
                                     <td>[[${learner.institution}]]</td>
-<!--                                    <td class="table-info"> <button type="button" class="btn btn-warning">Edit</button></td>-->
-                                </tr>
-                                <tr>
-                                    <td>Campus</td>
                                     <td>[[${learner.campus}]]</td>
-<!--                                    <td class="table-info"> <button type="button" class="btn btn-warning">Edit</button></td>-->
-                                </tr>
-                                <tr>
-                                    <td>Action</td>
-                                    <td>_</td>
-                                    <td class="table-info"><a th:href="@{'/api/student/edit-profile/' + ${learner.learnerId}}"><button type="button" class="btn btn-warning">Edit</button></a></td>
+                                    <td class="table-info">
+                                        <a th:href="@{/api/student/{learnerId}/edit(learnerId=${learner.learnerId})}"><button type="button" class="btn btn-warning">Edit</button></a>
+                                    </td>
                                 </tr>
                             </th:block>
                             </tbody>
