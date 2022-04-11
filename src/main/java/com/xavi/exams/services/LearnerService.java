@@ -159,5 +159,15 @@ public class LearnerService {
     }
 
 
+    public void delete(String learnerId) {
+        learnerRepository.deleteById(learnerId);
+    }
 
+    public void findById(String learnerId) {
+        learnerRepository.findById(learnerId);
+    }
+
+//    public void setResults(Integer r) {
+//        learnerRepository.saveScore(r);
+//    }
 }

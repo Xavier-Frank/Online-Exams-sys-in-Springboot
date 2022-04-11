@@ -8,7 +8,6 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Date;
 
 @Entity
 @AllArgsConstructor
@@ -48,6 +47,8 @@ public class Learner {
 
     @Column(length = 50, insertable = true)
     private String oneTimePassword;
+
+    private Integer results;
 
     @CreationTimestamp
     @Column(updatable = false)

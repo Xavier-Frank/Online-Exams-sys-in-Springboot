@@ -1,12 +1,12 @@
 package com.xavi.exams.doa;
 
 import com.xavi.exams.models.Instructor;
+import com.xavi.exams.models.Learner;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.lang.instrument.Instrumentation;
 import java.util.List;
 
 @Repository
@@ -39,6 +39,13 @@ public interface InstructorRepository extends JpaRepository <Instructor, String>
 
     @Query("SELECT staffId FROM Instructor i WHERE i.oneTimePassword = :pass")
     String findStaffId(String pass);
+
+    @Query(value = "SELECT * FROM instructor WHERE" + " " +
+            "MATCH (staffId, first_name, last_name, email)" + " "
+            + "AGAINST (?1)", nativeQuery = true)
+    List<Learner> searchInstructor(String keyword);
+
+
 
 
 //    public Instructor findByResetPasswordToken(String token);

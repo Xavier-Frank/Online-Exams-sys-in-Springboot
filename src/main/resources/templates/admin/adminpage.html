@@ -89,9 +89,17 @@
         </nav>
         <div class="row text-center">
             <div class="col-md-12">
-                <div th:if="${param.success}">
+                <div th:if="${param.successN}">
                     <div class="alert alert-info alert-dismissible fade show" role="alert">
-                        List of Enrolled learners
+                        Success
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+                <div th:if="${param.error}">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                       Error
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -100,13 +108,7 @@
             </div>
         </div>
 
-        <div class="container-fluid">
-            <!-- The form -->
-            <form class="example" th:action="@{/api/instructor/searchlearner}" method="get">
-                <input type="search" placeholder="Search user" name="keyword">
-                <button type="submit"><i class="fa fa-search"></i></button>
-            </form>
-        </div>
+
 
 
         <br>
@@ -132,6 +134,16 @@
 
                         <div class="question-form">
                             <div id="instructor" class="hide">
+                                <div class="container-fluid">
+                                    <!-- The form -->
+                                    <form class="example" th:action="@{/api/admin/searchInstructor}" method="get">
+                                        <input type="search" placeholder="Search user" name="keyword">
+                                        <button type="submit"><i class="fa fa-search"></i></button>
+                                    </form>
+                                </div>
+                                <br>
+                                <br>
+                                <br>
 
                                 <div class = "container">
                                     <div class="table-responsive">
@@ -161,8 +173,8 @@
                                                     <td>[[${instructor.email}]]</td>
 
                                                     <td class="table-info">
-                                                        <a th:href="@{/api/instructor/{staffId}/edit(staffId=${instructor.staffId})}"><button type="button" class="btn btn-info">Edit</button></a>
-                                                        <a th:href="@{'/api/instructor/delete-exam/' + ${instructor.staffId}}"><button type="button" class="btn btn-danger">Delete</button></a>
+                                                        <a th:href="@{/api/admin/{staffId}/edit(staffId=${instructor.staffId})}"><button type="button" class="btn btn-info">Edit</button></a>
+                                                        <a th:href="@{'/api/admin/delete-instructor/' + ${instructor.staffId}}"><button type="button" class="btn btn-danger">Delete</button></a>
                                                     </td>
                                                 </tr>
                                             </th:block>
@@ -173,7 +185,16 @@
                             </div>
 
                             <div id="student" class="hide">
+                                <div class="container-fluid">
+                                    <!-- The form -->
+                                    <form class="example" th:action="@{/api/admin/searchlearner}" method="get">
+                                        <input type="search" placeholder="Search user" name="keyword">
+                                        <button type="submit"><i class="fa fa-search"></i></button>
+                                    </form>
+                                </div>
 
+                                <br>
+                                <br>
                                 <div class = "container">
 
                                     <div class="table-responsive">
@@ -205,8 +226,8 @@
                                                     <td>[[${learner.campus}]] </td>
                                                     <td>[[${learner.email}]] </td>
                                                     <td class="table-info">
-                                                        <a th:href="@{/api/learner/{learnerId}/eit(learnerId=${learner.learnerId})}"><button type="button" class="btn btn-info">Edit</button></a>
-                                                        <a th:href="@{'/api/exams/delete-exam/' + ${learner.learnerId}}"><button type="button" class="btn btn-danger">Delete</button></a>
+                                                        <a th:href="@{/api/admin/{learnerId}/eit(learnerId=${learner.learnerId})}"><button type="button" class="btn btn-info">Edit</button></a>
+                                                        <a th:href="@{'/api/admin/delete-learner/' + ${learner.learnerId}}"><button type="button" class="btn btn-danger">Delete</button></a>
                                                     </td>
                                                 </tr>
 

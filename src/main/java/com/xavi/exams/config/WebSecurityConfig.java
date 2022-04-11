@@ -33,6 +33,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         properties.put("mail.smtp.starttls.enable", "true");
         properties.put("mail.debug", "true");
 
+
+
+//        proxy
+//        properties.setProperty("http.proxyHost", "172.16.63.3");
+//        properties.setProperty("http.proxyPort", "3128");
+//        properties.setProperty("http.nonProxyHosts", "localhost|127.0.0.1|10.*.*.*");
+//        properties.setProperty("https.proxyHost", "172.16.63.3");
+//        properties.setProperty("https.proxyPort", "3128");
+//        properties.setProperty("https.nonProxyHosts", "localhost|127.0.0.1|10.*.*.*");
+//        properties.setProperty("java.net.useSystemProxies", "true");
+//        System.setProperty("http.proxyHost", "172.16.63.3");
+//        System.setProperty("http.proxyPort", "3128");
+//        System.setProperty("http.nonProxyHosts", "localhost|127.0.0.1|10.*.*.*");
+//        System.setProperty("https.proxyHost", "172.16.63.3");
+//        System.setProperty("https.proxyPort", "3128");
+//        System.setProperty("https.nonProxyHosts", "localhost|127.0.0.1|10.*.*.*");
+//        System.setProperty("java.net.useSystemProxies", "true");
+
         return mailSender;
 
     }

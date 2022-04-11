@@ -2,6 +2,7 @@ package com.xavi.exams.services;
 
 import com.xavi.exams.doa.InstructorRepository;
 import com.xavi.exams.models.Instructor;
+import com.xavi.exams.models.Learner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -163,6 +164,23 @@ public class InstructorService {
         return instructorRepository.findAll();
     }
 
+    public void delete(String staffId) {
+        instructorRepository.deleteById(staffId);
+    }
+
+    public List<Learner> searchInstructor(String keyword) throws UserNotFoundException {
+            List<Learner> searchedInstructor = instructorRepository.searchInstructor(keyword);
+
+            if (searchedInstructor.isEmpty()){
+                throw new UserNotFoundException("No Learner with the key word exists");
+            }
+            return instructorRepository.searchInstructor(keyword);
+
+        }
+
+    }
+
+
 
     //Create exams
 
@@ -170,4 +188,3 @@ public class InstructorService {
 
 
 
-}

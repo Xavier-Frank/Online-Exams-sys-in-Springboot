@@ -5,6 +5,7 @@ import com.xavi.exams.models.Comments;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @Service
@@ -20,5 +21,13 @@ public class CommentsService {
 
     public List<Comments> commentList() {
         return commentsRepository.findAll();
+    }
+
+    public void delete(BigInteger id) {
+        commentsRepository.deleteById(id);
+    }
+
+    public List<Comments> searchcomment(String keyword) {
+        return commentsRepository.searchComment(keyword);
     }
 }

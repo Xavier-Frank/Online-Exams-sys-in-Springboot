@@ -1,6 +1,10 @@
 package com.xavi.exams.controller;
 
-import com.xavi.exams.models.*;
+import com.xavi.exams.doa.LearnerRepository;
+import com.xavi.exams.models.Exams;
+import com.xavi.exams.models.Learner;
+import com.xavi.exams.models.Notifications;
+import com.xavi.exams.models.Utility;
 import com.xavi.exams.services.ExamService;
 import com.xavi.exams.services.LearnerService;
 import com.xavi.exams.services.NotificationService;
@@ -24,7 +28,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/api/student")
@@ -40,6 +43,8 @@ public class LearnerController {
 
     @Autowired
     private ExamService examService;
+    @Autowired
+    private LearnerRepository learnerRepository;
 
     /* ====================== Navigation controllers for student dashboard ===========================*/
     // Return Student Dashboard
@@ -70,6 +75,7 @@ public class LearnerController {
 
         learnerService.loginLearner(learner);
         model.addAttribute("learner", learner);
+        learnerRepository.save(learner);
 
 
 
@@ -279,19 +285,19 @@ public class LearnerController {
     }
 
     //edit stud profile
-    @GetMapping(value = {"/{learnerId}/edit"})
-    public String showEditLecForm(Model model, @PathVariable String learnerId) {
-        Optional<Learner> learner = null;
-        try {
-            examService.findById(learnerId).ifPresent(o -> model.addAttribute("instructor", o) );
-            model.addAttribute("formHeader", "Update details");
-
-        } catch (UserNotFoundException ex) {
-            model.addAttribute("errorMessage", "Instructor not found");
-            return "/student/stud-profile";
-        }
-        return "/instructor/stud-profile-edit";
-    }
+//    @GetMapping(value = {"/{learnerId}/edit"})
+//    public String showEditLecForm(Model model, @PathVariable String learnerId) {
+////        Optional<Learner> learner = null;
+////        try {
+////            learnerService.findById(learnerId).ifPresent(o -> model.addAttribute("learner", o) );
+////            model.addAttribute("formHeader", "Update details");
+////
+////        } catch (UserNotFoundException ex) {
+////            model.addAttribute("errorMessage", "Instructor not found");
+////            return "/student/stud-profile";
+////        }
+////        return "/student/stud-profile-edit";
+//    }
 
     //update notification
     @PostMapping(value = {"/{learnerId}/edit"})

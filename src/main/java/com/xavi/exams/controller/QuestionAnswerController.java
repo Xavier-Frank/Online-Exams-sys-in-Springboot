@@ -1,9 +1,7 @@
 package com.xavi.exams.controller;
 
-import com.xavi.exams.models.Question;
-import com.xavi.exams.models.QuestionForm;
-import com.xavi.exams.models.QuestionOpen;
-import com.xavi.exams.models.Result;
+import com.xavi.exams.models.*;
+import com.xavi.exams.services.LearnerService;
 import com.xavi.exams.services.QuestionOpenService;
 import com.xavi.exams.services.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +22,9 @@ public class QuestionAnswerController {
         QuizService qService;
 
         Boolean submitted = false;
+
+        @Autowired
+        private LearnerService learnerService;
 
         @Autowired
         private QuestionOpenService questionOpenService;
@@ -89,7 +90,6 @@ public class QuestionAnswerController {
             question.setChose(chose);
             try {
                 qService.saveQuestion(question);
-                System.out.println("Hello world");
                 return "redirect:/api/question_and_answer/add-question?success";
             }catch (Exception e){
 
@@ -135,7 +135,17 @@ public class QuestionAnswerController {
     @PostMapping("/submit-answers")
     public String submit(@ModelAttribute QuestionForm qForm, Model model) {
         if(!submitted) {
+            Integer result1 = qService.getResult(qForm);
             result.setTotalCorrect(qService.getResult(qForm));
+
+            model.addAttribute("result", result1);
+
+            Integer r = result.getTotalCorrect();
+
+            Learner learner = new Learner();
+            learner.setResults(r);
+//            learnerService.setResults(r);
+
             qService.saveScore(result);
             submitted = true;
         }

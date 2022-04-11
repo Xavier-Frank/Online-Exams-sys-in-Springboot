@@ -56,4 +56,7 @@ public interface LearnerRepository extends JpaRepository <Learner, String> {
 
     @Query("SELECT campus FROM Learner i WHERE i.oneTimePassword = :pass")
     String getCampus(String pass);
+
+//    @Query("UPDATE learner l set results = :r WHERE l.learnerId = A15/09420/17")
+//    void saveScore(Integer r);
 }

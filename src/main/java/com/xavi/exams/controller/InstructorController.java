@@ -94,6 +94,7 @@ public class InstructorController {
 //        verifyOTP(model, httpServletRequest, httpServletResponse,instructor, pass);
 //        Optional<Instructor> instructor = instructorService.findById(pass);
          model.addAttribute("instructor", instructor);
+         instructorRepository.save(instructor);
 
         return "/instructor/lec-profile";
     }
@@ -121,7 +122,9 @@ public class InstructorController {
 
     //return results page
     @GetMapping("/results")
-    public String lecResults() {
+    public String lecResults(Model model) {
+        List<Learner> list_of_learners = learnerService.learnerList();
+        model.addAttribute("learner", list_of_learners);
         return "/instructor/lec-results";
     }
 
