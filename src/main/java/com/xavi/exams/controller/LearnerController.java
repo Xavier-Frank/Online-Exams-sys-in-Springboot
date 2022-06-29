@@ -28,6 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/api/student")
@@ -76,10 +77,7 @@ public class LearnerController {
         learnerService.loginLearner(learner);
         model.addAttribute("learner", learner);
         learnerRepository.save(learner);
-
-
-
-        return "/student/stud-profile";
+    return "/student/stud-profile";
     }
 
     //Return notifications
@@ -284,20 +282,24 @@ public class LearnerController {
         return "/student/search-results/search-exams";
     }
 
-    //edit stud profile
-//    @GetMapping(value = {"/{learnerId}/edit"})
-//    public String showEditLecForm(Model model, @PathVariable String learnerId) {
-////        Optional<Learner> learner = null;
-////        try {
-////            learnerService.findById(learnerId).ifPresent(o -> model.addAttribute("learner", o) );
-////            model.addAttribute("formHeader", "Update details");
-////
-////        } catch (UserNotFoundException ex) {
-////            model.addAttribute("errorMessage", "Instructor not found");
-////            return "/student/stud-profile";
-////        }
-////        return "/student/stud-profile-edit";
-//    }
+    // edit stud profile
+    @GetMapping(value = {"/{learnerId}/edit"})
+    public String showEditLecForm(Model model, @PathVariable String learnerId) throws UserNotFoundException {
+        Optional<Learner> learner = null;
+        //            learnerService.findById(learnerId).ifPresent(o -> model.addAttribute("learner", o) );
+
+        learnerService.findById(learnerId);
+        if (learner.isPresent()){
+            model.addAttribute("learner", learner);
+            model.addAttribute("formHeader", "Update details");
+        }
+        else
+        {
+            throw new UserNotFoundException("Learner with the given id does not exist");
+        }
+
+        return "/student/stud-profile-edit";
+    }
 
     //update notification
     @PostMapping(value = {"/{learnerId}/edit"})
